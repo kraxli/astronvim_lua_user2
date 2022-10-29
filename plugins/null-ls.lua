@@ -16,7 +16,7 @@ return function(config)
 		diagnostics.gitlint,
 		diagnostics.luacheck,
 		diagnostics.markdownlint,
-		diagnostics.mypy,
+		-- diagnostics.mypy,
 		diagnostics.shellcheck,
 		vale,
 		null_ls.builtins.diagnostics.vulture,
