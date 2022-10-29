@@ -1,3 +1,83 @@
+-- -------------------------------------------------------
+-- command-line
+-- -------------------------------------------------------
+
+vim.cmd([[
+  cnoremap <c-v> <MiddleMouse>
+  cnoremap <S-Insert> <MiddleMouse>
+  cnoremap <C-s> <cmd>write<CR>
+
+  " Navigation in command line
+  cnoremap <C-h> <Home>
+  cnoremap <C-l> <End>
+  cnoremap <C-f> <Right>
+  cnoremap <C-b> <Left>
+  cnoremap <expr> <Up>  pumvisible() ? "\<C-p>" : "\<Up>"
+  cnoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+
+  nmap [z [sz=
+  nmap ]z ]sz=
+
+]])
+
+local opts = { noremap = true, silent = true }
+local keymap = vim.api.nvim_set_keymap
+
+-- Recording (see below):
+-- keymap("n", "Q", "q", opts)
+-- keymap("n", "gQ", "@q", opts)
+
+-- -------------------------------------------------------
+-- Tab shift
+-- -------------------------------------------------------
+
+keymap("x", "<", "<gv", opts)
+keymap("x", ">", ">gv|", opts)
+keymap("x", "<S-Tab>", "<gv", opts)
+keymap("x", "<Tab>", ">gv|", opts)
+keymap("n", "<", "<<_", opts)
+keymap("n", ">", ">>_", opts)
+
+-- -------------------------------------------------------
+-- TODO:
+-- -------------------------------------------------------
+
+keymap("n", "<F6>", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
+keymap("n", "gx", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
+
+-- code_jump
+-- vim.api.nvim_set_keymap('n', '<C-BS>', '<C-o>', {noremap=false})
+vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = false })
+vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = false })
+
+-- comment
+vim.api.nvim_set_keymap(
+	"n",
+	[[<C-§>]],
+	[[v:count == 0 ? '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$' : '<CMD>lua require("Comment.api").call("toggle_linewise_count_op")<CR>g@$']],
+	{ noremap = true, silent = true, expr = true }
+)
+vim.keymap.set(
+	"n",
+	[[<C-§>]],
+	[[v:count == 0 ? '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$' : '<CMD>lua require("Comment.api").call("toggle_linewise_count_op")<CR>g@$']],
+	{ desc = "" }
+)
+
+-- floating window
+vim.api.nvim_set_keymap("", "<F2>", '<Cmd>lua require("user.utils").toggle_term()<CR>', { noremap = false })
+vim.api.nvim_set_keymap("", "<c-t>", '<Cmd>lua require("user.utils").toggle_term()<CR>', { noremap = false })
+vim.cmd([[
+    vnoremap <silent><leader>x :'<,'>lua require('user.utils').excecute_code('visual_lines')<CR>
+    nnoremap <silent><leader>x <cmd>lua require('user.utils').excecute_code('single_line')<CR>
+    vnoremap <silent><c-x> :'<'> lua require('user.utils').excecute_code('visual_selection')<CR>
+    inoremap <silent><c-x> <cmd>lua require('user.utils').excecute_code('single_line')<CR>
+    nnoremap <silent><c-x> <cmd>lua require('user.utils').excecute_code('single_line')<CR>
+    " TODO: run file command for ipython
+    " 2TermExec cmd="git status" dir=~/<my-repo-path>
+  ]])
+vim.api.nvim_set_keymap("n", "<F5>", [[<cmd>lua require('user.utils').execute_file()<CR>]], opts)
+
 return {
   n = {
     -- disable default bindings
