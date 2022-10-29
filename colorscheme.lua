@@ -1,2 +1,3 @@
-return "duskfox"
--- "onehalfdark" 
+return "nightfox"
+-- "duskfox"
+-- "onehalfdark"
