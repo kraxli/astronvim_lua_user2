@@ -132,11 +132,28 @@ return {
     ["Cl"] = { "<cmd>GitConflictListQf<cr>", desc = "List Conflicts" },
     ["]C"] = { "<Plug>(git-conflict-next-conflict)", desc = "Next conflict" },
     ["[C"] = { "<Plug>(git-conflict-prev-conflict)", desc = "Previous conflict" },
+
+    -- recording
+    ["Q"] = { "q", desc = "Record" },
+    ["gQ"] = { "@q", desc = "Record" },
+    
+    -- time stamps
+    ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', desc = "Time stamp" },
+    -- spell
+    -- ["[z"] = { "[sz=", desc = "Correct previous spell", noremap = false, silent = true },
+    -- ["]z"] = { "]sz=", desc = "Correct next spell", noremap = false, silent = true },
+    -- Miscellenuous
+    ["<C-z>"] = { ":undo<cr>", desc = "Undo" },
+    
+    -- close / delete buffer
+    ["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" }, -- TODO: resolve conflict
   },
   i = {
     -- type template string
     ["<c-CR>"] = { "<++>", desc = "Insert template string" },
+    -- [";mk"] = { "<++>", desc = "Insert template string" },
     ["<S-Tab>"] = { "<C-V><Tab>", desc = "Tab character" },
+    ["<F4>"] = { '<C-R>=strftime("%Y-%m-%d")<CR>', desc = "Time stamp" },
   },
   v = {
     -- navigating wrapped lines
@@ -145,8 +162,21 @@ return {
   },
   -- terminal mappings
   t = {
-    ["<c-q>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
+    -- ["<c-q>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
+    -- ["<esc><esc>"] = { "<c-\\><c-n>:q<cr>", desc = "Terminal quit" },
+    ["jk"] = false,
+    ["<c-n>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
+    ["<esc>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
+    ["<c-c>"] = { "<c-\\><c-n>:q<cr>", desc = "Terminal quit" },
     ["<esc><esc>"] = { "<c-\\><c-n>:q<cr>", desc = "Terminal quit" },
+    -- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
+    ["<leader>tp"] = {
+    	function()
+    		astronvim.toggle_term_cmd("ipython")
+    	end,
+    	desc = "ToggleTerm iPython",
+    },
+    ["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" },
   },
   x = {
     -- better increment/decrement
