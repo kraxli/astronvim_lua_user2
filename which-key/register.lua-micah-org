@@ -36,15 +36,10 @@ return {
         p = { "<cmd>Telescope project<cr>", "Projects" },
         r = { "<cmd>Telescope registers<cr>", "Registers" },
         t = { "<cmd>Telescope colorscheme<cr>", "Themes" },
-		-- nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-		-- nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-		-- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-		-- commands
-		-- tags
       },
 
       m = {
-        name = "Compiler/Make",
+        name = "Compiler",
         k = {
           function()
             vim.cmd "silent! write"
@@ -96,7 +91,7 @@ return {
         f = { "<cmd>TexlabForward<cr>", "Forward Search" },
       },
 
-      d = { -- or w
+      d = {
         name = "Document",
         n = { "<cmd>enew<cr>", "New File" },
         s = { "<cmd>setlocal spell!<cr>", "Toggle Spelling" },
@@ -166,49 +161,6 @@ return {
         w = { function() require("dapui").float_element "watches" end, "Watches" },
         x = { function() require("dap.ui.widgets").hover() end, "Inspect" },
       },
-			D = { "<cmd>Dashboard<CR>", "Dashboard" },
-
-			-- Git, enhance base functionality
-			g = {
-				m = { "<cmd>Neogit<CR>", "Magit" }, -- noremap=true
-				v = { "<cmd>diffview: diff HEAD", "Diffview" },
-				y = {
-					"<cmd>lua require('core.utils').toggle_term_cmd({cmd = 'lazygit', count = 1, direction = 'float'})<CR>",
-					"Lazygit",
-				},
-				-- g = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'},
-			},
-
-			u = {
-				name = "Utils",
-				w = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
-			},
-			i = { -- micah has redundatn double mapping (only one leaf)
-				name = "Treesitter",
-				v = {function() require("syntax-tree-surfer").targeted_jump({ "variable_declaration" }) end, "Go to Variables", }, 
-
-				f = { function() require("syntax-tree-surfer").targeted_jump({ "function" }) end, "Go to Functions", },
-				i = { function() require("syntax-tree-surfer").targeted_jump({
-							"if_statement",
-							"else_clause",
-							"else_statement",
-							"elseif_statement",
-						}) end, "Go to If Statements", },
-				r = { function() require("syntax-tree-surfer").targeted_jump({ "for_statement" }) end, "Go to If Statements", },
-				w = { function() require("syntax-tree-surfer").targeted_jump({ "white_statement" }) end, "Go to While Statements", },
-				s = { function() require("syntax-tree-surfer").targeted_jump({ "switch_statement" }) end, "Go to Switch Statements", },
-				t = { function() require("syntax-tree-surfer").targeted_jump({ "function",
-							"if_statement",
-							"else_clause",
-							"else_statement",
-							"elseif_statement",
-							"for_statement",
-							"while_statement",
-							"switch_statement",
-						})
-					end, "Go to Statement", },
-			},
-
     },
     ["]"] = {
       f = "Next function start",
@@ -273,104 +225,7 @@ return {
         },
       },
     },
-    ["<localleader>"] = {
-
-	-- TODO: commented out commands are not working - check rafi/vim-config for fix
-	-- Telescope general pickers
-	a = { "<Cmd>Neotree toggle dir=%:p:h<CR>", "Neotree toggle" }, -- Nvimtree /  Neotree focus
-	b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
-	c = { '<cmd>lua require("telescope.builtin").command_history()<CR>', "Command history" },
-	d = { '<cmd>lua require"user.plugins.telescope".pickers.plugin_directories()<CR>', "Directories" },
-	-- Trouble & Diagnostics --
-	D = {
-		name = "Diagnostics",
-		c = { "<cmd>TroubleClose<cr>", "Close" },
-		d = { "<cmd>ToggleDiag<cr>", "Toggle diagnostics" },
-		D = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
-		i = { "<cmd>TroubleToggle lsp_implementations<cr>", "Implementations" },
-		f = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document" },
-		l = { "<cmd>TroubleToggle loclist<cr>", "Location list" },
-		o = { "<cmd>cexpr system('refurb --quiet ' . shellescape(expand('%'))) | copen<CR><CR>", "Refurb" }, -- optimization suggestions
-		q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
-		r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-		R = { "<cmd>TroubleRefresh<cr>", "Refresh" },
-		t = { "<cmd>TroubleToggle<cr>", "Trouble" },
-		T = { "<cmd>TroubleToggle lsp_type_definitions<cr>", "Types" },
-		v = { "<Plug>(toggle-lsp-diag-vtext)<cr>", "Toggle vtext diagnostics" },
-		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace" },
-	},
-	e = { "<Cmd>Neotree toggle<CR>", "Neotree toggle" },
-	f = { '<cmd>lua require("telescope.builtin").find_files()<CR>', "Files" },
-	g = { '<cmd>lua require("telescope.builtin").live_grep()<CR>', "Live grep" },
-	G = { "<cmd>lua require('user.plugins.telescope').pickers.grep_string_cursor()<cr>", "Grep cursor word" },
-	h = { '<cmd>lua require("telescope.builtin").highlights()<CR>', "Highlights" },
-	H = { '<cmd>lua require("telescope.builtin").search_history()<CR>', "Search history" },
-	j = { '<cmd>lua require("telescope.builtin").jumplist()<CR>', "Jumplist" },
-	-- k = {"<cmd>bd!<cr>", "Kill (del) buffer"},
-	l = { name = "VimTex" },
-	m = { '<cmd>lua require("telescope.builtin").marks()<CR>', "Marks" },
-	n = { "<cmd>lua require('telescope').extensions.notify.notify()<cr>", "Notifications" }, -- require("telescope").load_extension("notify")
-	N = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
-	-- o = {'<cmd>lua require("telescope.builtin").vim_options()<CR>', "Vim options"},
-	-- p = {'<cmd>lua require("telescope.builtin").projects()<CR>', "Projects"},
-	q = { "<cmd>bd!<cr>", "Kill (del) buffer" },
-	R = { '<cmd>lua require("telescope.builtin").pickers()<CR>', "Pickers" },
-	-- S = {'<cmd>lua require("telescope.builtin").session-lens search_session()<CR>', "Search session"},
-	s = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', "Search current Buffer" },
-	t = {
-		'<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
-		"LSP workspace symbols",
-	},
-	T = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
-	u = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
-	v = { '<cmd>lua require("telescope.builtin").registers()<CR>', "Registers" },
-	w = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
-	x = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" },
-	-- z = {'<cmd>Zoxide<CR>', "Zoxide"},
-	["/"] = {
-		'<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
-		"Search current buffer",
-	},
-},
-w = {
-	name = "Window", -- optional group name
-	g = { "<cmd>call Toggle_background()<CR>", "Toggle background color" }, -- create a binding with label
-	b = { "<cmd>buffer#<CR>", "Buffer alternate" },
-	o = { "<cmd>only<CR>", "Only this" },
-	c = { "<cmd>close<CR>", "Close" },
-	d = { "<cmd>bdelete!<CR>", "Buffer delete" },
-	q = { "<cmd>quit<CR>", "Quit" },
-	w = { "<cmd>save %<CR>", "Save" },
-	x = { "<cmd>call utils#window_empty_buffer()<CR>", "Buffer empty" },
-	z = { "<cmd>call utils#zoom()<CR>", "Zoom" },
-
-	-- h = { '<cmd>split<CR>', "Split horizontal"},
-	-- v = { '<cmd>vsplit<CR>', "Split vertical"},
-	--Split current buffer, go to previous window and previous buffer
-	h = { "<cmd>split<CR>:wincmd p<CR>:e#<CR>", "Split horizontal" },
-	v = { "<cmd>vsplit<CR>:wincmd p<CR>:e#<CR>", "Split vertical" },
-	t = { "<cmd>tabnew<CR>", "Tab new" },
-	n = { "<cmd>tabnext<CR>", "Tab next" },
-	p = { "<cmd>tabprev<CR>", "Tab previous" },
-
-	f = { "<cmd>lcd %:p:h<CR>" },
-},
-["q"] = {
-	function()
-		MiniBufremove.delete()
-	end,
-	"Bye Buffer",
-},
-["<c-q>"] = {
-	function()
-		MiniBufremove.delete()
-	end,
-	"Bye Buffer",
-},
-["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', "Time stamp" }, -- '=strftime("%H:%M")<CR>P'
-}, -- end normal mode
-
--- insert mode
+  },
   i = {
     ["<c-d>"] = {
       n = { "<c-r>=strftime('%Y-%m-%d')<cr>", "Y-m-d" },
@@ -381,7 +236,6 @@ w = {
       d = { "<c-r>=strftime('%Y/%m/%d %H:%M:%S -')<cr>", "Y/m/d H:M:S -" },
     },
   },
-  -- visual mode
   v = {
     ["<leader>"] = {
       h = {
@@ -422,13 +276,5 @@ w = {
         e = { function() require("dapui").eval() end, "Evaluate Line" },
       },
     },
-  },
-
-  -- x-mode (visual)
-  x = {
-  	["<localleader"] = {
-  		g = { '<cmd>lua require"user.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection" },
-  		G = { '<cmd>lua require"user.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection" },
-  	},
   },
 }
