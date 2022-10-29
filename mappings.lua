@@ -190,10 +190,10 @@ return {
     ["K"] = { "<cmd>STSSelectPrevSiblingNode<cr>", desc = "Surf previous tree-sitter object" },
     ["H"] = { "<cmd>STSSelectParentNode<cr>", desc = "Surf parent tree-sitter object" },
     ["L"] = { "<cmd>STSSelectChildNode<cr>", desc = "Surf child tree-sitter object" },
-    ["<c-j>"] = { "<cmd>STSSwapNextVisual<cr>", desc = "Surf next tree-sitter object" },
-    ["<c-l>"] = { "<cmd>STSSwapNextVisual<cr>", desc = "Surf next tree-sitter object" },
-    ["<c-k>"] = { "<cmd>STSSwapPrevVisual<cr>", desc = "Surf previous tree-sitter object" },
-    ["<c-h>"] = { "<cmd>STSSwapPrevVisual<cr>", desc = "Surf previous tree-sitter object" },
+    ["<m-j>"] = { "<cmd>STSSwapNextVisual<cr>", desc = "Surf next tree-sitter object" },
+    ["<m-l>"] = { "<cmd>STSSwapNextVisual<cr>", desc = "Surf next tree-sitter object" },
+    ["<m-k>"] = { "<cmd>STSSwapPrevVisual<cr>", desc = "Surf previous tree-sitter object" },
+    ["<m-h>"] = { "<cmd>STSSwapPrevVisual<cr>", desc = "Surf previous tree-sitter object" },
   },
   o = {
     -- line text-objects
@@ -203,5 +203,9 @@ return {
   [""] = {
     ["<c-e><c-e>"] = { "<Plug>SendLine", desc = "Send line to REPL" },
     ["<c-e>"] = { "<Plug>Send", desc = "Send to REPL" },
+    ["<c-PageUp>"] = { "<Cmd>BufferLineCyclePrev<CR>" },
+    ["<c-PageDown>"] = { "<Cmd>BufferLineCycleNext<CR>" },
+    ["<C-s>"] = { ":w!<cr>", desc = "Save" },
+    -- ["<c-D>"] = {"<cmd>bd!<cr>", desc = "Kill (del) buffer"},
   },
 }
