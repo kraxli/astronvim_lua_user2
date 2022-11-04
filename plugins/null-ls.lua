@@ -12,7 +12,7 @@ return function(config)
 		-- Set a linter
 		diagnostics.actionlint,
 		diagnostics.eslint,
-		diagnostics.fish,
+		-- diagnostics.fish,
 		diagnostics.gitlint,
 		diagnostics.luacheck,
 		diagnostics.markdownlint,

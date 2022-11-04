@@ -196,3 +196,5 @@ end
 --
 -- return M
 --
+
+-- return { mode = "symbol" }

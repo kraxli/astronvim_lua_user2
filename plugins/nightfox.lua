@@ -1,0 +1,28 @@
+require("nightfox").setup {
+  options = {
+    dim_inactive = true,
+    styles = { comments = "italic" },
+    modules = {
+      barbar = false,
+      coc = false,
+      dashboard = false,
+      fern = false,
+      fidget = false,
+      gitgutter = false,
+      glyph_palette = false,
+      illuminate = false,
+      lightspeed = false,
+      lsp_saga = false,
+      lsp_trouble = false,
+      mini = false,
+      modes = false,
+      neogit = false,
+      neotest = false,
+      nvimtree = false,
+      pounce = false,
+      sneak = false,
+      symbol_outline = false,
+    },
+  },
+  groups = { all = { NormalFloat = { link = "Normal" } } },
+}
