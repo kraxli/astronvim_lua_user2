@@ -1,7 +1,6 @@
 return {
   ["goolord/alpha-nvim"] = { disable = true },
   ["max397574/better-escape.nvim"] = { disable = true },
-
   ["EdenEast/nightfox.nvim"] = { config = function() require "user.plugins.nightfox" end },
   ["akinsho/git-conflict.nvim"] = { tag = "*", config = function() require "user.plugins.git-conflict" end },
   ["andweeb/presence.nvim"] = { module = "presence" },
@@ -124,6 +123,9 @@ return {
 	-- -------------------------------------------------------
 	-- KRAXLI ADDINGS:
 	-- -------------------------------------------------------
+
+	-- cmp
+	{"hrsh7th/cmp-cmdline", after = "nvim-cmp", },
 
 	{ "nvim-treesitter/nvim-treesitter-refactor" },
 	{ "nvim-treesitter/nvim-treesitter-context" },
@@ -270,11 +272,45 @@ return {
 		end,
 	},
 	-- TODO: activate
-	{
-		"michaelb/sniprun",
-		run = "bash ./install.sh",
-		disable = true,
-	},
+  {
+    "michaelb/sniprun",
+    run = "bash ./install.sh",
+    config = function()
+      require("sniprun").setup({
+        display = {
+          -- "Terminal",
+          "Classic",
+          "VirtualTextOk",
+          -- "TempFloatingWindow",
+          "Notification",
+        },
+      })
+      vim.cmd([[
+        nnoremap <silent> <LocalLeader>r  <Plug>SnipRun<cr>
+        xnoremap <silent> <LocalLeader>r  <Plug>SnipRun<cr>
+        " <cmd>lua require’sniprun’.run('v')<CR>
+        " nnoremap <silent><expr> <LocalLeader>rs  :SnipRun<CR>
+      ]])
+    end,
+  },
+  -- see also metakirby5/codi.vim !
+  --
+  -- { 'dccsillag/magma-nvim',
+  --   run = 'UpdateRemotePlugins',
+  --   config = function()
+  --     vim.cmd([[
+  --       nnoremap <silent><expr> <LocalLeader>r  :MagmaEvaluateOperator<CR>
+  --       nnoremap <silent>       <LocalLeader>rr :MagmaEvaluateLine<CR>
+  --       xnoremap <silent>       <LocalLeader>r  :<C-u>MagmaEvaluateVisual<CR>
+  --       nnoremap <silent>       <LocalLeader>rc :MagmaReevaluateCell<CR>
+  --       nnoremap <silent>       <LocalLeader>rd :MagmaDelete<CR>
+  --       nnoremap <silent>       <LocalLeader>ro :MagmaShowOutput<CR>
+  --
+  --       let g:magma_automatically_open_output = v:false
+  --       let g:magma_image_provider = "ueberzug"
+  --     ]])
+  --   end
+  -- },
 	{
 		"ThePrimeagen/refactoring.nvim",
 		ft = { "typescript", "javascript", "lua", "c", "cpp", "go", "python", "java", "php" },
