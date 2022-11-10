@@ -132,10 +132,6 @@ local mappings = {
 		-- ["]z"] = { "]sz=", desc = "Correct next spell", noremap = false, silent = true },
 		-- Miscellenuous
 		["<C-z>"] = { ":undo<cr>", desc = "Undo" },
-
-		-- close / delete buffer
-		["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" }, -- TODO: resolve conflict
-
   },
   i = {
     -- type template string
@@ -199,6 +195,17 @@ local mappings = {
 		-- ["<c-D>"] = {"<cmd>bd!<cr>", desc = "Kill (del) buffer"},
   },
 }
+
+-- Bufdelete
+if astronvim.is_available "bufdelete.nvim" then
+  mappings.n["q"] = { function() require("bufdelete").bufdelete(0, false) end, desc = "Close buffer" }
+  mappings.n["<c-q>"] = { function() require("bufdelete").bufdelete(0, true) end, desc = "Force close buffer" }
+else
+  mappings.n["q"] = { "<cmd>bdelete<cr>", desc = "Close buffer" }
+  mappings.n["<c-q>"] = { "<cmd>bdelete!<cr>", desc = "Force close buffer" }
+end
+
+ 
 
 -- add more text objects for "in" and "around"
 for _, char in ipairs({ "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }) do

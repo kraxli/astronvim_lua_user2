@@ -333,18 +333,6 @@ w = {
 
 	f = { "<cmd>lcd %:p:h<CR>" },
 },
-["q"] = {
-	function()
-		MiniBufremove.delete()
-	end,
-	"Bye Buffer",
-},
-["<c-q>"] = {
-	function()
-		MiniBufremove.delete()
-	end,
-	"Bye Buffer",
-},
 ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', "Time stamp" }, -- '=strftime("%H:%M")<CR>P'
 }, -- end normal mode
 
