@@ -151,21 +151,17 @@ local mappings = {
   },
   -- terminal mappings
   t = {
-    -- ["<C-q>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-    -- ["<esc><esc>"] = { "<C-\\><C-n>:q<cr>", desc = "Terminal quit" },
 		["jk"] = false,
+    -- ["<C-q>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+    ["<esc><esc>"] = { "<C-\\><C-n>:q<cr>", desc = "Terminal quit" },
+    ["<esc>q"] = { "<C-\\><C-n>:q<cr>", desc = "Terminal quit" },
 		["<c-n>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
 		["<esc>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
 		["<c-c>"] = { "<c-\\><c-n>:q<cr>", desc = "Terminal quit" },
-		["<esc><esc>"] = { "<c-\\><c-n>:q<cr>", desc = "Terminal quit" },
 		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
-		["<leader>tp"] = {
-			function()
-				astronvim.toggle_term_cmd("ipython")
-			end,
-			desc = "ToggleTerm iPython",
+		["<leader>tp"] = { function() astronvim.toggle_term_cmd("ipython") end, desc = "ToggleTerm iPython",
 		},
-		["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" },
+		-- ["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" },
   },
   x = {
     -- better increment/decrement

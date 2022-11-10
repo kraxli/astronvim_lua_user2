@@ -59,6 +59,7 @@ autocmd("TermEnter term://*toggleterm#*", {
 	group = "FloatingWindow",
 	-- pattern = "*",
 	command = "nnoremap <silent><buffer> q :close<CR>",
+	-- command = "noremap q <c-\\><c-n>:q<cr>" ,
 	-- command='tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>',
 })
 
@@ -89,8 +90,8 @@ vim.cmd([[
   autocmd!
   
 	autocmd WinClosed,WinEnter * if winnr('$') == 1 && &ft == "neo-tree" | q | endif
-  autocmd FileType toggleterm,qf,help,man,lspinfo,TelescopePrompt nnoremap <silent><buffer> q :close!<CR>
-  autocmd FileType toggleterm,qf,help,man,lspinfo,TelescopePrompt nnoremap <silent><buffer> <localleader>c :close!<CR>
+  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :q!<CR>  " ,TelescopePrompt
+  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> <localleader>c :close!<CR>  " ,TelescopePrompt
   " set file types
   
   augroup end
