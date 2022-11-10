@@ -1,47 +1,49 @@
-return function(config)
-	config.preset = "codicons"
-	config.symbol_map = {
-		Class = " ",
-		Color = " ",
-		Constant = "",
-		Constructor = " ",
-		Default = " ",
-		Enum = "練",
-		EnumMember = " ",
-		Event = " ",
-		Field = "ﰠ ",
-		File = " ",
-		Folder = " ",
-		Function = " ",
-		Interface = " ",
-		-- Interface = "ﰮ",
-		Keyword = " ",
-		Method = "ƒ ",
-		Module = " ",
-		Operator = " ",
-		Property = " ",
-		Reference = "",
-		Snippet = " ", -- " "," "
-		Struct = "פּ ",
-		Text = " ",
-		TypeParameter = "𝙏",
-		-- TypeParameter = "  ",
-		Unit = "塞",
-		Value = " ",
-		Variable = " ",
-		-- Variable = "",
-		Namespace = "",
-		Package = "",
-		String = "𝓐",
-		Number = "#",
-		Boolean = "⊨",
-		Array = "",
-		Object = "⦿",
-		Key = "",
-		Null = "NULL",
-	}
-	return config
-end
+-- return function(config)
+-- 	config.preset = "codicons"
+-- 	config.symbol_map = {
+-- 		Class = " ",
+-- 		Color = " ",
+-- 		Constant = "",
+-- 		Constructor = " ",
+-- 		Default = " ",
+-- 		Enum = "練",
+-- 		EnumMember = " ",
+-- 		Event = " ",
+-- 		Field = "ﰠ ",
+-- 		File = " ",
+-- 		Folder = " ",
+-- 		Function = " ",
+-- 		Interface = " ",
+-- 		-- Interface = "ﰮ",
+-- 		Keyword = " ",
+-- 		Method = "ƒ ",
+-- 		Module = " ",
+-- 		Operator = " ",
+-- 		Property = " ",
+-- 		Reference = "",
+-- 		Snippet = " ", -- " "," "
+-- 		Struct = "פּ ",
+-- 		Text = " ",
+-- 		TypeParameter = "𝙏",
+-- 		-- TypeParameter = "  ",
+-- 		Unit = "塞",
+-- 		Value = " ",
+-- 		Variable = " ",
+-- 		-- Variable = "",
+-- 		Namespace = "",
+-- 		Package = "",
+-- 		String = "𝓐",
+-- 		Number = "#",
+-- 		Boolean = "⊨",
+-- 		Array = "",
+-- 		Object = "⦿",
+-- 		Key = "",
+-- 		Null = "NULL",
+-- 	}
+-- 	return config
+-- end
+
+return { mode = "symbol" }
 
 -- local M = {}
 --
@@ -195,6 +197,3 @@ end
 -- }
 --
 -- return M
---
-
--- return { mode = "symbol" }
