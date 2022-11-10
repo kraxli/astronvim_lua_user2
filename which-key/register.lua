@@ -112,14 +112,14 @@ return {
         m = { function() require("nabla").popup() end, "Preview Math" },
       },
 
-      h = {
-        name = "Hop",
-        c = { "<cmd>HopChar1<cr>", "Character" },
-        C = { "<cmd>HopChar2<cr>", "2 Characters" },
-        l = { "<cmd>HopLine<cr>", "Line" },
-        p = { "<cmd>HopPattern<cr>", "Pattern" },
-        w = { "<cmd>HopWord<cr>", "Word" },
-      },
+      -- h = {
+      --   name = "Hop",
+      --   c = { "<cmd>HopChar1<cr>", "Character" },
+      --   C = { "<cmd>HopChar2<cr>", "2 Characters" },
+      --   l = { "<cmd>HopLine<cr>", "Line" },
+      --   p = { "<cmd>HopPattern<cr>", "Pattern" },
+      --   w = { "<cmd>HopWord<cr>", "Word" },
+      -- },
 
       s = {
         name = "Surf",
@@ -310,7 +310,7 @@ return {
 		"Search current buffer",
 	},
 },
-w = {
+  w = {
 	name = "Window", -- optional group name
 	g = { "<cmd>call Toggle_background()<CR>", "Toggle background color" }, -- create a binding with label
 	b = { "<cmd>buffer#<CR>", "Buffer alternate" },
@@ -328,9 +328,11 @@ w = {
 	h = { "<cmd>split<CR>:wincmd p<CR>:e#<CR>", "Split horizontal" },
 	v = { "<cmd>vsplit<CR>:wincmd p<CR>:e#<CR>", "Split vertical" },
 	t = { "<cmd>tabnew<CR>", "Tab new" },
-	n = { "<cmd>tabnext<CR>", "Tab next" },
-	p = { "<cmd>tabprev<CR>", "Tab previous" },
-
+	N = { "<cmd>enew<CR>", "Buf new"},
+	-- n = { "<cmd>tabnext<CR>", "Tab next" },
+	-- p = { "<cmd>tabprev<CR>", "Tab previous" },
+  n = { "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer tab right" },
+  p = { "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer tab left" },
 	f = { "<cmd>lcd %:p:h<CR>" },
 },
 ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', "Time stamp" }, -- '=strftime("%H:%M")<CR>P'

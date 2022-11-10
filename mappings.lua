@@ -82,11 +82,11 @@ local mappings = {
 
   n = {
     -- disable default bindings
-    -- ["<C-Down>"] = false,
-    -- ["<C-Left>"] = false,
-    -- ["<C-Right>"] = false,
-    -- ["<C-Up>"] = false,
-    -- ["<C-q>"] = false,
+    ["<C-Down>"] = false,
+    ["<C-Left>"] = false,
+    ["<C-Right>"] = false,
+    ["<C-Up>"] = false,
+    ["<C-q>"] = false,
     ["<C-s>"] = false,
     ["<leader>fh"] = false,
     ["<leader>fm"] = false,
@@ -109,10 +109,10 @@ local mappings = {
     ["-"] = { "<c-x>", desc = "Descrement number" },
     ["+"] = { "<c-a>", desc = "Increment number" },
     -- resize with arrows
-    -- ["<Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
-    -- ["<Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
-    -- ["<Left>"] = { function() require("smart-splits").resize_left(2) end, desc = "Resize split left" },
-    -- ["<Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
+    ["<c-Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
+    ["<c-Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
+    ["<c-Left>"] = { function() require("smart-splits").resize_left(2) end, desc = "Resize split left" },
+    ["<c-Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
     -- Treesitter Surfer
@@ -120,6 +120,11 @@ local mappings = {
     ["<m-right>"] = { "<cmd>STSSwapDownNormal<cr>", desc = "Swap next tree-sitter object" },
     ["<m-up>"] = { "<cmd>STSSwapUpNormal<cr>", desc = "Swap previous tree-sitter object" },
     ["<m-left>"] = { "<cmd>STSSwapUpNormal<cr>", desc = "Swap previous tree-sitter object" },
+
+    -- ["<C-Down>"] = {"<c-w>j", desc="Move to window down"},  -- use <c-j> and siblings
+    -- ["<C-Left>"] = {"<c-w>h", desc="Move to window left"},
+    -- ["<C-Right>"] = {"<c-w>l", desc="Move to window right"},
+    -- ["<C-Up>"] = {"<c-w>k", desc="Move to window up"},
 
 		-- recording
 		["Q"] = { "q", desc = "Record" },
@@ -189,12 +194,20 @@ local mappings = {
   [""] = {
     ["<C-e><C-e>"] = { "<Plug>SendLine", desc = "Send line to REPL" },
     ["<C-e>"] = { "<Plug>Send", desc = "Send to REPL" },
-		["<c-PageUp>"] = { "<Cmd>BufferLineCyclePrev<CR>" },
-		["<c-PageDown>"] = { "<Cmd>BufferLineCycleNext<CR>" },
 		["<C-s>"] = { ":w!<cr>", desc = "Save" },
 		-- ["<c-D>"] = {"<cmd>bd!<cr>", desc = "Kill (del) buffer"},
   },
 }
+
+if astronvim.is_available "bufferline.nvim" then
+  mappings.n["<c-PageDown>"] = { "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer tab" }
+  mappings.n["<c-PageUp>"] = { "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer tab" }
+  mappings.n["<m-PageDown>"] = { "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer tab right" }
+  mappings.n["<m-PageUp>"] = { "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer tab left" }
+else
+  mappings.n["<c-PageDown>"] = { "<cmd>bnext<cr>", desc = "Next buffer" }
+  mappings.n["<c-PageUp>"] = { "<cmd>bprevious<cr>", desc = "Previous buffer" }
+end
 
 -- Bufdelete
 if astronvim.is_available "bufdelete.nvim" then
@@ -204,8 +217,6 @@ else
   mappings.n["q"] = { "<cmd>bdelete<cr>", desc = "Close buffer" }
   mappings.n["<c-q>"] = { "<cmd>bdelete!<cr>", desc = "Force close buffer" }
 end
-
- 
 
 -- add more text objects for "in" and "around"
 for _, char in ipairs({ "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }) do
