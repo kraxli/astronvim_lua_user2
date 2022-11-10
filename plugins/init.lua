@@ -35,7 +35,7 @@ return {
     after = "nvim-cmp",
     config = function() require "user.plugins.cmp-latex-symbols" end,
   },
-  ["machakann/vim-sandwich"] = {},
+  -- ["machakann/vim-sandwich"] = {},
   ["mfussenegger/nvim-dap"] = {},
   ["mtikekar/nvim-send-to-term"] = {
     cmd = "SendHere",
@@ -144,25 +144,6 @@ return {
 		config = function()
 			require("lsp_signature").setup()
 			-- require("user.plugins.lsp_signature").config()
-		end,
-	},
-	{
-		"sindrets/diffview.nvim",
-		opt = true,
-		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-		module = "diffview",
-		keys = "<leader>gd",
-		setup = function()
-			-- require("which-key").register { ["<leader>gd"] = "diffview: diff HEAD" }
-		end,
-		config = function()
-			require("diffview").setup({
-				enhanced_diff_hl = true,
-				key_bindings = {
-					file_panel = { q = "<Cmd>DiffviewClose<CR>" },
-					view = { q = "<Cmd>DiffviewClose<CR>" },
-				},
-			})
 		end,
 	},
 	{
