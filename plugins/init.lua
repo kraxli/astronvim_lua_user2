@@ -1,12 +1,10 @@
 return {
   ["goolord/alpha-nvim"] = { disable = true },
   ["max397574/better-escape.nvim"] = { disable = true },
-  ["EdenEast/nightfox.nvim"] = { config = function() require "user.plugins.nightfox" end },
-  ["akinsho/git-conflict.nvim"] = { tag = "*", config = function() require "user.plugins.git-conflict" end },
-  ["andweeb/presence.nvim"] = { module = "presence" },
+
   ["andymass/vim-matchup"] = { after = "nvim-treesitter" },
   ["arsham/indent-tools.nvim"] = {
-    requires = { "arsham/arshlib.nvim" },
+    requires = "arsham/arshlib.nvim",
     config = function() require "user.plugins.indent-tools" end,
   },
   ["danymat/neogen"] = {
@@ -15,10 +13,7 @@ return {
     cmd = "Neogen",
     config = function() require "user.plugins.neogen" end,
   },
-  ["dhruvasagar/vim-table-mode"] = {
-    cmd = "TableModeToggle",
-    config = function() require "user.plugins.vim-table-mode" end,
-  },
+  ["EdenEast/nightfox.nvim"] = { config = function() require "user.plugins.nightfox" end },
   ["ethanholz/nvim-lastplace"] = { config = function() require "user.plugins.nvim-lastplace" end },
   ["hrsh7th/cmp-calc"] = { after = "nvim-cmp", config = function() require "user.plugins.cmp-calc" end },
   ["hrsh7th/cmp-emoji"] = { after = "nvim-cmp", config = function() require "user.plugins.cmp-emoji" end },
@@ -27,7 +22,6 @@ return {
     after = { "mason.nvim", "nvim-dap" },
     config = function() require "user.plugins.mason-nvim-dap" end,
   },
-  ["jbyuki/nabla.nvim"] = { module = "nabla" },
   ["jc-doyle/cmp-pandoc-references"] = {
     after = "nvim-cmp",
     config = function() require "user.plugins.cmp-pandoc-references" end,
@@ -36,17 +30,13 @@ return {
     after = "mason-lspconfig.nvim",
     config = function() require "user.plugins.typescript" end,
   },
+  ["junegunn/vim-easy-align"] = {},
   ["kdheepak/cmp-latex-symbols"] = {
     after = "nvim-cmp",
     config = function() require "user.plugins.cmp-latex-symbols" end,
   },
-  ["kylechui/nvim-surround"] = { tag = "*", config = function() require "user.plugins.nvim-surround" end },
-  ["lukas-reineke/headlines.nvim"] = {
-    ft = { "markdown", "rmd", "qmd" },
-    config = function() require "user.plugins.headlines" end,
-  },
+  ["machakann/vim-sandwich"] = {},
   ["mfussenegger/nvim-dap"] = {},
-  ["mickael-menu/zk-nvim"] = { module = { "zk", "zk.commands" }, config = function() require "user.plugins.zk" end },
   ["mtikekar/nvim-send-to-term"] = {
     cmd = "SendHere",
     config = function() require "user.plugins.nvim-send-to-term" end,
@@ -81,17 +71,16 @@ return {
     after = "mason-lspconfig.nvim",
     config = function() require "user.plugins.clangd_extensions" end,
   },
-  ["phaazon/hop.nvim"] = {
-    cmd = { "HopChar1", "HopChar2", "HopLine", "HopPattern", "HopWord" },
-    branch = "v2",
-    config = function() require "user.plugins.hop" end,
-  },
   ["rcarriga/nvim-dap-ui"] = { after = "nvim-dap", config = function() require "user.plugins.dapui" end },
+  ["sindrets/diffview.nvim"] = {
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    config = function() require "user.plugins.diffview" end,
+  },
   ["theHamsta/nvim-dap-virtual-text"] = {
     after = "nvim-dap",
     config = function() require "user.plugins.nvim-dap-virtual-text" end,
   },
-  ["vitalk/vim-simple-todo"] = {
+  ["vitalk/vim-simple-todo"] = {  -- Micah seems to have removed vim-simple-tod
     keys = {
       "<Plug>(simple-todo-above)",
       "<Plug>(simple-todo-below)",
