@@ -91,6 +91,11 @@ vim.cmd([[
 					  \ : substitute(l:scheme, 'day', 'nord', '')
 		        \ )
 
+		  let l:scheme = (l:scheme =~# 'night'
+					  \ ? substitute(l:scheme, 'night', 'day', '')
+					  \ : substitute(l:scheme, 'day', 'night', '')
+		        \ )
+
 		  execute 'colorscheme ' .. l:scheme
       return
     end
