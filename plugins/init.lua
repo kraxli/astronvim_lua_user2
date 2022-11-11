@@ -346,6 +346,7 @@ return {
          ]])
 			require("user.plugins.telekasten")
 		end,
+		disable = true
 	},
 	{
 		"lervag/vimtex",
