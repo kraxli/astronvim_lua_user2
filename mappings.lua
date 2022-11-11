@@ -18,6 +18,8 @@ vim.cmd([[
   nmap [z [sz=
   nmap ]z ]sz=
 
+  " nmap < <<_
+  " nmap > >>_
 ]])
 
 local opts = { noremap = true, silent = true }
@@ -98,7 +100,8 @@ local mappings = {
     ["<leader>sk"] = false,
     ["<leader>sm"] = false,
     ["<leader>sn"] = false,
-    ["<leader>sr"] = false,
+    [">b"] = false,
+    ["<b"] = false,
     -- navigating wrapped lines
     j = { "gj", desc = "Navigate down" },
     k = { "gk", desc = "Navigate down" },

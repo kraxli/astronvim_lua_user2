@@ -19,8 +19,12 @@ vim.cmd([[
 		let g:mkdx#settings = { 'map': { 'prefix': 'm' } }
 
 		fun! s:MkdxRemap()
-    	nmap <buffer><silent> m<space> <Plug>(mkdx-checkbox-next-n)
-    	vmap <buffer><silent> m<space> <Plug>(mkdx-checkbox-next-v)
+				nmap <buffer><silent> m<space> <Plug>(mkdx-checkbox-next-n)
+				vmap <buffer><silent> m<space> <Plug>(mkdx-checkbox-next-v)
+				nmap <buffer><silent> <c-space> <Plug>(mkdx-checkbox-next-n)
+				vmap <buffer><silent> <c-space> <Plug>(mkdx-checkbox-next-v)
+				nmap <buffer><silent> =  <Plug>(mkdx-demote-header)
+				nmap <buffer><silent> ?  <Plug>(mkdx-promote-header)
 		endfun
 
 		augroup Mkdx
