@@ -78,7 +78,9 @@ vim.cmd([[
     " TODO: run file command for ipython
     " 2TermExec cmd="git status" dir=~/<my-repo-path>
   ]])
-vim.api.nvim_set_keymap("n", "<F5>", [[<cmd>lua require('user.utils').execute_file()<CR>]], opts)
+
+-- open system app for file under cursor or file explorer
+vim.api.nvim_set_keymap("n", "<F5>", [[<cmd>lua require('user.utils').openSysApp()<CR>]], opts)
 
 local mappings = {
 

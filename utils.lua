@@ -48,4 +48,46 @@ function M.toggle_qf()
   end
 end
 
+local function getOs()
+
+  local osKey = ''
+
+  if vim.fn.has "mac" == 1 then
+    osKey = "mac"
+  elseif vim.fn.has "unix" == 1 then
+    osKey = "unix"
+  elseif vim.fn.has('win64') or vim.fn.has('win32') then
+    osKey='win'
+  end
+
+  return osKey
+end
+
+function M.openSysApp()
+
+  local commandsOpen = {unix="xdg-open", mac="open", win='Invoke-Expression'}
+  local os = getOs()
+  sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
+
+  -- os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))) -- ; vim.cmd "redraw!"
+  vim.cmd([[
+    let path = fnamemodify(expand('<cfile>'), ':p')  " <cfile>  or <cword>  
+    " let path = expand('<cword>')  " <cfile>  or <cword>  
+
+    if empty(glob(path))  " | !isdirectory(path)
+      let path =  expand('%:p:h')
+    end
+    
+    " execute 'silent! !xdg-open ' . shellescape(path, 1)
+    execute 'silent! !' . luaeval('sys_app') . ' ' . shellescape(path, 1)
+  ]])
+end
+
+function M.openExplorer()
+
+  local commandsOpen = {unix="xdg-open", mac="open", win='Invoke-Expression'}
+
+  os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
+end
+
 return M
