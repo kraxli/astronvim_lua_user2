@@ -99,7 +99,7 @@ return {
         f = { "<cmd>TexlabForward<cr>", "Forward Search" },
       },
 
-      d = { -- or w
+      w = { -- or w
         name = "Document",
         n = { "<cmd>enew<cr>", "New File" },
         s = { "<cmd>setlocal spell!<cr>", "Toggle Spelling" },
@@ -148,8 +148,10 @@ return {
 
 			-- Git, enhance base functionality
 			g = {
+				L = {"<cmd>Git blame<cr>", "Git blame file"},
 				m = { "<cmd>Neogit<CR>", "Magit" }, -- noremap=true
-				v = { "<cmd>diffview: diff HEAD", "Diffview" },
+        v = { "<cmd>DiffviewOpen<cr>", "Diffview open" },
+        q = { "<cmd>DiffviewClose<cr>", "Diffview close" },
 				y = {
 					"<cmd>lua require('core.utils').toggle_term_cmd({cmd = 'lazygit', count = 1, direction = 'float'})<CR>",
 					"Lazygit",
