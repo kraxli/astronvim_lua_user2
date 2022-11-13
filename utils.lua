@@ -63,24 +63,66 @@ local function getOs()
   return osKey
 end
 
-function M.openSysApp()
+function visual_selection_range()
+  local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
+  local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
+  -- if line_start < line_end or (line_start == line_end and col_start <= col_end) then
+  --   return line_start - 1, col_start - 1, line_end - 1, col_end
+  -- else
+  --   return line_end - 1, col_end - 1, line_start - 1, col_start
+  -- end
 
-  local commandsOpen = {unix="xdg-open", mac="open", win='Invoke-Expression'}
+  local lines = vim.fn.getline(line_start, line_end)
+
+  if vim.fn.len(lines) == 0 then
+      return ''
+  end
+
+  -- local lines[#lines] = lines[#lines][: col_end)]
+  -- local lines[0] = lines[0][col_start - 1:]
+
+  -- return join(lines, "\n")
+
+end
+
+-- fun! Google()
+--   let keyword = expand("<cword>")
+--   let url = "http://www.google.com/search?q=" . keyword
+--   let path = "/usr/bin/"
+--   exec 'silent !"' . path . 'firefox" ' . url
+-- endfun
+
+
+-- @param mode: the active mode ('n', 'i', 'v', 'x')
+function M.sys_app_open(mode)
+
+  local mode = mode or vim.api.nvim_get_mode()["mode"]
+  local commandsOpen = {unix="xdg-open", mac="open", win='Invoke-Expression', wingui='start'}
   local os = getOs()
-  sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
+  local sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
 
+  if os == 'win' and vim.fn.has('gui_running') then
+    os = 'wingui'
+  end
+
+  if mode == 'v' or mode == 'x' then
+    path = visual_selection_range()  -- global such that it can be used in vim.cmd()
+  else
+    path = vim.fn.expand("<cfile>")
+    -- path = path or vim.fn.expand("<cfile>")  -- in case of input variable path, <cfile>  or <cword>  
+    path = vim.fn.fnamemodify(path, ':p')
+  end
+
+  local is_not_web_address = vim.fn.empty(string.match(path, '[a-z]*://[^ >,;()]*')) == 1
+  local is_empty_path = vim.fn.empty(vim.fn.glob(path)) == 1
+
+  if (is_empty_path and is_not_web_address) then
+    path = vim.fn.expand('%:p:h')
+  end
+
+  vim.fn.jobstart({ sys_app, path }, { detach = true })
   -- os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))) -- ; vim.cmd "redraw!"
-  vim.cmd([[
-    let path = fnamemodify(expand('<cfile>'), ':p')  " <cfile>  or <cword>  
-    " let path = expand('<cword>')  " <cfile>  or <cword>  
-
-    if empty(glob(path))  " | !isdirectory(path)
-      let path =  expand('%:p:h')
-    end
-    
-    " execute 'silent! !xdg-open ' . shellescape(path, 1)
-    execute 'silent! !' . luaeval('sys_app') . ' ' . shellescape(path, 1)
-  ]])
+  -- vim.cmd([[ execute 'silent! !' . luaeval('sys_app') . ' ' . shellescape(path, 1) ]])
 end
 
 function M.openExplorer()

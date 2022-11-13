@@ -80,7 +80,7 @@ vim.cmd([[
   ]])
 
 -- open system app for file under cursor or file explorer
-vim.api.nvim_set_keymap("n", "<F5>", [[<cmd>lua require('user.utils').openSysApp()<CR>]], opts)
+vim.api.nvim_set_keymap("", "<F3>", [[<cmd>lua require('user.utils').sys_app_open()<CR>]], opts)
 
 local mappings = {
 
