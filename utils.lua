@@ -97,7 +97,7 @@ end
 function M.sys_app_open(mode)
 
   local mode = mode or vim.api.nvim_get_mode()["mode"]
-  local commandsOpen = {unix="xdg-open", mac="open", win='Invoke-Expression', wingui='start'}
+  local commandsOpen = {unix="xdg-open", mac="open", win='Start-Process', wingui='start'}
   local os = getOs()
   local sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
 
@@ -127,7 +127,7 @@ end
 
 function M.openExplorer()
 
-  local commandsOpen = {unix="xdg-open", mac="open", win='Invoke-Expression'}
+  local commandsOpen = {unix="xdg-open", mac="open", win='Start-Process'}
 
   os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
 end
