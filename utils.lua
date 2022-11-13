@@ -97,13 +97,14 @@ end
 function M.sys_app_open(mode)
 
   local mode = mode or vim.api.nvim_get_mode()["mode"]
-  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='start'}
+  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='explorer'}  -- win='start /b ""'
   local os = getOs()
-  local sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
 
   if os == 'win' and vim.o.shell == 'powershell' then
     os = 'powershell'
   end
+
+  sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
 
   if mode == 'v' or mode == 'x' then
     path = visual_selection_range()  -- global such that it can be used in vim.cmd()
@@ -120,14 +121,18 @@ function M.sys_app_open(mode)
     path = vim.fn.expand('%:p:h')
   end
 
-  vim.fn.jobstart({ sys_app, path }, { detach = true })
+  if os == 'win' then
+      vim.cmd([[ execute 'silent! !' . luaeval('sys_app') . ' ' .shellescape(luaeval('path'), 1) ]])
+  else
+      vim.fn.jobstart({ sys_app, path }, { detach = true })
+  end
+
   -- os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))) -- ; vim.cmd "redraw!"
-  -- vim.cmd([[ execute 'silent! !' . luaeval('sys_app') . ' ' . shellescape(path, 1) ]])
 end
 
 function M.openExplorer()
 
-  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='start'}
+  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='start /b ""'}
 
   os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
 end
