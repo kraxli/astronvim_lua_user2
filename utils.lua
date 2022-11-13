@@ -97,12 +97,12 @@ end
 function M.sys_app_open(mode)
 
   local mode = mode or vim.api.nvim_get_mode()["mode"]
-  local commandsOpen = {unix="xdg-open", mac="open", win='Start-Process', wingui='start'}
+  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='start'}
   local os = getOs()
   local sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
 
-  if os == 'win' and vim.fn.has('gui_running') then
-    os = 'wingui'
+  if os == 'win' and vim.o.shell == 'powershell' then
+    os = 'powershell'
   end
 
   if mode == 'v' or mode == 'x' then
@@ -127,7 +127,7 @@ end
 
 function M.openExplorer()
 
-  local commandsOpen = {unix="xdg-open", mac="open", win='Start-Process'}
+  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='start'}
 
   os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
 end
