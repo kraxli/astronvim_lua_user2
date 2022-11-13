@@ -100,6 +100,10 @@ function M.sys_app_open(mode)
   local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='explorer'}  -- win='start /b ""'
   local os = getOs()
 
+  -- powershell: 
+  --   set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
+  --   set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+
   if os == 'win' and vim.o.shell == 'powershell' then
     os = 'powershell'
   end
