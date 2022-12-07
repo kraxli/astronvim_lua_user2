@@ -113,6 +113,15 @@ return {
 	-- KRAXLI ADDINGS:
 	-- -------------------------------------------------------
 
+  -- File Explorer --
+  -- {'prichrd/netrw.nvim'},
+
+  -- quickfix / location list --
+
+  -- {"ten3roberts/qf.nvim"},
+  -- {"arsham/listish.nvim"},
+
+
 	-- cmp
 	{"hrsh7th/cmp-cmdline", after = "nvim-cmp", },
 
