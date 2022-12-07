@@ -1,3 +1,4 @@
-return "nightfox"
+return "kanagawa" 
+-- "nightfox"
 -- "duskfox"
 -- "onehalfdark"
