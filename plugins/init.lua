@@ -311,32 +311,23 @@ return {
 		ft = { "lua" },
 		-- setup = function() require("config.plugins.dap") end,
 	},
-	{
-		"SidOfc/mkdx",
-		ft = { "markdown", "text", "vimwiki" }, -- vimwiki.markdown
-		setup = function()
-			require("user.plugins.markdown.mkdx")
-		end,
-	},
-	{
-		"machakann/vim-sandwich",
-		keys = { "s" },
-		event = "BufReadPost",
-		config = function()
-			require("user.plugins.sandwich")
-		end,
-	},
-	{
-		"iamcco/markdown-preview.nvim",
-		run = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-		-- run = "cd app && npm install",  -- does not seem to work on windows
-		ft = "markdown",
-		config = function()
-			require("user.plugins.markdown.markdown_preview")
-		end,
-	},
+
+  ---------------------------------------------------------------------
+	-- Markdown
+	-- https://github.com/rockerBOO/awesome-neovim/blob/main/README.md#markdown-and-latex
+  ---------------------------------------------------------------------
+  -- NFrid/markdown-togglecheck
+  -- lervag/wiki.vim
+  -- lervag/wiki-ft.vim
+
+  -- {
+  --   'ixru/nvim-markdown',
+  --   ft='markdown',
+  --   config = function () require('user.plugins.markdown.vim-markdown') end
+  --   disable = true,
+  -- },
+    -- 'prashanthellina/follow-markdown-links',
+  --   'jghauser/follow-md-links.nvim',
 	-- {
 	-- 	"SidOfc/mkdx",
 	-- 	ft = { "markdown", "text", "vimwiki" }, -- vimwiki.markdown
