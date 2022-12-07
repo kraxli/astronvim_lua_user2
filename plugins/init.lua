@@ -139,6 +139,14 @@ return {
 		end,
 		event = "BufRead",
 	},
+	{
+		"machakann/vim-sandwich",
+		keys = { "s" },
+		event = "BufReadPost",
+		config = function()
+			require("user.plugins.sandwich")
+		end,
+	},
 	--	{
 	--		"tknightz/telescope-termfinder.nvim",
 	--		after = { "nvim-telescope/telescope.nvim", "akinsho/toggleterm.nvim" },
