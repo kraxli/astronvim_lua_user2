@@ -328,6 +328,18 @@ return {
   -- },
     -- 'prashanthellina/follow-markdown-links',
   --   'jghauser/follow-md-links.nvim',
+  {
+    'gaoDean/autolist.nvim',
+    ft= {'markdown' , 'text'},
+    config = function()
+      require('autolist').setup({
+          normal_mappings = {
+            invert = { "<c-d>+[catch]" },  -- or <c-r>
+          },
+      })
+    end,
+  },
+
 	-- {
 	-- 	"SidOfc/mkdx",
 	-- 	ft = { "markdown", "text", "vimwiki" }, -- vimwiki.markdown
