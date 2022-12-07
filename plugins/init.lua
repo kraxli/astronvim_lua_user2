@@ -321,8 +321,12 @@ return {
 		end,
 	},
 	-- {
-	-- 	"renerocksai/calendar-vim", -- TODO: lazy loading ft or cmd
-	-- 	cmd = { "Calendar" },
+	-- 	"SidOfc/mkdx",
+	-- 	ft = { "markdown", "text", "vimwiki" }, -- vimwiki.markdown
+	-- 	setup = function()
+	-- 		require("user.plugins.markdown.mkdx")
+	-- 	end,
+	-- },
 	-- 	config = function()
 	-- 		require("user.plugins.calendar-vim")
 	-- 	end,
@@ -337,16 +341,24 @@ return {
 	-- -- TODO:
 	{
 		"renerocksai/telekasten.nvim",
-		ft = { "markdown", "vimwiki", "text" },
+		ft = { "markdown", "vimwiki", "text", "telekasten" },
 		cmd = { "Telekasten", "Tk" },
 		keys = { "<leader>z" },
-		config = function()
+		setup = function()
 			vim.cmd([[
          command! Tk :Telekasten
+         au! FileType telekasten set filetype=markdown
          ]])
 			require("user.plugins.telekasten")
 		end,
-		disable = true
+	},
+	{
+		"renerocksai/calendar-vim", -- TODO: lazy loading ft or cmd
+		cmd = { "Calendar", "Telekasten", "Tk", "CalendarH", "CalendarT" },
+		ft = { "markdown", "vimwiki", "text", "telekasten" },
+		config = function()
+			require("user.plugins.calendar-vim")
+		end,
 	},
 	{
 		"lervag/vimtex",

@@ -188,7 +188,41 @@ return {
 						})
 					end, "Go to Statement", },
 			},
+      v = {
+	      name = "View", -- optional group name
+	      g = { "<cmd>call Toggle_background()<CR>", "Toggle background color" }, -- create a binding with label
+	      b = { "<cmd>buffer#<CR>", "Buffer alternate" },
+	      o = { "<cmd>only<CR>", "Only this" },
+	      c = { "<cmd>close<CR>", "Close" },
+	      d = { "<cmd>bdelete!<CR>", "Buffer delete" },
+	      q = { "<cmd>quit<CR>", "Quit" },
+	      w = { "<cmd>save %<CR>", "Save" },
+	      x = { "<cmd>call utils#window_empty_buffer()<CR>", "Buffer empty" },
+	      z = { "<cmd>call utils#zoom()<CR>", "Zoom" },
 
+	      -- h = { '<cmd>split<CR>', "Split horizontal"},
+	      -- v = { '<cmd>vsplit<CR>', "Split vertical"},
+	      --Split current buffer, go to previous window and previous buffer
+	      h = { "<cmd>split<CR>:wincmd p<CR>:e#<CR>", "Split horizontal" },
+	      v = { "<cmd>vsplit<CR>:wincmd p<CR>:e#<CR>", "Split vertical" },
+	      t = { "<cmd>enew<CR>", "Buf new"},
+	      T = { "<cmd>tabnew<CR>", "Tab new" },
+	      -- n = { "<cmd>tabnext<CR>", "Tab next" },
+	      -- p = { "<cmd>tabprev<CR>", "Tab previous" },
+        n = { "<cmd>BufferLineMoveNext<cr>", "Move buffer tab right" },
+        p = { "<cmd>BufferLineMovePrev<cr>",  "Move buffer tab left" },
+	      f = { "<cmd>lcd %:p:h<CR>" },
+      },
+      z = {
+        name = "Zettel / Md",
+        d = {'<cmd>lua require("telekasten").find_daily_notes()<CR>', "Find dailies"},
+        f = {'<cmd>lua require("telekasten").find_notes()<CR>', "Find note"},
+        g = {'<cmd>lua require("telekasten").search_notes()<CR>', 'Search notes'},
+        l = {'<cmd>lua require("telekasten").follow_link()<CR>', 'Follow link'},
+        t = {'<cmd>lua require("telekasten").toggle_todo()<CR>', 'Toggle todo'},
+        z = {'<cmd>lua require("telekasten").panel()<CR>', 'Panel'},
+        -- vim.api.nvim_set_keymap('n', '<Leader>z', ':lua require('telekasten').pandel()<CR>', keyOpts)
+      },
     },
     ["]"] = {
       f = "Next function start",
@@ -311,31 +345,6 @@ return {
 		'<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
 		"Search current buffer",
 	},
-},
-  w = {
-	name = "Window", -- optional group name
-	g = { "<cmd>call Toggle_background()<CR>", "Toggle background color" }, -- create a binding with label
-	b = { "<cmd>buffer#<CR>", "Buffer alternate" },
-	o = { "<cmd>only<CR>", "Only this" },
-	c = { "<cmd>close<CR>", "Close" },
-	d = { "<cmd>bdelete!<CR>", "Buffer delete" },
-	q = { "<cmd>quit<CR>", "Quit" },
-	w = { "<cmd>save %<CR>", "Save" },
-	x = { "<cmd>call utils#window_empty_buffer()<CR>", "Buffer empty" },
-	z = { "<cmd>call utils#zoom()<CR>", "Zoom" },
-
-	-- h = { '<cmd>split<CR>', "Split horizontal"},
-	-- v = { '<cmd>vsplit<CR>', "Split vertical"},
-	--Split current buffer, go to previous window and previous buffer
-	h = { "<cmd>split<CR>:wincmd p<CR>:e#<CR>", "Split horizontal" },
-	v = { "<cmd>vsplit<CR>:wincmd p<CR>:e#<CR>", "Split vertical" },
-	t = { "<cmd>tabnew<CR>", "Tab new" },
-	N = { "<cmd>enew<CR>", "Buf new"},
-	-- n = { "<cmd>tabnext<CR>", "Tab next" },
-	-- p = { "<cmd>tabprev<CR>", "Tab previous" },
-  n = { "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer tab right" },
-  p = { "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer tab left" },
-	f = { "<cmd>lcd %:p:h<CR>" },
 },
 ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', "Time stamp" }, -- '=strftime("%H:%M")<CR>P'
 }, -- end normal mode

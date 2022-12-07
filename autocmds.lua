@@ -75,12 +75,18 @@ autocmd("TermEnter term://*toggleterm#*", {
 -- })
 
 vim.cmd([[
-	
+
+	if (has('win32') || has('win64'))
+		augroup _Colors
+			au! ColorScheme kanagawa hi link TelescopeSelection Normal
+		augroup end
+	end
+
 	augroup _MarkdownBuf
 	autocmd!
 
-  autocmd BufRead,BufEnter,BufWinEnter,BufNew,VimEnter *.md,*.wiki setlocal filetype=markdown " vimwiki.markdown
-  autocmd BufRead,BufEnter,BufWinEnter,BufNew,BufWrite,VimEnter,InsertEnter *.md,*.wiki lua require('user.highlight').markdown()
+  " autocmd BufRead,BufEnter,BufWinEnter,BufNew,VimEnter *.md,*.wiki setlocal filetype=markdown " vimwiki.markdown
+  autocmd BufRead,BufEnter,BufWinEnter,BufNew,BufWrite,VimEnter,InsertEnter *.md,*.wiki,*.txt lua require('user.highlight').markdown()
   " autocmd FileType vimwiki.markdown,vimwiki,markdown,text set foldmethod=expr foldexpr=MkdFoldSimple()
   autocmd FileType vimwiki.markdown,vimwiki,markdown,text setl spell spelllang=en,de
 

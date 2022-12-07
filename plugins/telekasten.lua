@@ -5,8 +5,14 @@
 -- - if you **must** use Windows, use "/Users/myname/zettelkasten" instead of "~/zettelkasten"
 -- - NEVER use "C:\Users\myname" style paths
 
-local home = vim.fn.expand("~/Dropbox/PKD")
--- local home = vim.fn.expand(dirPkd)
+local status, _ = pcall(require, "local.settings")
+if status then
+  home = vim.g.dirPkd
+  -- home = require("local.settings").dirPkd
+else
+  home = vim.fn.expand("~/Dropbox/PKD")
+end
+-- local home = vim.fn.expand("~/Dropbox/PKD")
 
 require('telekasten').setup({
     home = home,
@@ -15,7 +21,7 @@ require('telekasten').setup({
     take_over_my_home = true,
 
     -- auto-set telekasten filetype: if false, the telekasten filetype will not be used and thus the telekasten syntax will not be loaded either
-    auto_set_filetype = true,
+    auto_set_filetype = false,
 
     -- dir names for special notes (absolute path or subdir name)
     dailies      = home .. '/' .. 'daily',
@@ -35,17 +41,17 @@ require('telekasten').setup({
     dailies_create_nonexisting = true,
     weeklies_create_nonexisting = true,
 
-    -- template for new notes (new_note, follow_link)
-    -- set to `nil` or do not specify if you do not want a template
-    template_new_note = home .. '/' .. 'templates/new_note.md',
-
-    -- template for newly created daily notes (goto_today)
-    -- set to `nil` or do not specify if you do not want a template
-    template_new_daily = home .. '/' .. 'templates/daily.md',
-
-    -- template for newly created weekly notes (goto_thisweek)
-    -- set to `nil` or do not specify if you do not want a template
-    template_new_weekly= home .. '/' .. 'templates/weekly.md',
+    -- -- template for new notes (new_note, follow_link)
+    -- -- set to `nil` or do not specify if you do not want a template
+    -- template_new_note = home .. '/' .. 'templates/new_note.md',
+    --
+    -- -- template for newly created daily notes (goto_today)
+    -- -- set to `nil` or do not specify if you do not want a template
+    -- template_new_daily = home .. '/' .. 'templates/daily.md',
+    --
+    -- -- template for newly created weekly notes (goto_thisweek)
+    -- -- set to `nil` or do not specify if you do not want a template
+    -- template_new_weekly= home .. '/' .. 'templates/weekly.md',
 
     -- image link style
     -- wiki:     ![[image name]]
@@ -81,12 +87,12 @@ require('telekasten').setup({
     -- instead of a [[title only]] link
     subdirs_in_links = true,
 
-    -- template_handling
-    -- What to do when creating a new note via `new_note()` or `follow_link()`
-    -- to a non-existing note
-    -- - prefer_new_note: use `new_note` template
-    -- - smart: if day or week is detected in title, use daily / weekly templates (default)
-    -- - always_ask: always ask before creating a note
+    -- -- template_handling
+    -- -- What to do when creating a new note via `new_note()` or `follow_link()`
+    -- -- to a non-existing note
+    -- -- - prefer_new_note: use `new_note` template
+    -- -- - smart: if day or week is detected in title, use daily / weekly templates (default)
+    -- -- - always_ask: always ask before creating a note
     template_handling = "smart",
 
     -- path handling:
@@ -116,21 +122,16 @@ require('telekasten').setup({
     rename_update_links = true,
 })
 
-
--- key mappings telekasten
- -- we could define [[ in **insert mode** to call insert link
- -- alternatively: leader [
-
--- vim.cmd([[
---  inoremap llii <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
---  inoremap <leader>zt <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
---  inoremap <leader># <cmd>lua require('telekasten').show_tags({i = true})<cr>
--- ]])
-
 local keyOpts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('i', '<c-i>', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
-vim.api.nvim_set_keymap('i', '<c-t>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
+-- vim.api.nvim_set_keymap('i', '<c-$>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
+vim.api.nvim_set_keymap('n', '<c-space>', "<ESC>:lua require('telekasten').toggle_todo({ i=false })<CR>", keyOpts)
 vim.api.nvim_set_keymap('i', '<c-#>', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
 
-vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>', keyOpts)
+-- vim.api.nvim_set_keymap('n', '<Leader>zf', ':lua require("telekasten").find_notes()<CR>', keyOpts)
+-- vim.api.nvim_set_keymap('n', '<Leader>zd', ':lua require("telekasten").find_daily_notes()<CR>', keyOpts)
+-- vim.api.nvim_set_keymap('n', '<Leader>zg', ':lua require("telekasten").search_notes()<CR>', keyOpts)
+-- vim.api.nvim_set_keymap('n', '<Leader>zl', ':lua require("telekasten").follow_link()<CR>', keyOpts)
+-- vim.api.nvim_set_keymap('n', '<Leader>zz', ':lua require("telekasten").pandel()<CR>', keyOpts)
+-- vim.api.nvim_set_keymap('n', '<Leader>z', ':lua require('telekasten').pandel()<CR>', keyOpts)
 
