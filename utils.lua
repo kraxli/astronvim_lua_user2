@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 function M.quick_notification(msg) vim.notify(msg, "info", { title = "AstroNvim", timeout = 0 }) end
 
@@ -63,35 +63,69 @@ local function getOs()
   return osKey
 end
 
-function visual_selection_range()
-  local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
-  local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
-  -- if line_start < line_end or (line_start == line_end and col_start <= col_end) then
-  --   return line_start - 1, col_start - 1, line_end - 1, col_end
-  -- else
-  --   return line_end - 1, col_end - 1, line_start - 1, col_start
+function M.get_visual_selection()
+
+  -- local mode = vim.api.nvim_get_mode()["mode"]  -- or vim.fn.mode()
+  -- if mode ~= 'v' or mode ~= 'x' then
+  --   return ''
   -- end
 
-  local lines = vim.fn.getline(line_start, line_end)
+  vim.cmd('noau normal! "vy"')
+  selection = string.gsub(vim.fn.getreg('v'), '^%s*(.-)%s*$', '%1')  -- remove leading and trailing spaces
 
-  if vim.fn.len(lines) == 0 then
-      return ''
-  end
-
-  -- local lines[#lines] = lines[#lines][: col_end)]
-  -- local lines[0] = lines[0][col_start - 1:]
-
-  -- return join(lines, "\n")
-
+  return selection
 end
 
--- fun! Google()
---   let keyword = expand("<cword>")
---   let url = "http://www.google.com/search?q=" . keyword
---   let path = "/usr/bin/"
---   exec 'silent !"' . path . 'firefox" ' . url
--- endfun
 
+-- see e.g. https://github.com/theHamsta/nvim-treesitter/blob/a5f2970d7af947c066fb65aef2220335008242b7/lua/nvim-treesitter/incremental_selection.lua#L22-L30
+function M.get_visual_range()
+
+  local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
+  local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
+  -- local line_start = vim.fn.getpos("'<")[2]
+  -- local col_start = vim.fn.getpos("'<")[3]
+  -- local line_end = vim.fn.getpos("'>")[2]
+  -- local col_end = vim.fn.getpos("'>")[3]
+  local selection = vim.fn.getline(line_start, line_end)
+
+  -- print('lines: ' .. line_start .. ' to ' .. line_end)
+  -- print(vim.inspect(selection))
+
+  if #selection == 0 then  -- or vim.fn.len(selection) == 0
+    return ''
+  end
+
+  local first_line = selection[1]
+  local last_line = selection[#selection]
+  first_line = string.sub(first_line, col_start, first_line:len())
+  first_line = string.gsub(first_line, '^%s*(.-)%s*$', '%1')  -- remove leading and trailing spaces
+  last_line =  string.sub(last_line, 1, col_end)
+  last_line = string.gsub(last_line, '^%s*(.-)%s*$', '%1')  -- remove leading and trailing spaces
+  selection[1] = first_line
+  selection[#selection] = last_line
+
+  return table.concat(selection, '\n')
+end
+
+function M.execute(str)
+
+  print(str)
+  local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='explorer'}  -- win='start /b ""'
+  local os = getOs()
+  sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
+
+  if os == 'win' then
+      vim.cmd([[ execute 'silent! !' . luaeval('sys_app') . ' ' .shellescape(luaeval('str'), 1) ]])
+  else
+      vim.fn.jobstart({ sys_app, str }, { detach = true })
+  end
+end
+
+function M.google()
+  local keyword = vim.fn.expand("<cword>")
+  local url = "http://www.google.com/search?q=" .. keyword
+  M.execute(url)
+end
 
 -- @param mode: the active mode ('n', 'i', 'v', 'x')
 function M.sys_app_open(mode)
@@ -111,7 +145,7 @@ function M.sys_app_open(mode)
   sys_app = commandsOpen[os]  -- must be global to be used in vimscript below
 
   if mode == 'v' or mode == 'x' then
-    path = visual_selection_range()  -- global such that it can be used in vim.cmd()
+    path = M.get_visual_selection()  -- global such that it can be used in vim.cmd()
   else
     path = vim.fn.expand("<cfile>")
     -- path = path or vim.fn.expand("<cfile>")  -- in case of input variable path, <cfile>  or <cword>  
