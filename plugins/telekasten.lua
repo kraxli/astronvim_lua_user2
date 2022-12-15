@@ -10,7 +10,7 @@ if status then
   home = vim.g.dirPkd
   -- home = require("local.settings").dirPkd
 else
-  home = vim.fn.expand("~/Dropbox/PKD")
+  home = "/home/dave/Dropbox/PKD"  -- vim.fn.expand("/home/dave/Dropbox/PKD")
 end
 -- local home = vim.fn.expand("~/Dropbox/PKD")
 
@@ -18,7 +18,7 @@ require('telekasten').setup({
     home = home,
 
     -- if true, telekasten will be enabled when opening a note within the configured home
-    take_over_my_home = true,
+    take_over_my_home = false,
 
     -- auto-set telekasten filetype: if false, the telekasten filetype will not be used and thus the telekasten syntax will not be loaded either
     auto_set_filetype = false,
@@ -123,10 +123,10 @@ require('telekasten').setup({
 })
 
 local keyOpts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('i', '<c-i>', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
--- vim.api.nvim_set_keymap('i', '<c-$>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
+-- vim.api.nvim_set_keymap('i', '<c-a>', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
+-- vim.api.nvim_set_keymap('i', '<c-#>', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
 vim.api.nvim_set_keymap('n', '<c-space>', "<ESC>:lua require('telekasten').toggle_todo({ i=false })<CR>", keyOpts)
-vim.api.nvim_set_keymap('i', '<c-#>', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
+vim.api.nvim_set_keymap('i', '<c-space>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
 
 -- vim.api.nvim_set_keymap('n', '<Leader>zf', ':lua require("telekasten").find_notes()<CR>', keyOpts)
 -- vim.api.nvim_set_keymap('n', '<Leader>zd', ':lua require("telekasten").find_daily_notes()<CR>', keyOpts)
