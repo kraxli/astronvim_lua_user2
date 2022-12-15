@@ -8,7 +8,7 @@ vim.cmd([[ command! -range Words2String :'<,'>s/\%V\(\h\+\)/'\1'/g ]])
 create_command("Pv", ":MarkdownPreview", { desc = "Preview markdown" })
 create_command("Format", '<cmd>lua vim.lsp.buf.format()', {desc= "Format code"})
 
-create_command("Google", '<cmd>lua require("user.utils").google()')
+create_command("Google", '<cmd>lua require("user.utils").google()', {desc= "Google word"})
 
 
 -- TODO:
