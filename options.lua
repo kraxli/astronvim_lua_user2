@@ -45,6 +45,8 @@ return {
 	g = {
 		maplocalleader = ",",
 		matchup_matchparen_deferred = 1,
+    diagnostics_enabled = false, -- enable diagnostics at start
+    status_diagnostics_enabled = true, -- enable diagnostics in statusline
 	},
 	wo = {
 		number = true,
