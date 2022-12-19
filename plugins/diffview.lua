@@ -13,7 +13,7 @@ local build_keymaps = function(maps)
       ["Cl"] = { actions.cycle_layout, desc = "Cycle Diff Layout" }, -- Cycle through available layouts.
       ["Ct"] = { actions.listing_style, desc = "Cycle Tree Style" }, -- Cycle through available layouts.
       ["<leader>e"] = { actions.toggle_files, desc = "Toggle Explorer" }, -- Toggle the file panel.
-      ["<leader>o"] = { actions.focus_files, desc = "Focus Explorer" }, -- Bring focus to the file panel
+      ["<leader>O"] = { actions.focus_files, desc = "Focus Explorer" }, -- Bring focus to the file panel
     }, maps))
   do
     local opts

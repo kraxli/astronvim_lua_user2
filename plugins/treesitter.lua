@@ -53,14 +53,15 @@ return {
     swap = {
       enable = true,
       swap_next = {
-        [">B"] = "@block.outer",
-        [">F"] = "@function.outer",
-        [">P"] = "@parameter.inner",
+        -- ["<leader>osnB"] = {"@block.outer", desc="Swap next block outer"},
+        ["<leader>osnB"] = "@block.outer",
+        ["<leader>osnF"] = "@function.outer",
+        ["<leader>osnP"] = "@parameter.inner",
       },
       swap_previous = {
-        ["<B"] = "@block.outer",
-        ["<F"] = "@function.outer",
-        ["<P"] = "@parameter.inner",
+        ["<leader>ospB"] = "@block.outer",
+        ["<leader>ospF"] = "@function.outer",
+        ["<leader>ospP"] = "@parameter.inner",
       },
     },
     lsp_interop = {

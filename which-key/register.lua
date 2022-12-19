@@ -224,7 +224,17 @@ return {
         T = {'<cmd>lua require("telekasten").show_tags({i = false})<CR>', 'Toggle todo'},
         z = {'<cmd>lua require("telekasten").panel()<CR>', 'Panel'},
       },
-    },
+      o = {
+        name = "Text Object",
+        s = {
+          name = "Swap",
+            n = {
+              name = "next",
+          },
+        },
+      },
+    },  -- end leader
+
     ["]"] = {
       f = "Next function start",
       x = "Next class start",
@@ -290,65 +300,65 @@ return {
     },
     ["<localleader>"] = {
 
-	-- TODO: commented out commands are not working - check rafi/vim-config for fix
-	-- Telescope general pickers
-	a = { "<Cmd>Neotree toggle dir=%:p:h<CR>", "Neotree toggle" }, -- Nvimtree /  Neotree focus
-	b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
-	c = { '<cmd>lua require("telescope.builtin").command_history()<CR>', "Command history" },
-	d = { '<cmd>lua require"user.plugins.telescope".pickers.plugin_directories()<CR>', "Directories" },
-	-- Trouble & Diagnostics --
-	D = {
-		name = "Diagnostics",
-		c = { "<cmd>TroubleClose<cr>", "Close" },
-		d = { "<cmd>ToggleDiag<cr>", "Toggle diagnostics" },
-		D = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
-		i = { "<cmd>TroubleToggle lsp_implementations<cr>", "Implementations" },
-		f = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document" },
-		l = { "<cmd>TroubleToggle loclist<cr>", "Location list" },
-		o = { "<cmd>cexpr system('refurb --quiet ' . shellescape(expand('%'))) | copen<CR><CR>", "Refurb" }, -- optimization suggestions
-		q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
-		r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-		R = { "<cmd>TroubleRefresh<cr>", "Refresh" },
-		t = { "<cmd>TroubleToggle<cr>", "Trouble" },
-		T = { "<cmd>TroubleToggle lsp_type_definitions<cr>", "Types" },
-		v = { "<Plug>(toggle-lsp-diag-vtext)<cr>", "Toggle vtext diagnostics" },
-		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace" },
-	},
-	e = { "<Cmd>Neotree toggle<CR>", "Neotree toggle" },
-	f = { '<cmd>lua require("telescope.builtin").find_files()<CR>', "Files" },
-	g = { '<cmd>lua require("telescope.builtin").live_grep()<CR>', "Live grep" },
-	G = { "<cmd>lua require('user.plugins.telescope').pickers.grep_string_cursor()<cr>", "Grep cursor word" },
-	h = { '<cmd>lua require("telescope.builtin").highlights()<CR>', "Highlights" },
-	H = { '<cmd>lua require("telescope.builtin").search_history()<CR>', "Search history" },
-	j = { '<cmd>lua require("telescope.builtin").jumplist()<CR>', "Jumplist" },
-	-- k = {"<cmd>bd!<cr>", "Kill (del) buffer"},
-	l = { name = "VimTex" },
-	m = { '<cmd>lua require("telescope.builtin").marks()<CR>', "Marks" },
-	n = { "<cmd>lua require('telescope').extensions.notify.notify()<cr>", "Notifications" }, -- require("telescope").load_extension("notify")
-	N = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
-	-- o = {'<cmd>lua require("telescope.builtin").vim_options()<CR>', "Vim options"},
-	-- p = {'<cmd>lua require("telescope.builtin").projects()<CR>', "Projects"},
-	q = { "<cmd>bd!<cr>", "Kill (del) buffer" },
-	R = { '<cmd>lua require("telescope.builtin").pickers()<CR>', "Pickers" },
-	-- S = {'<cmd>lua require("telescope.builtin").session-lens search_session()<CR>', "Search session"},
-	s = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', "Search current Buffer" },
-	t = {
-		'<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
-		"LSP workspace symbols",
-	},
-	T = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
-	u = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
-	v = { '<cmd>lua require("telescope.builtin").registers()<CR>', "Registers" },
-	w = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
-	x = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" },
-	-- z = {'<cmd>Zoxide<CR>', "Zoxide"},
-	["/"] = {
-		'<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
-		"Search current buffer",
-	},
-},
-["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', "Time stamp" }, -- '=strftime("%H:%M")<CR>P'
-}, -- end normal mode
+	      -- TODO: commented out commands are not working - check rafi/vim-config for fix
+	      -- Telescope general pickers
+	      a = { "<Cmd>Neotree toggle dir=%:p:h<CR>", "Neotree toggle" }, -- Nvimtree /  Neotree focus
+	      b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
+	      c = { '<cmd>lua require("telescope.builtin").command_history()<CR>', "Command history" },
+	      d = { '<cmd>lua require"user.plugins.telescope".pickers.plugin_directories()<CR>', "Directories" },
+	      -- Trouble & Diagnostics --
+	      D = {
+		      name = "Diagnostics",
+		      c = { "<cmd>TroubleClose<cr>", "Close" },
+		      d = { "<cmd>ToggleDiag<cr>", "Toggle diagnostics" },
+		      D = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
+		      i = { "<cmd>TroubleToggle lsp_implementations<cr>", "Implementations" },
+		      f = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document" },
+		      l = { "<cmd>TroubleToggle loclist<cr>", "Location list" },
+		      o = { "<cmd>cexpr system('refurb --quiet ' . shellescape(expand('%'))) | copen<CR><CR>", "Refurb" }, -- optimization suggestions
+		      q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+		      r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+		      R = { "<cmd>TroubleRefresh<cr>", "Refresh" },
+		      t = { "<cmd>TroubleToggle<cr>", "Trouble" },
+		      T = { "<cmd>TroubleToggle lsp_type_definitions<cr>", "Types" },
+		      v = { "<Plug>(toggle-lsp-diag-vtext)<cr>", "Toggle vtext diagnostics" },
+		      w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace" },
+	      },
+	      e = { "<Cmd>Neotree toggle<CR>", "Neotree toggle" },
+	      f = { '<cmd>lua require("telescope.builtin").find_files()<CR>', "Files" },
+	      g = { '<cmd>lua require("telescope.builtin").live_grep()<CR>', "Live grep" },
+	      G = { "<cmd>lua require('user.plugins.telescope').pickers.grep_string_cursor()<cr>", "Grep cursor word" },
+	      h = { '<cmd>lua require("telescope.builtin").highlights()<CR>', "Highlights" },
+	      H = { '<cmd>lua require("telescope.builtin").search_history()<CR>', "Search history" },
+	      j = { '<cmd>lua require("telescope.builtin").jumplist()<CR>', "Jumplist" },
+	      -- k = {"<cmd>bd!<cr>", "Kill (del) buffer"},
+	      l = { name = "VimTex" },
+	      m = { '<cmd>lua require("telescope.builtin").marks()<CR>', "Marks" },
+	      n = { "<cmd>lua require('telescope').extensions.notify.notify()<cr>", "Notifications" }, -- require("telescope").load_extension("notify")
+	      N = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
+	      -- o = {'<cmd>lua require("telescope.builtin").vim_options()<CR>', "Vim options"},
+	      -- p = {'<cmd>lua require("telescope.builtin").projects()<CR>', "Projects"},
+	      q = { "<cmd>bd!<cr>", "Kill (del) buffer" },
+	      R = { '<cmd>lua require("telescope.builtin").pickers()<CR>', "Pickers" },
+	      -- S = {'<cmd>lua require("telescope.builtin").session-lens search_session()<CR>', "Search session"},
+	      s = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', "Search current Buffer" },
+	      t = {
+		      '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
+		      "LSP workspace symbols",
+	      },
+	      T = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
+	      u = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
+	      v = { '<cmd>lua require("telescope.builtin").registers()<CR>', "Registers" },
+	      w = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
+	      x = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" },
+	      -- z = {'<cmd>Zoxide<CR>', "Zoxide"},
+	      ["/"] = {
+		      '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
+		      "Search current buffer",
+	      },
+      },
+    ["<F4>"] = { '=strftime("%Y-%m-%d")<CR>P', "Time stamp" }, -- '=strftime("%H:%M")<CR>P'
+  }, -- end normal mode
 
 -- insert mode
   i = {
@@ -370,7 +380,6 @@ return {
       },
     },
   },
-
   -- x-mode (visual)
   x = {
   	["<localleader"] = {
@@ -379,3 +388,18 @@ return {
   	},
   },
 }
+
+
+-- Skeletons without keymaps:
+
+-- keymaps["n"]['<leader>']['o'] = {
+--         name = "Text Object",
+--         s = {
+--           name = "Swap",
+--             n = {
+--               name = "next",
+--           },
+--         },
+--       },
+
+-- return keymaps

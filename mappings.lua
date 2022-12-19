@@ -18,8 +18,6 @@ vim.cmd([[
   nmap [z [sz=
   nmap ]z ]sz=
 
-  " nmap < <<_
-  " nmap > >>_
 ]])
 
 local opts = { noremap = true, silent = true }
