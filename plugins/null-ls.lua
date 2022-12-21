@@ -5,8 +5,8 @@ return function(config)
 	local null_ls = require("null-ls")
 	local formatting = null_ls.builtins.formatting
 	local diagnostics = null_ls.builtins.diagnostics
-	local vale = null_ls.builtins.diagnostics.vale
-	vale["filetypes"] = { "markdown", "tex", "asciidoc", "html" }
+	-- local vale = null_ls.builtins.diagnostics.vale
+	-- vale["filetypes"] = { "markdown", "tex", "asciidoc", "html" }
 	config.sources = {
 		null_ls.builtins.code_actions.shellcheck,
 		-- Set a linter
@@ -18,7 +18,7 @@ return function(config)
 		diagnostics.markdownlint,
 		-- diagnostics.mypy,
 		diagnostics.shellcheck,
-		vale,
+		-- vale,
 		null_ls.builtins.diagnostics.vulture,
 		null_ls.builtins.diagnostics.yamllint,
 		refurb,
