@@ -191,6 +191,18 @@ function M.better_search(key)
   end
 end
 
+
+function M.cleanCache()
+
+  os.execute("rm -rf $XDG_DATA_HOME/nvim/*")
+  os.execute("rm -rf $XDG_CACHE_HOME/nvim/*")
+  os.execute("rm -rf $XDG_DATA_HOME/nvim-data/*")
+  os.execute("rm -rf $XDG_CACHE_HOME/nvim-data/*")
+
+  os.execute("rm -rf $XDG_CONFIG_HOME/nvim-data/*")
+
+end
+
 -- --- Install all Mason packages from mason-lspconfig, mason-null-ls, mason-nvim-dap
 -- function M.mason.install_all()
 --   local registry_avail, registry = pcall(require, "mason-registry")
