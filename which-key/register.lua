@@ -3,7 +3,6 @@ local utils = require "user.utils"
 return {
   n = {
     ["<leader>"] = {
-      b = { "<cmd>read !getbib -c<cr>", "Get Bib" },
       r = { "<cmd>SendHere<cr>", "Set REPL" },
       N = { "<cmd>tabnew<cr>", "New Buffer" },
       ["<cr>"] = { '<esc>/<++><cr>"_c4l', "Next Template" },
@@ -16,13 +15,6 @@ return {
         f = { function() require("neogen").generate { type = "func" } end, "Function" },
         t = { function() require("neogen").generate { type = "type" } end, "Type" },
         F = { function() require("neogen").generate { type = "file" } end, "File" },
-      },
-
-      d = {
-        name = "Diff View",
-        ["<cr>"] = { "<cmd>DiffviewOpen<cr>", "Open DiffView" },
-        h = { "<cmd>DiffviewFileHistory %<cr>", "Open DiffView File History" },
-        H = { "<cmd>DiffviewFileHistory<cr>", "Open DiffView Branch History" },
       },
 
       f = {
@@ -123,26 +115,8 @@ return {
 
       s = {
         name = "Surf",
-        s = { "<cmd>STSSelectMasterNode<cr>", "Surf" },
-        S = { "<cmd>STSSelectCurrentNode<cr>", "Surf Node" },
-      },
-
-      x = {
-        name = "Debugger",
-        b = { function() require("dap").toggle_breakpoint() end, "Toggle Breakpoint" },
-        B = { function() require("dap").clear_breakpoints() end, "Clear Breakpoints" },
-        c = { function() require("dap").continue() end, "Continue" },
-        i = { function() require("dap").step_into() end, "Step Into" },
-        l = { function() require("dapui").float_element "breakpoints" end, "List Breakpoints" },
-        o = { function() require("dap").step_over() end, "Step Over" },
-        q = { function() require("dap").close() end, "Close Session" },
-        Q = { function() require("dap").terminate() end, "Terminate" },
-        r = { function() require("dap").repl.toggle() end, "REPL" },
-        s = { function() require("dapui").float_element "scopes" end, "Scopes" },
-        t = { function() require("dapui").float_element "stacks" end, "Threads" },
-        u = { function() require("dapui").toggle() end, "Toggle Debugger UI" },
-        w = { function() require("dapui").float_element "watches" end, "Watches" },
-        x = { function() require("dap.ui.widgets").hover() end, "Inspect" },
+        s = { function() require("syntax-tree-surfer").select() end, "Surf" },
+        S = { function() require("syntax-tree-surfer").select_current_node() end, "Surf Node" },
       },
 			D = { "<cmd>Dashboard<CR>", "Dashboard" },
 
@@ -373,12 +347,12 @@ return {
   },
   -- visual mode
   v = {
-    ["<leader>"] = {
-      x = {
-        name = "Debugger",
-        e = { function() require("dapui").eval() end, "Evaluate Line" },
-      },
-    },
+    -- ["<leader>"] = {
+    --   x = {
+    --     name = "Debugger",
+    --     e = { function() require("dapui").eval() end, "Evaluate Line" },
+    --   },
+    -- },
   },
   -- x-mode (visual)
   x = {

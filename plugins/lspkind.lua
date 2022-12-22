@@ -1,3 +1,5 @@
+return mode = "symbol" }
+
 -- return function(config)
 -- 	config.preset = "codicons"
 -- 	config.symbol_map = {
@@ -42,8 +44,6 @@
 -- 	}
 -- 	return config
 -- end
-
-return { mode = "symbol" }
 
 -- local M = {}
 --

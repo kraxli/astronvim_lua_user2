@@ -1,8 +1,11 @@
 local M = {}
 
-function M.quick_notification(msg) vim.notify(msg, "info", { title = "AstroNvim", timeout = 0 }) end
+function M.quick_notification(msg, type) astronvim.notify(msg, type or "info", { timeout = 0 }) end
 
 function M.vim_opt_toggle(opt, on, off, name)
+  if on == nil then on = true end
+  if off == nil then off = false end
+  if not name then name = opt end
   local is_off = vim.opt[opt]:get() == off
   vim.opt[opt] = is_off and on or off
   M.quick_notification(name .. " " .. (is_off and "Enabled" or "Disabled"))
@@ -174,5 +177,48 @@ function M.openExplorer()
 
   os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
 end
+
+function M.better_search(key)
+  return function()
+    local searched, error =
+      pcall(vim.cmd.normal, { args = { (vim.v.count > 0 and vim.v.count or "") .. key }, bang = true })
+    if searched then
+      pcall(vim.cmd.normal, "zzzv")
+    else
+      M.quick_notification(error, "error")
+    end
+    vim.opt.hlsearch = searched ~= nil
+  end
+end
+
+-- --- Install all Mason packages from mason-lspconfig, mason-null-ls, mason-nvim-dap
+-- function M.mason.install_all()
+--   local registry_avail, registry = pcall(require, "mason-registry")
+--   if not registry_avail then
+--     vim.api.nvim_err_writeln "Unable to access mason registry"
+--     return
+--   end
+--
+--   local installed = false
+--   for plugin_name, opts in pairs {
+--     ["mason-lspconfig"] = { type = "server", map = "lspconfig" },
+--     ["mason-null-ls"] = { type = "source", map = "null_ls" },
+--     ["mason-nvim-dap"] = { type = "source", map = "nvim_dap" },
+--   } do
+--     local plugin_avail, plugin = pcall(require, plugin_name .. ".settings")
+--     if plugin_avail then
+--       local mappings = require(plugin_name .. ".mappings." .. opts.type)[opts.map .. "_to_package"]
+--       local pkgs = plugin.current.ensure_installed
+--       for _, pkg in ipairs(pkgs) do
+--         local mason_pkg = mappings[pkg]
+--         if not registry.is_installed(mason_pkg) then
+--           installed = true
+--           astronvim.mason.update(mason_pkg)
+--         end
+--       end
+--     end
+--   end
+--   if not installed then astronvim.notify "Mason: No packages to install" end
+-- end
 
 return M

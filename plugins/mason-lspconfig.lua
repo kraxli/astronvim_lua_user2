@@ -1,12 +1,12 @@
 return {
-  automatic_installation = true,
   ensure_installed = {
     "clangd",
-    "cmake",
     "cssls",
+    "gopls",
     "html",
     "intelephense",
     "marksman",
+    "neocmake",
     "jsonls",
     "pyright",
     "sqls",

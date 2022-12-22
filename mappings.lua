@@ -101,14 +101,15 @@ local mappings = {
     ["<leader>sk"] = false,
     ["<leader>sm"] = false,
     ["<leader>sn"] = false,
+    ["<leader>sr"] = false,
     [">b"] = false,
     ["<b"] = false,
     -- navigating wrapped lines
     j = { "gj", desc = "Navigate down" },
     k = { "gk", desc = "Navigate down" },
-    -- easy splits
-    ["\\"] = { "<cmd>split<cr>", desc = "Horizontal split" },
-    ["|"] = { "<cmd>vsplit<cr>", desc = "Vertical split" },
+    -- better search
+    n = { require("user.utils").better_search "n", desc = "Next search" },
+    N = { require("user.utils").better_search "N", desc = "Previous search" },
     -- better increment/decrement
     ["-"] = { "<c-x>", desc = "Descrement number" },
     ["+"] = { "<c-a>", desc = "Increment number" },
@@ -119,12 +120,6 @@ local mappings = {
     ["<c-Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
-    -- Treesitter Surfer
-    ["<m-down>"] = { "<cmd>STSSwapDownNormal<cr>", desc = "Swap next tree-sitter object" },
-    ["<m-right>"] = { "<cmd>STSSwapDownNormal<cr>", desc = "Swap next tree-sitter object" },
-    ["<m-up>"] = { "<cmd>STSSwapUpNormal<cr>", desc = "Swap previous tree-sitter object" },
-    ["<m-left>"] = { "<cmd>STSSwapUpNormal<cr>", desc = "Swap previous tree-sitter object" },
-
     -- ["<C-Down>"] = {"<c-w>j", desc="Move to window down"},  -- use <c-j> and siblings
     -- ["<C-Left>"] = {"<c-w>h", desc="Move to window left"},
     -- ["<C-Right>"] = {"<c-w>l", desc="Move to window right"},
@@ -141,6 +136,23 @@ local mappings = {
 		-- ["]z"] = { "]sz=", desc = "Correct next spell", noremap = false, silent = true },
 		-- Miscellenuous
 		["<C-z>"] = { ":undo<cr>", desc = "Undo" },
+    -- Treesitter Surfer
+    ["<C-down>"] = {
+      function() require("syntax-tree-surfer").move("n", false) end,
+      desc = "Swap next tree-sitter object",
+    },
+    ["<C-right>"] = {
+      function() require("syntax-tree-surfer").move("n", false) end,
+      desc = "Swap next tree-sitter object",
+    },
+    ["<C-up>"] = {
+      function() require("syntax-tree-surfer").move("n", true) end,
+      desc = "Swap previous tree-sitter object",
+    },
+    ["<C-left>"] = {
+      function() require("syntax-tree-surfer").move("n", true) end,
+      desc = "Swap previous tree-sitter object",
+    },
   },
   i = {
     -- type template string
@@ -178,25 +190,43 @@ local mappings = {
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
     -- Tressitter Surfer
-    ["J"] = { "<cmd>STSSelectNextSiblingNode<cr>", desc = "Surf next tree-sitter object" },
-    ["K"] = { "<cmd>STSSelectPrevSiblingNode<cr>", desc = "Surf previous tree-sitter object" },
-    ["H"] = { "<cmd>STSSelectParentNode<cr>", desc = "Surf parent tree-sitter object" },
-    ["L"] = { "<cmd>STSSelectChildNode<cr>", desc = "Surf child tree-sitter object" },
-    ["<m-j>"] = { "<cmd>STSSwapNextVisual<cr>", desc = "Surf next tree-sitter object" },
-    ["<m-l>"] = { "<cmd>STSSwapNextVisual<cr>", desc = "Surf next tree-sitter object" },
-    ["<m-k>"] = { "<cmd>STSSwapPrevVisual<cr>", desc = "Surf previous tree-sitter object" },
-    ["<m-h>"] = { "<cmd>STSSwapPrevVisual<cr>", desc = "Surf previous tree-sitter object" },
+    ["J"] = {
+      function() require("syntax-tree-surfer").surf("next", "visual") end,
+      desc = "Surf next tree-sitter object",
+    },
+    ["K"] = {
+      function() require("syntax-tree-surfer").surf("prev", "visual") end,
+      desc = "Surf previous tree-sitter object",
+    },
+    ["H"] = {
+      function() require("syntax-tree-surfer").surf("parent", "visual") end,
+      desc = "Surf parent tree-sitter object",
+    },
+    ["L"] = {
+      function() require("syntax-tree-surfer").surf("child", "visual") end,
+      desc = "Surf child tree-sitter object",
+    },
+    ["<m-j>"] = {
+      function() require("syntax-tree-surfer").surf("next", "visual", true) end,
+      desc = "Surf next tree-sitter object",
+    },
+    ["<m-l>"] = {
+      function() require("syntax-tree-surfer").surf("next", "visual", true) end,
+      desc = "Surf next tree-sitter object",
+    },
+    ["<m-k>"] = {
+      function() require("syntax-tree-surfer").surf("prev", "visual", true) end,
+      desc = "Surf previous tree-sitter object",
+    },
+    ["<m-h>"] = {
+      function() require("syntax-tree-surfer").surf("prev", "visual", true) end,
+      desc = "Surf previous tree-sitter object",
+    },
   },
   o = {
     -- line text-objects
     ["il"] = { ":normal vil<cr>", desc = "Inside line text object" },
     ["al"] = { ":normal val<cr>", desc = "Around line text object" },
-  },
-  [""] = {
-    ["<C-e><C-e>"] = { "<Plug>SendLine", desc = "Send line to REPL" },
-    ["<C-e>"] = { "<Plug>Send", desc = "Send to REPL" },
-		["<C-s>"] = { ":w!<cr>", desc = "Save" },
-		-- ["<c-D>"] = {"<cmd>bd!<cr>", desc = "Kill (del) buffer"},
   },
 }
 
