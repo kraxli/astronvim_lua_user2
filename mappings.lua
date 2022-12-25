@@ -259,4 +259,10 @@ for _, char in ipairs({ "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", 
 	end
 end
 
+if vim.g.neovide then
+  vim.api.nvim_set_keymap('i', "<c-v>", '<ESC>"+pi', opts)
+  -- mappings.i["<C-v>"] = { '<ESC>"+pi', desc = "Paset insert" }
+end
+
+
 return mappings
