@@ -3,7 +3,6 @@ local create_command = vim.api.nvim_create_user_command
 create_command("Mappings", "enew|pu=execute('map')", { desc = "List all mappings" })
 create_command("CdHere", "lcd %:p:h", { desc = "Change the cwd to this file" })
 create_command("Cd2This", "lcd %:p:h", { desc = "Change the cwd to this file" })
-create_command("CacheReset", "require('user.utils').cache_reset", { desc = "Reset nvim cache" })
 vim.cmd([[ command! -range Words2String :'<,'>s/\%V\(\h\+\)/'\1'/g ]])
 create_command("Pv", ":MarkdownPreview", { desc = "Preview markdown" })
 create_command("Format", '<cmd>lua vim.lsp.buf.format()', {desc= "Format code"})
