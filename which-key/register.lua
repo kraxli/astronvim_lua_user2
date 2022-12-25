@@ -118,7 +118,6 @@ return {
         s = { function() require("syntax-tree-surfer").select() end, "Surf" },
         S = { function() require("syntax-tree-surfer").select_current_node() end, "Surf Node" },
       },
-			D = { "<cmd>Dashboard<CR>", "Dashboard" },
 
 			-- Git, enhance base functionality
 			g = {
