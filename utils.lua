@@ -171,12 +171,14 @@ function M.sys_app_open(mode)
   -- os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))) -- ; vim.cmd "redraw!"
 end
 
+
 function M.openExplorer()
 
   local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='start /b ""'}
 
   os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
 end
+
 
 function M.better_search(key)
   return function()
@@ -194,12 +196,13 @@ end
 
 function M.cacheClean()
 
-  local opts = '-rf'
+  local opts_unix = '-rf'
+  local opts_win = ''
 
   if vim.has('win') or vim.has('win64') then
-    opts = ''
+    opts = opts_win
   else
-    opts = '-rf'
+    opts = opts_unix
   end
 
   os.execute("rm  $XDG_DATA_HOME/nvim/packer_compiled.lua")
@@ -217,6 +220,19 @@ function M.cacheClean()
   -- cd $XDG_CONFIG_HOME/astronvim
   -- pull
 
+end
+
+function M.better_search(key)
+  return function()
+    local searched, error =
+      pcall(vim.cmd.normal, { args = { (vim.v.count > 0 and vim.v.count or "") .. key }, bang = true })
+    if searched then
+      pcall(vim.cmd.normal, "zzzv")
+    else
+      M.quick_notification(error, "error")
+    end
+    vim.opt.hlsearch = searched
+  end
 end
 
 -- --- Install all Mason packages from mason-lspconfig, mason-null-ls, mason-nvim-dap
