@@ -192,7 +192,7 @@ function M.better_search(key)
 end
 
 
-function M.cleanCache()
+function M.cacheClean()
 
   local opts = '-rf'
 

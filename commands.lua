@@ -10,6 +10,8 @@ create_command("Format", '<cmd>lua vim.lsp.buf.format()', {desc= "Format code"})
 
 create_command("Google", '<cmd>lua require("user.utils").google()', {desc= "Google word"})
 
+create_command("CacheClean", '<cmd>lua require("user.utils").cacheClean()', {desc= "Clean cache dirs"})
+
 
 -- TODO:
 -- copy path of file of current file
