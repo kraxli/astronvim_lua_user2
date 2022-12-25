@@ -194,12 +194,28 @@ end
 
 function M.cleanCache()
 
-  os.execute("rm -rf $XDG_DATA_HOME/nvim/*")
-  os.execute("rm -rf $XDG_CACHE_HOME/nvim/*")
-  os.execute("rm -rf $XDG_DATA_HOME/nvim-data/*")
-  os.execute("rm -rf $XDG_CACHE_HOME/nvim-data/*")
+  local opts = '-rf'
 
-  os.execute("rm -rf $XDG_CONFIG_HOME/nvim-data/*")
+  if vim.has('win') or vim.has('win64') then
+    opts = ''
+  else
+    opts = '-rf'
+  end
+
+  os.execute("rm  $XDG_DATA_HOME/nvim/packer_compiled.lua")
+
+  os.execute("rm " .. opts .. " $XDG_DATA_HOME/nvim/*")
+  -- os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim/*")
+  os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim/site")
+  os.execute("rm " .. opts .. " $XDG_DATA_HOME/nvim-data/*")
+  os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim-data/*")
+
+  os.execute("rm " .. opts .. " $XDG_CONFIG_HOME/nvim-data/*")
+
+  -- cd $XDG_CONFIG_HOME/nvim
+  -- pull
+  -- cd $XDG_CONFIG_HOME/astronvim
+  -- pull
 
 end
 
