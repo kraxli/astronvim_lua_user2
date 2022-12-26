@@ -7,10 +7,11 @@
 
 local status, _ = pcall(require, "local.settings")
 if status then
-  home = vim.g.dirPkd
-  -- home = require("local.settings").dirPkd
+  home = vim.fn.expand(vim.g.dirPkd)
+  -- home = vim.fn.expand("~/Dropbox/PKD/")
+  -- home = vim.fn.expand(require("local.settings").dirPkd)
 else
-  home = "/home/dave/Dropbox/PKD"  -- vim.fn.expand("/home/dave/Dropbox/PKD")
+  home = vim.fn.expand("/home/dave/Dropbox/PKD")
 end
 -- local home = vim.fn.expand("~/Dropbox/PKD")
 
