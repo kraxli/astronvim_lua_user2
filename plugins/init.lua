@@ -119,6 +119,14 @@ return {
   -- {"ten3roberts/qf.nvim"},
   -- {"arsham/listish.nvim"},
 
+  ["mfussenegger/nvim-dap-python"] = {
+    after = "mason-nvim-dap.nvim",
+    config = function ()
+      -- require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+      require('dap-python').setup('/usr/bin/python3')
+    end,
+    -- config = function() require "user.plugins.nvim-dap-vscode-js" end,
+  },
 
 	-- cmp
 	{"hrsh7th/cmp-cmdline", after = "nvim-cmp", },

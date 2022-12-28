@@ -101,14 +101,20 @@ function M.get_visual_range()
   local first_line = selection[1]
   local last_line = selection[#selection]
   first_line = string.sub(first_line, col_start, first_line:len())
-  first_line = string.gsub(first_line, '^%s*(.-)%s*$', '%1')  -- remove leading and trailing spaces
-  last_line =  string.sub(last_line, 1, col_end)
-  last_line = string.gsub(last_line, '^%s*(.-)%s*$', '%1')  -- remove leading and trailing spaces
+  first_line = string.gsub(first_line, '^%s*(.-)%s*$', '%1')  -- remove all spaces (not only leading and trailing)  last_line =  string.sub(last_line, 1, col_end)
+  last_line = string.gsub(last_line, '^%s*(.-)%s*$', '%1')  -- remove all spaces (not only leading and trailing)
   selection[1] = first_line
   selection[#selection] = last_line
 
   return table.concat(selection, '\n')
 end
+
+
+function M.rm_trailing_spaces(str)
+  local str = string.gsub(str, '[ \t]+%f[\r\n%z]', '')
+  return str
+end
+
 
 function M.execute(str)
 
@@ -178,21 +184,6 @@ function M.openExplorer()
 
   os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"
 end
-
-
-function M.better_search(key)
-  return function()
-    local searched, error =
-      pcall(vim.cmd.normal, { args = { (vim.v.count > 0 and vim.v.count or "") .. key }, bang = true })
-    if searched then
-      pcall(vim.cmd.normal, "zzzv")
-    else
-      M.quick_notification(error, "error")
-    end
-    vim.opt.hlsearch = searched ~= nil
-  end
-end
-
 
 function M.cacheClean()
 

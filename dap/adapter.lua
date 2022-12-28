@@ -1,0 +1,9 @@
+-- not sure how this is use??
+-- return{
+--   python = {
+--     type = 'executable';
+--     command = '/usr/bin/python3';
+--     --   command = "path/to/virtualenvs/debugpy/bin/python",
+--     args = { '-m', 'debugpy.adapter' };
+--   },
+-- }
