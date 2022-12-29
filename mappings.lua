@@ -153,6 +153,9 @@ local mappings = {
       function() require("syntax-tree-surfer").move("n", true) end,
       desc = "Swap previous tree-sitter object",
     },
+    ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd = "ipython", hidden = false}) end, desc = "ToggleTerm iPython"},  -- {cmd = 'lazygit', count = 1, direction = 'float'}
+    -- ["<leader>tp"] = { function() vim.cmd([[TermExec cmd="ipython"]]) end, desc = "ToggleTerm iPython"},
+		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
   },
   i = {
     -- type template string
@@ -170,14 +173,11 @@ local mappings = {
   t = {
 		["jk"] = false,
     -- ["<C-q>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-    ["<esc><esc>"] = { "<C-\\><C-n>:q<cr>", desc = "Terminal quit" },
-    ["<esc>q"] = { "<C-\\><C-n>:q<cr>", desc = "Terminal quit" },
-		["<c-n>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
-		["<esc>"] = { "<c-\\><c-n>", desc = "Terminal normal mode" },
-		["<c-c>"] = { "<c-\\><c-n>:q<cr>", desc = "Terminal quit" },
-		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
-		["<leader>tp"] = { function() astronvim.toggle_term_cmd("ipython") end, desc = "ToggleTerm iPython",
-		},
+    ["<ESC><ESC>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+    ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+		["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+		["<ESC>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+		["<C-c>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		-- ["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" },
   },
   x = {
@@ -261,10 +261,16 @@ end
 
 -- DAP:
 -- see: https://github.com/fdschmidt93/dotfiles/commit/d3c5d965dbbb14f489c75ec7d9331f1a0ff12d01#
-vim.keymap.set("v", "<M-d>", function()
+vim.keymap.set("v", "<M-D>", function()
   local selection = table.concat(require("user.utils_dap").visual_selection(), "\n")
   require("user.utils_dap").execute_in_dap_session(selection)
 end)
+
+vim.keymap.set("v", "<M-d>", function()
+  local selection = require('user.utils').get_visual_lines()
+  require("user.utils_dap").execute_in_dap_session(selection)
+end)
+
 
 vim.keymap.set({"n", 'i'}, "<M-d>", function()
   local line_nr = vim.api.nvim_win_get_cursor(0)[1]

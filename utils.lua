@@ -79,20 +79,16 @@ function M.get_visual_selection()
   return selection
 end
 
-
 -- see e.g. https://github.com/theHamsta/nvim-treesitter/blob/a5f2970d7af947c066fb65aef2220335008242b7/lua/nvim-treesitter/incremental_selection.lua#L22-L30
 function M.get_visual_range()
 
+  vim.cmd [[normal :esc<CR> gv]] -- this is required since the following two getpos() calls get the last but not the current visual selection
   local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
   local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
   -- local line_start = vim.fn.getpos("'<")[2]
   -- local col_start = vim.fn.getpos("'<")[3]
-  -- local line_end = vim.fn.getpos("'>")[2]
-  -- local col_end = vim.fn.getpos("'>")[3]
   local selection = vim.fn.getline(line_start, line_end)
-
-  -- print('lines: ' .. line_start .. ' to ' .. line_end)
-  -- print(vim.inspect(selection))
+  -- print(vim.inspect(nvim_buf_get_text(0, line_start, col_start, line_end, col_end, {}))) ??
 
   if #selection == 0 then  -- or vim.fn.len(selection) == 0
     return ''
@@ -107,6 +103,22 @@ function M.get_visual_range()
   selection[#selection] = last_line
 
   return table.concat(selection, '\n')
+end
+
+function M.get_visual_lines()
+
+  vim.cmd [[normal :esc<CR> gv]] -- this is required since the following two getpos() calls get the last but not the current visual selection
+  local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
+  local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
+  -- vim.cmd [[normal :esc<CR>]]
+  local selection = vim.fn.getline(line_start, line_end) -- or nvim_buf_get_lines() 
+
+  if #selection == 0 then  -- or vim.fn.len(selection) == 0
+    return ''
+  end
+
+  return table.concat(selection, '\n')
+ 
 end
 
 
@@ -129,6 +141,7 @@ function M.execute(str)
       vim.fn.jobstart({ sys_app, str }, { detach = true })
   end
 end
+
 
 function M.google()
   local keyword = vim.fn.expand("<cword>")
