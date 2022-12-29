@@ -262,8 +262,7 @@ end
 -- DAP:
 -- see: https://github.com/fdschmidt93/dotfiles/commit/d3c5d965dbbb14f489c75ec7d9331f1a0ff12d01#
 vim.keymap.set("v", "<M-d>", function()
-  local selection = table.concat(require("user.utils_fds").visual_selection(), "\n")
-  -- selection = require("utils").rm_trailing_spaces(selection)
+  local selection = table.concat(require("user.utils_dap").visual_selection(), "\n")
   local session = require("dap").session()
   session:evaluate(selection, function(err)
     if err then

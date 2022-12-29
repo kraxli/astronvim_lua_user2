@@ -312,7 +312,6 @@ function M.region(bufnr, pos1, pos2, regtype, inclusive)
   end
   for row = first_line, last_line do
     local line = lines[row]
-    local line_len = string.len(line)
     if line ~= "" then
       if regtype ~= "V" then
         local start_bytecol
@@ -363,7 +362,6 @@ function M.region(bufnr, pos1, pos2, regtype, inclusive)
       end
     end
     
-    print(vim.inspect(line))
     line = require("user.utils").rm_trailing_spaces(line)
     table.insert(concat, line)
   end
