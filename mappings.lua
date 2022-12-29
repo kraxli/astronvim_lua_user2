@@ -263,27 +263,14 @@ end
 -- see: https://github.com/fdschmidt93/dotfiles/commit/d3c5d965dbbb14f489c75ec7d9331f1a0ff12d01#
 vim.keymap.set("v", "<M-d>", function()
   local selection = table.concat(require("user.utils_dap").visual_selection(), "\n")
-  local session = require("dap").session()
-  session:evaluate(selection, function(err)
-    if err then
-      require("dap.repl").append(err.message)
-      return
-    end
-  end)
-  require("dap.repl").append(selection)
-  -- scroll dap repl to bottom
-  local repl_buf = vim.tbl_filter(function(b)
-    if vim.bo[b].filetype == "dap-repl" then
-      return true
-    end
-    return false
-  end, vim.api.nvim_list_bufs())[1]
-  -- deferring since otherwise too early
-  vim.defer_fn(function()
-    vim.api.nvim_buf_call(repl_buf, function()
-      vim.cmd [[normal! G]]
-    end)
-  end, 50)
+  require("user.utils_dap").execute_in_dap_session(selection)
+end)
+
+vim.keymap.set({"n", 'i'}, "<M-d>", function()
+  local line_nr = vim.api.nvim_win_get_cursor(0)[1]
+  local line = vim.api.nvim_buf_get_lines(0, line_nr - 1, line_nr, false)[1]
+  line = require("user.utils").rm_trailing_spaces(line)
+  require("user.utils_dap").execute_in_dap_session(line)
 end)
 
 -- neovide:

@@ -378,4 +378,28 @@ function M.visual_selection()
   -- vim.cmd [[set virtualedit=""]]
 end
 
+function M.execute_in_dap_session(selection)
+  local session = require("dap").session()
+  session:evaluate(selection, function(err)
+    if err then
+      require("dap.repl").append(err.message)
+      return
+    end
+  end)
+  require("dap.repl").append(selection)
+  -- scroll dap repl to bottom
+  local repl_buf = vim.tbl_filter(function(b)
+    if vim.bo[b].filetype == "dap-repl" then
+      return true
+    end
+    return false
+  end, vim.api.nvim_list_bufs())[1]
+  -- deferring since otherwise too early
+  vim.defer_fn(function()
+    vim.api.nvim_buf_call(repl_buf, function()
+      vim.cmd [[normal! G]]
+    end)
+  end, 50)
+end
+
 return M
