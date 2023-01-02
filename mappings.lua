@@ -147,10 +147,10 @@ local mappings = {
       function() require("syntax-tree-surfer").move("n", true) end,
       desc = "Swap previous tree-sitter object",
     },
-    ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd='ipython3', count=require("user.settings").terminal['python']}) end, desc = "ToggleTerm ipython" },
+    ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
-		["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) end, desc="Send line"},
-		["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) end, desc="Send line"},
+		["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
+		["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
   },
   i = {
     -- type template string
@@ -166,19 +166,19 @@ local mappings = {
     ["<leader>ts"] = {
       function () 
         vim.cmd [[normal :esc<CR> gv]]
-        require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) 
+        require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
       end, 
       desc="Send lines"},
     ["<leader>tS"] = {
       function () 
         vim.cmd [[normal :esc<CR> gv]]
-        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) 
+        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
       end, 
       desc="Send selection"},
     ["<C-e>"] = {
       function () 
         vim.cmd [[normal :esc<CR> gv]]
-        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) 
+        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
       end, 
       desc="Send selection"},
 
