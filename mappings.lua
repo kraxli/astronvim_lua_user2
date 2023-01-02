@@ -52,18 +52,10 @@ vim.api.nvim_set_keymap("n", "<c-bs>", "<C-o>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = false })
 
 -- comment
-vim.api.nvim_set_keymap(
-	"n",
-	[[<C-§>]],
-	[[v:count == 0 ? '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$' : '<CMD>lua require("Comment.api").call("toggle_linewise_count_op")<CR>g@$']],
-	{ noremap = true, silent = true, expr = true }
-)
-vim.keymap.set(
-	"n",
-	[[<C-§>]],
-	[[v:count == 0 ? '<CMD>lua require("Comment.api").call("toggle_current_linewise_op")<CR>g@$' : '<CMD>lua require("Comment.api").call("toggle_linewise_count_op")<CR>g@$']],
-	{ desc = "" }
-)
+-- n  <Space>/    * <Lua 149: ~/.config/nvim/lua/core/mappings.lua:106>
+--                  Comment line
+-- v  <Space>/    * <Esc><Cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>
+--                  Toggle comment line
 
 -- floating window
 vim.api.nvim_set_keymap("", "<F2>", '<Cmd>lua require("user.utils").toggle_term()<CR>', { noremap = false })
@@ -104,6 +96,8 @@ local mappings = {
     ["<leader>sr"] = false,
     [">b"] = false,
     ["<b"] = false,
+    ["<leader>tp"] = false,
+
     -- navigating wrapped lines
     j = { "gj", desc = "Navigate down" },
     k = { "gk", desc = "Navigate down" },
@@ -153,9 +147,10 @@ local mappings = {
       function() require("syntax-tree-surfer").move("n", true) end,
       desc = "Swap previous tree-sitter object",
     },
-    ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd = "ipython", hidden = false}) end, desc = "ToggleTerm iPython"},  -- {cmd = 'lazygit', count = 1, direction = 'float'}
-    -- ["<leader>tp"] = { function() vim.cmd([[TermExec cmd="ipython"]]) end, desc = "ToggleTerm iPython"},
+    ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd='ipython3', count=require("user.settings").terminal['python']}) end, desc = "ToggleTerm ipython" },
 		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
+		["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) end, desc="Send line"},
+		["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) end, desc="Send line"},
   },
   i = {
     -- type template string
@@ -168,6 +163,25 @@ local mappings = {
     -- navigating wrapped lines
     j = { "gj", desc = "Navigate down" },
     k = { "gk", desc = "Navigate down" },
+    ["<leader>ts"] = {
+      function () 
+        vim.cmd [[normal :esc<CR> gv]]
+        require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) 
+      end, 
+      desc="Send lines"},
+    ["<leader>tS"] = {
+      function () 
+        vim.cmd [[normal :esc<CR> gv]]
+        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) 
+      end, 
+      desc="Send selection"},
+    ["<C-e>"] = {
+      function () 
+        vim.cmd [[normal :esc<CR> gv]]
+        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype])}) 
+      end, 
+      desc="Send selection"},
+
   },
   -- terminal mappings
   t = {
@@ -247,6 +261,15 @@ if astronvim.is_available "bufdelete.nvim" then
 else
   mappings.n["q"] = { "<cmd>bdelete<cr>", desc = "Close buffer" }
   mappings.n["<c-q>"] = { "<cmd>bdelete!<cr>", desc = "Force close buffer" }
+end
+
+-- Comment
+if astronvim.is_available "Comment.nvim" then
+  mappings.n["<C-§>"] = { function() require("Comment.api").toggle.linewise.current() end, desc = "Comment line" }
+  mappings.v["<C-§>"] = {
+    "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+    desc = "Toggle comment line",
+  }
 end
 
 -- add more text objects for "in" and "around"

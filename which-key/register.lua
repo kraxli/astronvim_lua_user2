@@ -346,6 +346,11 @@ return {
   },
   -- visual mode
   v = {
+    ["<leader>"] = {
+      t = {
+          name = "Terminal",
+      },
+  	},
     -- ["<leader>"] = {
     --   x = {
     --     name = "Debugger",
@@ -355,6 +360,11 @@ return {
   },
   -- x-mode (visual)
   x = {
+  	-- ["<leader"] = {
+   --    t = {
+   --        name = "Terminal",
+   --    },
+  	-- },
   	["<localleader"] = {
   		g = { '<cmd>lua require"user.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection" },
   		G = { '<cmd>lua require"user.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection" },
