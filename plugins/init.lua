@@ -153,13 +153,28 @@ return {
 			require("user.plugins.sandwich")
 		end,
 	},
-	--	{
-	--		"tknightz/telescope-termfinder.nvim",
-	--		after = { "nvim-telescope/telescope.nvim", "akinsho/toggleterm.nvim" },
-	--		config = function()
-	--			require("telescope").load_extension("termfinder")
-	--		end,
-	--	},
+	-- {
+ --    "https://git.sr.ht/~havi/telescope-toggleterm.nvim",
+ --    event = "TermOpen",
+ --    requires = {
+ --       "akinsho/nvim-toggleterm.lua",
+ --       "nvim-telescope/telescope.nvim",
+ --       "nvim-lua/popup.nvim",
+ --       "nvim-lua/plenary.nvim",
+ --    },
+ --    config = function()
+ --       require("telescope").load_extension "toggleterm"
+ --    end,
+ --    -- Open buffer picker with :Telescope toggleterm or lua require('telescope-toggleterm').open()
+ --  },
+	{
+		"tknightz/telescope-termfinder.nvim",
+		requires = { "nvim-telescope/telescope.nvim", "akinsho/toggleterm.nvim" },
+		config = function()
+			require("telescope").load_extension("termfinder")
+		end,
+	  -- Telescope termfinder find
+	},
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "BufRead",

@@ -30,7 +30,8 @@ return {
         n = { "<cmd>Telescope notify<cr>", "Notifications" },
         p = { "<cmd>Telescope project<cr>", "Projects" },
         r = { "<cmd>Telescope registers<cr>", "Registers" },
-        t = { "<cmd>Telescope colorscheme<cr>", "Themes" },
+        t = { "<cmd>Telescope termfinder find<cr>", "Terminals" },
+        T = { "<cmd>Telescope colorscheme<cr>", "Themes" },
 		-- nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 		-- nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 		-- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
@@ -315,10 +316,11 @@ return {
 	      R = { '<cmd>lua require("telescope.builtin").pickers()<CR>', "Pickers" },
 	      -- S = {'<cmd>lua require("telescope.builtin").session-lens search_session()<CR>', "Search session"},
 	      s = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', "Search current Buffer" },
-	      t = {
+	      S = {
 		      '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>',
 		      "LSP workspace symbols",
 	      },
+	      t = {'<cmd>Telescope termfinder find<CR>', 'Terminals'},
 	      T = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
 	      u = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
 	      v = { '<cmd>lua require("telescope.builtin").registers()<CR>', "Registers" },
