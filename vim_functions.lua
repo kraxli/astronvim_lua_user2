@@ -55,6 +55,7 @@ vim.cmd([[
     return result
   endfunction
 
+
   function! KeyMaps()
       silent enew|pu=execute('verbose map')
       silent g/\s*Last.*/d
@@ -119,7 +120,7 @@ vim.cmd([[
   endfunction "}}}
 
 
-  " TODO: tern into lua cuntion (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
+  " TODO: tern into lua function (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
   function! Window_empty_buffer() "{{{
 	  let l:current = bufnr('%')
 	  if ! getbufvar(l:current, '&modified')
@@ -129,7 +130,7 @@ vim.cmd([[
   endfunction "}}}
 
 
-  " TODO: tern into lua cuntion (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
+  " TODO: tern into lua function (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
   " Simple zoom toggle
   function! Zoom() "{{{
 	  if exists('t:zoomed')
