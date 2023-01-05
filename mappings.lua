@@ -157,7 +157,7 @@ local mappings = {
     ["<C-CR>"] = { "<++>", desc = "Insert template string" },
     ["<S-Tab>"] = { "<C-V><Tab>", desc = "Tab character" },
 		["<F4>"] = { '<C-R>=strftime("%Y-%m-%d")<CR>', desc = "Time stamp" },
-		["<C-s>"] = { ":w!<cr>", desc = "Save" },
+		["<C-s>"] = { "<ESC>:w!<CR>a", desc = "Save" },
   },
   v = {
     -- navigating wrapped lines
