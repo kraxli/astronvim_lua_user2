@@ -111,6 +111,11 @@ return {
 	-- KRAXLI ADDINGS:
 	-- -------------------------------------------------------
 
+  -- enable DAP:
+  ["mfussenegger/nvim-dap"] = { disable = false },
+  ["rcarriga/nvim-dap-ui"] = { disable = false },
+  ["jayp0521/mason-nvim-dap.nvim"] = { disable = false },
+
   -- File Explorer --
   -- {'prichrd/netrw.nvim'},
 
