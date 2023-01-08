@@ -12,16 +12,16 @@ vim.api.nvim_create_autocmd("VimLeave", {
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-vim.api.nvim_create_augroup("TextYankPost", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight text while yanking",
-	group = "TextYankPost",
-	pattern = "*",
-	callback = function()
-		require("vim.highlight").on_yank({ higroup = "IncSearch", timeout = 150 })
-	end, -- higroup = 'Visual'
-})
--- autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup="IncSearch", timeout=150})   -- higroup = 'Visual'
+-- vim.api.nvim_create_augroup("TextYankPost", { clear = true })
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+-- 	desc = "Highlight text while yanking",
+-- 	group = "TextYankPost",
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		require("vim.highlight").on_yank({ higroup = "IncSearch", timeout = 150 })
+-- 	end, -- higroup = 'Visual'
+-- })
+-- -- autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup="IncSearch", timeout=150})   -- higroup = 'Visual'
 
 -- augroup("_terminal", {})
 -- autocmd("TermEnter term://*toggleterm#*",{
@@ -30,15 +30,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --   command='tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>',
 -- })
 
-augroup("FloatingWindow", { clear = true })
-autocmd("TermEnter term://*toggleterm#*", {
-	desc = "Close floating window",
-	group = "FloatingWindow",
-	-- pattern = "*",
-	command = "nnoremap <silent><buffer> q :close<CR>",
-	-- command = "noremap q <c-\\><c-n>:q<cr>" ,
-	-- command='tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>',
-})
+-- augroup("FloatingWindow", { clear = true })
+-- autocmd("TermEnter term://*toggleterm#*", {
+-- 	desc = "Close floating window",
+-- 	group = "FloatingWindow",
+-- 	-- pattern = "*",
+-- 	command = "nnoremap <silent><buffer> q :close<CR>",
+-- 	-- command = "noremap q <c-\\><c-n>:q<cr>" ,
+-- 	-- command='tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>',
+-- })
 
 -- augroup("MarkdownBuf", { clear = true })
 -- autocmd({ "BufRead", "BufEnter", "BufWinEnter", "BufNew", "VimEnter", "InsertEnter" }, {
@@ -87,12 +87,12 @@ vim.cmd([[
 
 ]])
 
-vim.api.nvim_create_augroup("mini", { clear = true })
-vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
-	desc = "Disable indent scope for conent types",
-	group = "mini",
-	callback = function()
-		vim.b.miniindentscope_disable = vim.tbl_contains({ "help", "terminal", "nofile", "prompt" }, vim.bo.buftype)
-	end,
-})
+-- vim.api.nvim_create_augroup("mini", { clear = true })
+-- vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
+-- 	desc = "Disable indent scope for conent types",
+-- 	group = "mini",
+-- 	callback = function()
+-- 		vim.b.miniindentscope_disable = vim.tbl_contains({ "help", "terminal", "nofile", "prompt" }, vim.bo.buftype)
+-- 	end,
+-- })
 
