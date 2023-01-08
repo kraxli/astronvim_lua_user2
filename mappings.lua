@@ -151,7 +151,8 @@ local mappings = {
 		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
 		["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
 		["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
-  },
+    ["<C-s>"] = { ":w!<CR>", desc = "Save" },
+  },  -- end normal mode
   i = {
     -- type template string
     ["<C-CR>"] = { "<++>", desc = "Insert template string" },
@@ -181,7 +182,7 @@ local mappings = {
         require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
       end, 
       desc="Send selection"},
-
+    ["<C-s>"] = { "<ESC>:w!<CR>gv", desc = "Save" },
   },
   -- terminal mappings
   t = {
