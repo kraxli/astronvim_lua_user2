@@ -116,6 +116,9 @@ return {
   ["rcarriga/nvim-dap-ui"] = { disable = false },
   ["jayp0521/mason-nvim-dap.nvim"] = { disable = false },
 
+
+  -- https://github.com/nvim-telescope/telescope-live-grep-args.nvim
+
   -- File Explorer --
   -- {'prichrd/netrw.nvim'},
 
@@ -354,24 +357,75 @@ return {
   -- },
     -- 'prashanthellina/follow-markdown-links',
   --   'jghauser/follow-md-links.nvim',
-  {
-    'gaoDean/autolist.nvim',
-    ft= {'markdown' , 'text'},
-    config = function()
-      require('autolist').setup({
-          normal_mappings = {
-            invert = { "<c-d>+[catch]" },  -- or <c-r>
-          },
-        	insert_mappings = {
-      indent = {
-			        "<tab>+[catch]('>>')",
-			        "<s-tab>+[catch]('<<')",
-		       },
-		    },
-      })
-    end,
-  },
+  {'dkarter/bullets.vim',  -- kaymmm/bullets.nvim
+    ft= {'markdown' , 'text', 'scratch', 'gitcommit', 'tex'},
+    setup = function ()
+      vim.cmd([[
+        let g:bullets_nested_checkboxes = 0 
+        " let g:bullets_checkbox_markers = '✗○◐●✓'
+        let g:bullets_set_mappings = 0 " disable adding default key mappings, default = 1
+        let g:bullets_mapping_leader = '<leader>L'  "'<M-b>'
 
+        " default = []
+        " N.B. You can set these mappings as-is without using this g:bullets_custom_mappings option but it
+        " will apply in this case for all file types while when using g:bullets_custom_mappings it would
+        " take into account file types filter set in g:bullets_enabled_file_types, and also
+        " g:bullets_enable_in_empty_buffers option.
+        let g:bullets_custom_mappings = [
+          \ ['imap', '<cr>', '<Plug>(bullets-newline)'],
+          \ ['inoremap', '<C-cr>', '<cr>'],
+          \
+          \ ['nmap', 'o', '<Plug>(bullets-newline)'],
+          \
+          \ ['vmap', 'gN', '<Plug>(bullets-renumber)'],
+          \ ['nmap', 'gN', '<Plug>(bullets-renumber)'],
+          \
+          \ ['nmap', '<leader>x', '<Plug>(bullets-toggle-checkbox)'],
+          \ ['nmap', '>', '<Plug>(bullets-demote)'],
+          \ ['vmap', '>', '<Plug>(bullets-demote)'],
+          \ ['nmap', '<', '<Plug>(bullets-promote)'],
+          \ ['vmap', '<', '<Plug>(bullets-promote)'],
+          \ ]
+        ]])
+          -- \ ['imap', '<C-t>', '<Plug>(bullets-demote)'],
+          -- \ ['imap', '<C-d>', '<Plug>(bullets-promote)'],
+    end
+  },
+  -- { 'gaoDean/autolist.nvim',
+  --   ft= {'markdown' , 'text'},
+  --   config = function()
+  --     local autolist = require("autolist")
+  --     autolist.setup()
+  --     autolist.create_mapping_hook("i", "<CR>", autolist.new)
+  --     autolist.create_mapping_hook("i", "<Tab>", autolist.indent)
+  --     autolist.create_mapping_hook("i", "<S-Tab>", autolist.indent)
+  --     -- autolist.create_mapping_hook("i", "<S-Tab>", autolist.indent, "<C-D>")
+  --     autolist.create_mapping_hook("n", "<leader>Lr", autolist.force_recalculate)
+  --     autolist.create_mapping_hook("n", "o", autolist.new)
+  --     autolist.create_mapping_hook("n", "O", autolist.new_before)
+  --     autolist.create_mapping_hook("n", "<leader>L>", autolist.indent)
+  --     autolist.create_mapping_hook("n", "<leader>L<", autolist.indent)
+  --     autolist.create_mapping_hook("n", "<leader>Lx", autolist.invert_entry, "")
+  --     -- require('autolist').setup({
+  --     --     normal_mappings = {
+  --     --       invert = { "<c-d>+[catch]" },  -- or <c-r>
+  --     --     },
+  --     --   	insert_mappings = {
+  --     --       indent = {
+		-- 	   --      "<tab>+[catch]('>')",
+		-- 	   --      "<s-tab>+[catch]('<')",
+		--     --     },
+		--     --   },
+  --     -- })
+  --   end,
+  --   disable = true,
+  -- },
+  {'jakewvincent/mkdnflow.nvim',
+      rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
+      config = function()
+          require('mkdnflow').setup({})
+      end
+  },
 	-- {
 	-- 	"SidOfc/mkdx",
 	-- 	ft = { "markdown", "text", "vimwiki" }, -- vimwiki.markdown
