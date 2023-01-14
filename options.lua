@@ -29,7 +29,7 @@ return {
 		wrap = true, -- soft wrap lines
 		relativenumber = false, -- Show relative numberline
 		number = true,
-		timeoutlen = 300, --- Time out on mappings
+		timeoutlen = 150, --- Time out on mappings
 		ttimeoutlen = 10, --- Time out on key codes
 		updatetime = 200, --- Idle time to write swap and trigger CursorHold
 		redrawtime = 2000, --- Time in milliseconds for stopping display redraw
