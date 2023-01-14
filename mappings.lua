@@ -15,8 +15,13 @@ vim.cmd([[
   cnoremap <expr> <Up>  pumvisible() ? "\<C-p>" : "\<Up>"
   cnoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
 
+  " Spelling
   nmap [z [sz=
   nmap ]z ]sz=
+
+  " Markdown
+  nmap = :call HeaderIncrease()<CR>
+  " nmap <C-0> :call HeaderDecrease()<CR>
 
 ]])
 

@@ -376,6 +376,7 @@ return {
           \ ['inoremap', '<C-cr>', '<cr>'],
           \
           \ ['nmap', 'o', '<Plug>(bullets-newline)'],
+          \ ['nmap', 'O', 'k<Plug>(bullets-newline)'],
           \
           \ ['vmap', 'gN', '<Plug>(bullets-renumber)'],
           \ ['nmap', 'gN', '<Plug>(bullets-renumber)'],
@@ -424,7 +425,8 @@ return {
       rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
       config = function()
           require('mkdnflow').setup({})
-      end
+      end,
+    disable=true,
   },
 	-- {
 	-- 	"SidOfc/mkdx",

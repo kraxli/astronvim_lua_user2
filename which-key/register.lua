@@ -193,6 +193,8 @@ return {
         f = {'<cmd>lua require("telekasten").find_notes()<CR>', "Find note"},
         g = {'<cmd>lua require("telekasten").search_notes()<CR>', 'Search notes'},
         i = {'<cmd>lua require("telekasten").insert_link({ i=false })<CR>', 'Insert link'},
+        h = {'<cmd>call HeaderIncrease()<CR>', 'Header promote'},
+        H = {'<cmd>call HeaderDecrease()<CR>', 'Header demote'},
         l = {'<cmd>lua require("telekasten").follow_link()<CR>', 'Follow link'},
         t = {'<cmd>lua require("telekasten").toggle_todo()<CR>', 'Toggle todo'},
         T = {'<cmd>lua require("telekasten").show_tags({i = false})<CR>', 'Toggle todo'},

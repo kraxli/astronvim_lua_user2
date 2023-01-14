@@ -144,4 +144,44 @@ vim.cmd([[
 	  endif
   endfunction "}}}
 
+  " {{{ SWITCH HEADER LEVEL
+  " see: https://github.com/kraxli/vim-mkd-org/blob/master/autoload/mkdd.vim
+  function! HeaderIncrease(...)
+    if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
+
+    let current_line = getline(lineNum)
+
+    if match(current_line, '^\s*#\{1,6}\s') >= 0
+      call setline(lineNum, substitute(current_line, '^\(\s*#\{1,5}\) \(.*$\)', '\1# \2', ''))
+      return
+    endif
+    if match(current_line, '^\s*[^#]') >= 0
+      call setline(lineNum, substitute(current_line, '^\(\s*\)\(.*$\)', '\1# \2', ''))
+      return
+    endif
+
+  endfunction
+
+  function! HeaderDecrease(...)
+    if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
+
+    let current_line = getline(lineNum)
+
+    if match(current_line, '^\s*#\{2,6}\s') >= 0
+      call setline(lineNum, substitute(current_line, '^\(\s*#\{1,5}\)# \(.*$\)', '\1 \2', ''))
+      return
+    endif
+    if match(current_line, '^\s*#\{1}\s') >= 0
+      call setline(lineNum, substitute(current_line, '^\(\s*\)# \(.*$\)', '\1\2', ''))
+      return
+    endif
+
+  endfunction
+
+  " }}}
+
+command! HeaderLevelIncrease call HeaderIncrease()
+command! HeaderLevelDecrease call HeaderDecrease()
 ]])
+
+
