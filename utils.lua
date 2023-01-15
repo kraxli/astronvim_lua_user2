@@ -239,6 +239,23 @@ function M.better_search(key)
   end
 end
 
+function M.insert_list_bullet(bullet_type)
+  bullet = bullet_type or "-"
+  local _, cursor_line, cursor_col, _, _ = unpack(vim.fn.getcurpos())
+  -- vim.cmd([[normal ^i- <esc>]])
+  vim.cmd([[ execute "normal ^i" . luaeval('bullet') . ' ' ]])
+  vim.fn.setpos('.', {0, cursor_line, cursor_col + 2, 0}) -- 15G25|
+end
+
+
+function M.reset_cursor_pos(callback, offset, ...)
+  offset = offset or 2
+  -- e.g. lua require("user.utils").reset_cursor_pos(function() print('x') end)
+  local _, cursor_line, cursor_col, _, _ = unpack(vim.fn.getcurpos())
+  callback()
+  vim.fn.setpos('.', {0, cursor_line, cursor_col + offset, 0}) -- 15G25|
+end
+
 -- --- Install all Mason packages from mason-lspconfig, mason-null-ls, mason-nvim-dap
 -- function M.mason.install_all()
 --   local registry_avail, registry = pcall(require, "mason-registry")

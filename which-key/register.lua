@@ -189,6 +189,7 @@ return {
       },
       z = {
         name = "Zettel / Md",
+        b = {'<cmd>lua require("user.utils").insert_list_bullet()<CR>', 'Set bullet'},
         d = {'<cmd>lua require("telekasten").find_daily_notes()<CR>', "Find dailies"},
         f = {'<cmd>lua require("telekasten").find_notes()<CR>', "Find note"},
         g = {'<cmd>lua require("telekasten").search_notes()<CR>', 'Search notes'},

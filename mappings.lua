@@ -40,6 +40,8 @@ keymap("x", "<", "<gv", opts)
 keymap("x", ">", ">gv|", opts)
 keymap("x", "<S-Tab>", "<gv", opts)
 keymap("x", "<Tab>", ">gv|", opts)
+-- keymap("n", "<", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal <<]] end, -vim.o.tabstop)", opts)
+-- keymap("n", ">", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal >>]] end, vim.o.tabstop)", opts)  -- tonumber('10')
 keymap("n", "<", "<<_", opts)
 keymap("n", ">", ">>_", opts)
 
