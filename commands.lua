@@ -17,6 +17,9 @@ create_command("CacheClean", '<cmd>lua require("user.utils").cacheClean()', {des
 -- copy folder path of current file
 
 vim.cmd([[
+  command! HeaderLevelIncrease call HeaderIncrease()
+  command! HeaderLevelDecrease call HeaderDecrease()
+
   command! KeyMaps :call utils#KeyMaps()
   " save and quit
   " command! W :w!

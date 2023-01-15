@@ -180,8 +180,6 @@ vim.cmd([[
 
   " }}}
 
-command! HeaderLevelIncrease call HeaderIncrease()
-command! HeaderLevelDecrease call HeaderDecrease()
 ]])
 
 
