@@ -37,6 +37,17 @@ require('telekasten').setup({
     -- markdown file extension
     extension    = ".md",
 
+    -- Generate note filenames. One of:
+    -- "title" (default) - Use title if supplied, uuid otherwise
+    -- "uuid" - Use uuid
+    -- "uuid-title" - Prefix title by uuid
+    -- "title-uuid" - Suffix title with uuid
+    new_note_filename = "uuid-title",
+    -- file uuid type ("rand" or input for os.date such as "%Y%m%d%H%M")
+    uuid_type = "Z-%Y%m%d%H%M",
+    -- UUID separator
+    uuid_sep = "-",
+
     -- following a link to a non-existing note will create it
     follow_creates_nonexisting = true,
     dailies_create_nonexisting = true,
