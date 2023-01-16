@@ -499,6 +499,13 @@ return {
 			require("user.plugins.clipboard-image")
 		end,
 	},
+	{
+	  "tpope/vim-abolish",
+		ft = { "markdown", "text", "vimwiki" },
+		config = function()
+			require("user.plugins.abolish")
+		end,
+	},
 
 	-- {
 	-- 	"nvim-orgmode/orgmode",
