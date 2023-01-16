@@ -342,7 +342,7 @@ return {
 	},
 
   ---------------------------------------------------------------------
-	-- Markdown
+	-- Markdown, text, latex
 	-- https://github.com/rockerBOO/awesome-neovim/blob/main/README.md#markdown-and-latex
   ---------------------------------------------------------------------
   -- NFrid/markdown-togglecheck
@@ -463,8 +463,8 @@ return {
 	{
 		"renerocksai/telekasten.nvim",
 		ft = { "markdown", "vimwiki", "text", "telekasten" },
-		cmd = { "Telekasten", "Tk" },
 		keys = { "<leader>z" },
+		cmd = { "Telekasten", "Tk" },
 		setup = function()
 			vim.cmd([[
          command! Tk :Telekasten
