@@ -149,14 +149,20 @@ vim.cmd([[
   function! HeaderIncrease(...)
     if a:0 == 0 | let lineNum = line('.') | else | let lineNum = a:1 | endif
 
-    let current_line = getline(lineNum)
+    let header_depth_max = 6
 
-    if match(current_line, '^\s*#\{1,6}\s') >= 0
-      call setline(lineNum, substitute(current_line, '^\(\s*#\{1,5}\) \(.*$\)', '\1# \2', ''))
+    let current_line = getline(lineNum)
+    let num_hashs = len(substitute(current_line, '^\(\s*#*\).*$', '\1', ''))
+    let hashs2add = repeat('#', min([v:count1 + num_hashs, header_depth_max]))
+
+    if match(current_line, '^\s*#\{1,' .. header_depth_max .. '}\s') >= 0
+      " let subsi_str = '^\(\s*\)#\{1,' .. (header_depth_max-1) .. '} \(.*$\)'
+      let subsi_str = '^\(\s*\)#\{1,' .. (header_depth_max-1) .. '} \(.*$\)'
+      call setline(lineNum, substitute(current_line, subsi_str, '\1' .. hashs2add .. ' \2', ''))
       return
     endif
     if match(current_line, '^\s*[^#]') >= 0
-      call setline(lineNum, substitute(current_line, '^\(\s*\)\(.*$\)', '\1# \2', ''))
+      call setline(lineNum, substitute(current_line, '^\(\s*\)\(.*$\)', '\1' .. hashs2add .. ' \2', ''))
       return
     endif
 
@@ -168,7 +174,7 @@ vim.cmd([[
     let current_line = getline(lineNum)
 
     if match(current_line, '^\s*#\{2,6}\s') >= 0
-      call setline(lineNum, substitute(current_line, '^\(\s*#\{1,5}\)# \(.*$\)', '\1 \2', ''))
+      call setline(lineNum, substitute(current_line, '^\(\s*#\{1,5}\)' .. repeat('#', v:count) .. ' \(.*$\)', '\1 \2', ''))
       return
     endif
     if match(current_line, '^\s*#\{1}\s') >= 0

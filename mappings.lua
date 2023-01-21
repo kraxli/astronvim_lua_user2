@@ -20,8 +20,8 @@ vim.cmd([[
   nmap ]z ]sz=
 
   " Markdown
-  nmap = :call HeaderIncrease()<CR>
-  " nmap <C-0> :call HeaderDecrease()<CR>
+  nmap = :<C-U>call HeaderIncrease()<CR>  " Note: The <C-U> is required to remove the line range that you
+  " nmap <C-0> :<C-U>call HeaderDecrease()<CR>
 
 ]])
 
@@ -42,8 +42,8 @@ keymap("x", "<S-Tab>", "<gv", opts)
 keymap("x", "<Tab>", ">gv|", opts)
 -- keymap("n", ">", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal >>]] end, vim.o.shiftwidth)", opts)
 -- keymap("n", "<", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal <<]] end, -vim.o.shiftwidth)", opts)
-keymap("n", ">", ">>_", opts)
-keymap("n", "<", "<<_", opts)
+keymap("n", ">", ">>_", opts)  -- <gt>
+keymap("n", "<", "<<_", opts)  -- <lt>  https://vimdoc.sourceforge.net/htmldoc/change.html#%3C
 
 -- -------------------------------------------------------
 -- TODO:
