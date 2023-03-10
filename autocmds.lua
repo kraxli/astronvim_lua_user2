@@ -27,7 +27,7 @@ vim.cmd([[
   " autocmd BufRead,BufEnter,BufWinEnter,BufNew,VimEnter *.md,*.wiki setlocal filetype=markdown " vimwiki.markdown
   autocmd BufRead,BufEnter,BufWinEnter,BufNew,BufWrite,VimEnter,InsertEnter *.md,*.wiki,*.txt lua require('user.highlight').markdown()
   " autocmd FileType vimwiki.markdown,vimwiki,markdown,text set foldmethod=expr foldexpr=MkdFoldSimple()
-  autocmd FileType vimwiki.markdown,vimwiki,markdown,text setl spell spelllang=en,de
+  autocmd FileType vimwiki.markdown,vimwiki,markdown,text,telekasten setl spell spelllang=en,de filetype=markdown syntax=markdown
 
   augroup end
 

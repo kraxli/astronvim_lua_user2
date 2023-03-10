@@ -435,23 +435,23 @@ return {
 	-- 		require("user.plugins.markdown.mkdx")
 	-- 	end,
 	-- },
-  {
-    'davidgranstrom/nvim-markdown-preview',
-    cmd = {'MarkdownPreview', 'Pv', 'Mp'},
-    -- run = function() vim.cmd("PlugInstall") end,
-  },
+  -- {
+  --   'davidgranstrom/nvim-markdown-preview',
+  --   cmd = {'MarkdownPreview', 'Pv', 'Mp'},
+  --   -- run = function() vim.cmd("PlugInstall") end,
+  -- },
 
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	run = function()
-	-- 		vim.fn["mkdp#util#install"]()
-	-- 	end,
-	-- 	-- run = "cd app && npm install",  -- does not seem to work on windows
-	-- 	ft = "markdown",
-	-- 	config = function()
-	-- 		require("user.plugins.markdown.markdown_preview")
-	-- 	end,
-	-- },
+	{
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+		-- run = "cd app && npm install",  -- does not seem to work on windows
+		ft = "markdown",
+		config = function()
+			require("user.plugins.markdown.markdown_preview")
+		end,
+	},
 	-- -- { 'mracos/mermaid.vim', ft = {'markdown', 'vimwiki', 'mermaid'} },
 	-- { "chazmcgarvey/vim-mermaid", ft = { "markdown", "vimwiki", "mermaid" } },
 	-- {
@@ -468,8 +468,8 @@ return {
 		setup = function()
 			vim.cmd([[
          command! Tk :Telekasten
-         au! FileType telekasten set filetype=markdown
-         ]])
+         au! FileType telekasten set filetype=markdown syntax=markdown
+      ]])
 		end,
 		config = function ()
 		  require("user.plugins.telekasten")
