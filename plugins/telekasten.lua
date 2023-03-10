@@ -44,7 +44,7 @@ require('telekasten').setup({
     -- "title-uuid" - Suffix title with uuid
     new_note_filename = "uuid-title",
     -- file uuid type ("rand" or input for os.date such as "%Y%m%d%H%M")
-    uuid_type = "Z-%Y%m%d%H%M",
+    uuid_type = "Z-%Y%m%d",  -- %H%M",
     -- UUID separator
     uuid_sep = "-",
 
@@ -140,10 +140,24 @@ local keyOpts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<c-space>', "<ESC>:lua require('telekasten').toggle_todo({ i=false })<CR>", keyOpts)
 vim.api.nvim_set_keymap('i', '<c-space>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
 
--- vim.api.nvim_set_keymap('n', '<Leader>zf', ':lua require("telekasten").find_notes()<CR>', keyOpts)
--- vim.api.nvim_set_keymap('n', '<Leader>zd', ':lua require("telekasten").find_daily_notes()<CR>', keyOpts)
--- vim.api.nvim_set_keymap('n', '<Leader>zg', ':lua require("telekasten").search_notes()<CR>', keyOpts)
--- vim.api.nvim_set_keymap('n', '<Leader>zl', ':lua require("telekasten").follow_link()<CR>', keyOpts)
--- vim.api.nvim_set_keymap('n', '<Leader>zz', ':lua require("telekasten").pandel()<CR>', keyOpts)
--- vim.api.nvim_set_keymap('n', '<Leader>z', ':lua require('telekasten').pandel()<CR>', keyOpts)
+vim.cmd([[
+   " we could define [[ in **insert mode** to call insert link
+   " inoremap [[ <ESC>:lua require('telekasten').insert_link()<CR>
+   " alternatively: leader [
+   inoremap <c-[> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
+   inoremap <c-space> <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
+   inoremap <c-3> <cmd>lua require('telekasten').show_tags({i = true})<cr>
 
+   " the following are for syntax-coloring [[links\]\] and ==highlighted text==
+   " (see the section about coloring in README.md)
+   " colors suitable for gruvbox color scheme
+   hi tklink ctermfg=72 guifg=#689d6a cterm=bold,underline gui=bold,underline
+   hi tkBrackets ctermfg=gray guifg=gray
+   " real yellow
+   hi tkHighlight ctermbg=yellow ctermfg=darkred cterm=bold guibg=yellow guifg=darkred gui=bold
+   " gruvbox
+   "hi tkHighlight ctermbg=214 ctermfg=124 cterm=bold guibg=#fabd2f guifg=#9d0006 gui=bold
+   hi link CalNavi CalRuler
+   hi tkTagSep ctermfg=gray guifg=gray
+   hi tkTag ctermfg=175 guifg=#d3869B
+]])
