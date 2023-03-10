@@ -211,18 +211,15 @@ function M.cacheClean()
 
   os.execute("rm  $XDG_DATA_HOME/nvim/packer_compiled.lua")
 
+  os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim/*")
   os.execute("rm " .. opts .. " $XDG_DATA_HOME/nvim/*")
-  -- os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim/*")
-  os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim/site")
-  os.execute("rm " .. opts .. " $XDG_DATA_HOME/nvim-data/*")
-  os.execute("rm " .. opts .. " $XDG_CACHE_HOME/.cache/nvim-data/*")
-
   os.execute("rm " .. opts .. " $XDG_CONFIG_HOME/nvim-data/*")
+  os.execute("rm " .. opts .. " $XDG_DATA_HOME/nvim-data/*")
 
-  -- cd $XDG_CONFIG_HOME/nvim
-  -- pull
-  -- cd $XDG_CONFIG_HOME/astronvim
-  -- pull
+  -- XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
+  -- XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+  -- XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+  -- XDG_DATA_DIRS
 
 end
 
