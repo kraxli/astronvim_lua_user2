@@ -164,11 +164,11 @@ return {
 			},
       v = {
 	      name = "View", -- optional group name
-	      g = { "<cmd>call Toggle_background()<CR>", "Toggle background color" }, -- create a binding with label
 	      b = { "<cmd>buffer#<CR>", "Buffer alternate" },
-	      o = { "<cmd>only<CR>", "Only this" },
 	      c = { "<cmd>close<CR>", "Close" },
 	      d = { "<cmd>bdelete!<CR>", "Buffer delete" },
+	      g = { "<cmd>call Toggle_background()<CR><ESC>", "Toggle background color" }, -- create a binding with label
+	      o = { "<cmd>only<CR>", "Only this" },
 	      q = { "<cmd>quit<CR>", "Quit" },
 	      w = { "<cmd>save %<CR>", "Save" },
 	      x = { "<cmd>call utils#window_empty_buffer()<CR>", "Buffer empty" },
