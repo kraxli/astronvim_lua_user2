@@ -141,12 +141,11 @@ vim.api.nvim_set_keymap('n', '<c-space>', "<ESC>:lua require('telekasten').toggl
 vim.api.nvim_set_keymap('i', '<c-space>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
 
 vim.cmd([[
-   " we could define [[ in **insert mode** to call insert link
-   " inoremap [[ <ESC>:lua require('telekasten').insert_link()<CR>
-   " alternatively: leader [
-   inoremap <c-[> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
+   " inoremap <c-[> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
+   inoremap <c-l> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
    inoremap <c-space> <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
-   inoremap <c-3> <cmd>lua require('telekasten').show_tags({i = true})<cr>
+   " inoremap <c-3> <cmd>lua require('telekasten').show_tags({i = true})<cr> 
+   inoremap <c-t> <cmd>lua require('telekasten').show_tags({i = true})<cr>#
 
    " the following are for syntax-coloring [[links\]\] and ==highlighted text==
    " (see the section about coloring in README.md)
@@ -160,4 +159,4 @@ vim.cmd([[
    hi link CalNavi CalRuler
    hi tkTagSep ctermfg=gray guifg=gray
    hi tkTag ctermfg=175 guifg=#d3869B
-]])
+ ]])
