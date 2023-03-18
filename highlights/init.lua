@@ -1,10 +1,12 @@
 return function()
-  local normal = astronvim.get_hlgroup "Normal"
+  local get_hlgroup = require("astronvim.utils").get_hlgroup
+  local normal = get_hlgroup "Normal"
   local fg, bg = normal.fg, normal.bg
-  local bg_alt = astronvim.get_hlgroup("Visual").bg
-  local green = astronvim.get_hlgroup("String").fg
-  local red = astronvim.get_hlgroup("Error").fg
+  local bg_alt = get_hlgroup("Visual").bg
+  local green = get_hlgroup("String").fg
+  local red = get_hlgroup("Error").fg
   return {
+    CursorLineFold = { link = "CursorLineNr" },
     HighlightURL = { underline = true },
     TelescopeBorder = { fg = bg_alt, bg = bg },
     TelescopeNormal = { bg = bg },

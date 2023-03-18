@@ -1,4 +1,1 @@
-return {
-  channel = "nightly",
-  skip_prompts = true,
-}
+return { channel = "nightly", skip_prompts = true }

@@ -80,6 +80,9 @@ vim.cmd([[
 -- open system app for file under cursor or file explorer
 vim.api.nvim_set_keymap("", "<F3>", [[<cmd>lua require('user.utils').sys_app_open()<CR>]], opts)
 
+local utils = require "user.utils"
+local astro_utils = require "astronvim.utils"
+
 local mappings = {
 
   n = {
@@ -108,12 +111,31 @@ local mappings = {
     -- navigating wrapped lines
     j = { "gj", desc = "Navigate down" },
     k = { "gk", desc = "Navigate down" },
+    -- ["q:"] = ":",
+
+    -- better buffer navigation
+    ["]b"] = false,
+    ["[b"] = false,
+    ["<S-l>"] = {
+      function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
+      desc = "Next buffer",
+    },
+    ["<S-h>"] = {
+      function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
+      desc = "Previous buffer",
+    },
+
     -- better search
-    n = { require("user.utils").better_search "n", desc = "Next search" },
-    N = { require("user.utils").better_search "N", desc = "Previous search" },
+    n = { utils.better_search "n", desc = "Next search" },
+    N = { utils.better_search "N", desc = "Previous search" },
     -- better increment/decrement
     ["-"] = { "<c-x>", desc = "Descrement number" },
     ["+"] = { "<c-a>", desc = "Increment number" },
+    -- kitty navigation
+    ["<C-j>"] = { "<cmd>KittyNavigateDown<cr>" },
+    ["<C-h>"] = { "<cmd>KittyNavigateLeft<cr>" },
+    ["<C-l>"] = { "<cmd>KittyNavigateRight<cr>" },
+    ["<C-k>"] = { "<cmd>KittyNavigateUp<cr>" },
     -- resize with arrows
     ["<c-Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
     ["<c-Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
@@ -121,6 +143,7 @@ local mappings = {
     ["<c-Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
+
     -- ["<C-Down>"] = {"<c-w>j", desc="Move to window down"},  -- use <c-j> and siblings
     -- ["<C-Left>"] = {"<c-w>h", desc="Move to window left"},
     -- ["<C-Right>"] = {"<c-w>l", desc="Move to window right"},
@@ -137,29 +160,129 @@ local mappings = {
 		-- ["]z"] = { "]sz=", desc = "Correct next spell", noremap = false, silent = true },
 		-- Miscellenuous
 		["<C-z>"] = { ":undo<cr>", desc = "Undo" },
+
     -- Treesitter Surfer
     ["<C-down>"] = {
       function() require("syntax-tree-surfer").move("n", false) end,
       desc = "Swap next tree-sitter object",
+
+    -- buffer switching (new mehalter)
+    ["<Tab>"] = {
+      function()
+        if #vim.t.bufs > 1 then
+          require("telescope.builtin").buffers { sort_mru = true, ignore_current_buffer = true }
+        else
+          astro_utils.notify "No other buffers open"
+        end
+      end,
+      desc = "Switch Buffers",
+
     },
-    ["<C-right>"] = {
-      function() require("syntax-tree-surfer").move("n", false) end,
-      desc = "Swap next tree-sitter object",
+    -- vim-sandwich
+    ["s"] = "<Nop>",
+    ["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" },
+    ["<leader>N"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
+    ["<leader><cr>"] = { '<esc>/<++><cr>"_c4l', desc = "Next Template" },
+    ["<leader>."] = { "<cmd>cd %:p:h<cr>", desc = "Set CWD" },
+    -- neogen
+    ["<leader>a"] = { desc = "󰏫 Annotate" },
+    ["<leader>a<cr>"] = { function() require("neogen").generate() end, desc = "Current" },
+    ["<leader>ac"] = { function() require("neogen").generate { type = "class" } end, desc = "Class" },
+    ["<leader>af"] = { function() require("neogen").generate { type = "func" } end, desc = "Function" },
+    ["<leader>at"] = { function() require("neogen").generate { type = "type" } end, desc = "Type" },
+    ["<leader>aF"] = { function() require("neogen").generate { type = "file" } end, desc = "File" },
+    -- telescope plugin mappings
+    ["<leader>fB"] = { "<cmd>Telescope bibtex<cr>", desc = "Find BibTeX" },
+    ["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "File explorer" },
+    ["<leader>fp"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" },
+    -- compiler
+    ["<leader>m"] = { desc = "󱁤 Compiler" },
+    ["<leader>mk"] = {
+      function()
+        vim.cmd "silent! write"
+        local filename = vim.fn.expand "%:t"
+        utils.async_run({ "compiler", vim.fn.expand "%:p" }, function() astro_utils.notify("Compiled " .. filename) end)
+      end,
+      desc = "Compile",
     },
-    ["<C-up>"] = {
-      function() require("syntax-tree-surfer").move("n", true) end,
-      desc = "Swap previous tree-sitter object",
+    ["<leader>ma"] = {
+      function()
+        vim.notify "Autocompile Started"
+        utils.async_run({ "autocomp", vim.fn.expand "%:p" }, function() astro_utils.notify "Autocompile stopped" end)
+      end,
+      desc = "Auto Compile",
     },
-    ["<C-left>"] = {
-      function() require("syntax-tree-surfer").move("n", true) end,
-      desc = "Swap previous tree-sitter object",
+    ["<leader>mv"] = {
+      function() vim.fn.jobstart { "opout", vim.fn.expand "%:p" } end,
+      desc = "View Output",
     },
+
     ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 		-- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
 		["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
 		["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
     ["<C-s>"] = { ":w!<CR>", desc = "Save" },
   },  -- end normal mode
+  ["<leader>mb"] = {
+      function()
+        local filename = vim.fn.expand "%:t"
+        utils.async_run({
+          "pandoc",
+          vim.fn.expand "%",
+          "--pdf-engine=xelatex",
+          "--variable",
+          "urlcolor=blue",
+          "-t",
+          "beamer",
+          "-o",
+          vim.fn.expand "%:r" .. ".pdf",
+        }, function() astro_utils.notify("Compiled " .. filename) end)
+      end,
+      desc = "Compile Beamer",
+    },
+    ["<leader>mp"] = {
+      function()
+        local pdf_path = vim.fn.expand "%:r" .. ".pdf"
+        if vim.fn.filereadable(pdf_path) == 1 then vim.fn.jobstart { "pdfpc", pdf_path } end
+      end,
+      desc = "Present Output",
+    },
+    ["<leader>ml"] = { function() utils.toggle_qf() end, desc = "Logs" },
+    ["<leader>mt"] = { "<cmd>TexlabBuild<cr>", desc = "LaTeX" },
+    ["<leader>mf"] = { "<cmd>TexlabForward<cr>", desc = "Forward Search" },
+    ["<leader>r"] = { desc = " REPL" },
+    ["<leader>rr"] = { "<Plug>Send", desc = "Send to REPL" },
+    ["<leader>rl"] = { "<Plug>SendLine", desc = "Send line to REPL" },
+    ["<leader>r<cr>"] = { "<cmd>SendHere<cr>", desc = "Set REPL" },
+    ["<leader>z"] = { "<cmd>ZenMode<cr>", desc = "Zen Mode" },
+    ["<leader>s"] = { desc = "󰛔 Search/Replace" },
+    ["<leader>ss"] = { function() require("spectre").open() end, desc = "Spectre" },
+    ["<leader>sf"] = { function() require("spectre").open_file_search() end, desc = "Spectre (current file)" },
+    ["<leader>sw"] = {
+      function() require("spectre").open_visual { select_word = true } end,
+      desc = "Spectre (current word)",
+    },
+    ["<leader>x"] = { desc = "裂Trouble" },
+    ["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+    ["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+    ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+    ["<leader>;"] = { desc = "󰧑 AI Assistant" },
+    ["<leader>;;"] = {
+      function()
+        vim.cmd.Codeium(vim.g.codeium_enabled == 0 and "Enable" or "Disable")
+        astro_utils.notify("Codeium " .. (vim.g.codeium_enabled == 0 and "Disabled" or "Enabled"))
+      end,
+      desc = "Toggle Global",
+    },
+    ["<leader>;b"] = {
+      function()
+        vim.cmd.Codeium(vim.b.codeium_enabled == 0 and "EnableBuffer" or "DisableBuffer")
+        astro_utils.notify("Codeium (buffer) " .. (vim.b.codeium_enabled == 0 and "Disabled" or "Enabled"))
+      end,
+      desc = "Toggle Buffer",
+    },
+  },
   i = {
     -- type template string
     ["<C-CR>"] = { "<++>", desc = "Insert template string" },
@@ -168,9 +291,8 @@ local mappings = {
 		["<C-s>"] = { "<ESC>:w!<CR>a", desc = "Save" },
   },
   v = {
-    -- navigating wrapped lines
-    j = { "gj", desc = "Navigate down" },
-    k = { "gk", desc = "Navigate down" },
+    ["<leader>r"] = { "<Plug>Send", desc = "Send to REPL" },
+    ["<leader>s"] = { function() require("spectre").open_visual() end, desc = "Spectre" },
     ["<leader>ts"] = {
       function () 
         vim.cmd [[normal :esc<CR> gv]]
@@ -190,6 +312,18 @@ local mappings = {
       end, 
       desc="Send selection"},
     ["<C-s>"] = { "<ESC>:w!<CR>gv", desc = "Save" },
+
+    -- navigating wrapped lines
+    j = { "gj", desc = "Navigate down" },
+    k = { "gk", desc = "Navigate down" },
+    -- date/time input
+    ["<c-t>"] = { desc = "󰃰 Date/Time" },
+    ["<c-t>n"] = { "<c-r>=strftime('%Y-%m-%d')<cr>", desc = "Y-m-d" },
+    ["<c-t>x"] = { "<c-r>=strftime('%m/%d/%y')<cr>", desc = "m/d/y" },
+    ["<c-t>f"] = { "<c-r>=strftime('%B %d, %Y')<cr>", desc = "B d, Y" },
+    ["<c-t>X"] = { "<c-r>=strftime('%H:%M')<cr>", desc = "H:M" },
+    ["<c-t>F"] = { "<c-r>=strftime('%H:%M:%S')<cr>", desc = "H:M:S" },
+    ["<c-t>d"] = { "<c-r>=strftime('%Y/%m/%d %H:%M:%S -')<cr>", desc = "Y/m/d H:M:S -" },
   },
   -- terminal mappings
   t = {
@@ -205,6 +339,7 @@ local mappings = {
 		-- ["<C-q>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
 		-- ["<ESC>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
 		-- ["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" },
+    ["<C-BS>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
   },
   x = {
     -- better increment/decrement
@@ -248,6 +383,9 @@ local mappings = {
       function() require("syntax-tree-surfer").surf("prev", "visual", true) end,
       desc = "Surf previous tree-sitter object",
     },
+
+    -- vim-sandwich
+    ["s"] = "<Nop>",
   },
   o = {
     -- line text-objects

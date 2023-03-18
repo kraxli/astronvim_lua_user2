@@ -27,6 +27,7 @@ vim.cmd([[
   " autocmd BufRead,BufEnter,BufWinEnter,BufNew,VimEnter *.md,*.wiki setlocal filetype=markdown " vimwiki.markdown
   autocmd BufRead,BufEnter,BufWinEnter,BufNew,BufWrite,VimEnter,InsertEnter *.md,*.wiki,*.txt lua require('user.highlight').markdown()
   " autocmd FileType vimwiki.markdown,vimwiki,markdown,text set foldmethod=expr foldexpr=MkdFoldSimple()
+
   autocmd FileType vimwiki.markdown,vimwiki,markdown,text,telekasten setl spell spelllang=en,de filetype=markdown syntax=markdown
 
   augroup end
@@ -49,3 +50,13 @@ vim.cmd([[
 
 ]])
 
+
+-- text like documents enable wrap and spell
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gitcommit", "markdown", "text", "plaintex", "tex", "vimwiki.markdown", "vimwiki", "telekasten" },
+  group = vim.api.nvim_create_augroup("auto_spell", { clear = true }),
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})

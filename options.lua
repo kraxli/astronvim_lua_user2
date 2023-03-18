@@ -23,9 +23,13 @@ return {
 		listchars = { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
 		shortmess = vim.opt.shortmess + { I = true },
 		showbreak = "↪ ",
+    showtabline = 0,
 		-- spellfile = "~/.config/astronvim/spell/en.utf-8.add",
+    -- spellfile = vim.fn.expand "~/.config/nvim/lua/user/spell/en.utf-8.add",
 		thesaurus = "~/.config/astronvim/spell/mthesaur.txt",
+    -- thesaurus = vim.fn.expand "~/.config/nvim/lua/user/spell/mthesaur.txt",
 		-- dictionary = {"~/.config/nvim/lua/user/spell/de.utf-8.spl"},
+    swapfile = false,
 		wrap = true, -- soft wrap lines
 		relativenumber = false, -- Show relative numberline
 		number = true,
@@ -47,6 +51,7 @@ return {
 		matchup_matchparen_deferred = 1,
     diagnostics_enabled = false, -- enable diagnostics at start
     status_diagnostics_enabled = true, -- enable diagnostics in statusline
+    heirline_bufferline = true,
 	},
 	wo = {
 		number = true,
