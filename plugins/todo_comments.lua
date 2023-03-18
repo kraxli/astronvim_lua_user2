@@ -42,4 +42,12 @@ M.config = function()
 	})
 end
 
-return M
+return	{
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			M.config()
+		end,
+		event = "BufRead",
+	},
+

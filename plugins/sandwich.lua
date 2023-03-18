@@ -1,6 +1,3 @@
-
-vim.g.sandwich_no_default_key_mappings = 1
-
 vim.cmd([[
 	" nmap ds <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 	" nmap dss <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
@@ -30,3 +27,10 @@ vim.cmd([[
 	" omap as <Plug>(textobj-sandwich-query-a)
 	" xmap as <Plug>(textobj-sandwich-query-a)
 ]])
+
+return{ 
+  { "machakann/vim-sandwich", event = "User AstroFile" },
+	vim.g.sandwich_no_default_key_mappings = 1
+},
+
+

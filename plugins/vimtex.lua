@@ -18,6 +18,12 @@
 -- see ":help vimtex-compiler".
 -- vim.g.vimtex_compiler_method = 'latexrun'
 
-vim.cmd([[
-  let g:vimtex_view_method =  'general' " 'mupdf' " 'zathura'
-]])
+return {
+	{
+		"lervag/vimtex",
+		ft = "tex",
+		setup = function()
+      vim.g.vimtex_view_method =  'general' " 'mupdf' " 'zathura'
+		end,
+	},
+}

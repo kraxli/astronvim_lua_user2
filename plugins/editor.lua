@@ -61,6 +61,7 @@ return {
       ignore_lsp = { "lua_ls" },
     },
     config = function(_, opts) require("project_nvim").setup(opts) end,
+    -- require("telescope").load_extension("projects"),
   },
   {
     "folke/trouble.nvim",
@@ -92,6 +93,6 @@ return {
     end,
   },
   { "junegunn/vim-easy-align", event = "User AstroFile" },
-  { "machakann/vim-sandwich", event = "User AstroFile" },
-  { "wakatime/vim-wakatime", event = "User AstroFile" },
+  -- { "machakann/vim-sandwich", event = "User AstroFile" },
+  -- { "wakatime/vim-wakatime", event = "User AstroFile" },
 }
