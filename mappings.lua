@@ -1,3 +1,5 @@
+require("user.mappings_d")
+
 local utils = require "user.utils"
 local astro_utils = require "astronvim.utils"
 local mappings = {
@@ -9,7 +11,7 @@ local mappings = {
     ["<C-Up>"] = false,
     ["<C-q>"] = false,
     ["<C-s>"] = false,
-    ["q:"] = ":",
+    -- ["q:"] = ":",
     -- better buffer navigation
     ["]b"] = false,
     ["[b"] = false,
@@ -33,10 +35,10 @@ local mappings = {
     ["<C-l>"] = { "<cmd>KittyNavigateRight<cr>" },
     ["<C-k>"] = { "<cmd>KittyNavigateUp<cr>" },
     -- resize with arrows
-    ["<Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
-    ["<Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
-    ["<Left>"] = { function() require("smart-splits").resize_left(2) end, desc = "Resize split left" },
-    ["<Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
+    ["<c-Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
+    ["<c-Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
+    ["<c-Left>"] = { function() require("smart-splits").resize_left(2) end, desc = "Resize split left" },
+    ["<c-Right>"] = { function() require("smart-splits").resize_right(2) end, desc = "Resize split right" },
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
     -- buffer switching
