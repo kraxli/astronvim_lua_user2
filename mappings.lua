@@ -412,6 +412,8 @@ local mappings = {
 --   mappings.n["<c-q>"] = { "<cmd>bdelete!<cr>", desc = "Force close buffer" }
 -- end
 
+mappings.n["q"] = { "<cmd>Bdelete<cr>", desc="Close buffer" }
+
 -- Comment
 if astro_utils.is_available "Comment.nvim" then
   mappings.n["<C-§>"] = { function() require("Comment.api").toggle.linewise.current() end, desc = "Comment line" }
