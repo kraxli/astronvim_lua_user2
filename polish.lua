@@ -27,4 +27,8 @@ return function()
   }
 
   require "user.autocmds"
+
+  pcall(require, "user.commands")
+  -- require("user.commands")
+  require("user.vim_functions")
 end
