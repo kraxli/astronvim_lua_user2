@@ -1,3 +1,4 @@
+-- auto stop auto-compiler if its running
 vim.api.nvim_create_autocmd("VimLeave", {
   desc = "Stop running auto compiler",
   group = vim.api.nvim_create_augroup("autocomp", { clear = true }),
@@ -44,14 +45,14 @@ vim.cmd([[
 
   augroup _General
   autocmd!
-  
+
 	autocmd WinClosed,WinEnter * if winnr('$') == 1 && &ft == "neo-tree" | q | endif
   autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :q!<CR>  " ,TelescopePrompt
   autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> <localleader>c :close!<CR>  " ,TelescopePrompt
   " set file types
-  
+
   augroup end
-  
+
   augroup _Alpha
     autocmd!
 		autocmd FileType alpha set nospell
@@ -68,5 +69,15 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
+  end,
+})
+
+-- auto hide tabline
+vim.api.nvim_create_autocmd("User", {
+  pattern = "AstroBufsUpdated",
+  group = vim.api.nvim_create_augroup("autohidetabline", { clear = true }),
+  callback = function()
+    local new_showtabline = #vim.t.bufs > 1 and 2 or 1
+    if new_showtabline ~= vim.opt.showtabline:get() then vim.opt.showtabline = new_showtabline end
   end,
 })

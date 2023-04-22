@@ -1,7 +1,7 @@
 return {
   "sindrets/diffview.nvim",
   event = "User AstroGitFile",
-  config = function()
+  opts = function()
     local actions = require "diffview.actions"
     local utils = require "astronvim.utils" --  astronvim utils
 
@@ -9,7 +9,7 @@ return {
 
     utils.set_mappings {
       n = {
-        [prefix] = { name = "Diff View" },
+        [prefix] = { name = " Diff View" },
         [prefix .. "<cr>"] = { "<cmd>DiffviewOpen<cr>", desc = "Open DiffView" },
         [prefix .. "h"] = { "<cmd>DiffviewFileHistory %<cr>", desc = "Open DiffView File History" },
         [prefix .. "H"] = { "<cmd>DiffviewFileHistory<cr>", desc = "Open DiffView Branch History" },
@@ -48,7 +48,8 @@ return {
       return out
     end
 
-    require("diffview").setup {
+    return {
+      enhanced_diff_hl = true,
       view = {
         merge_tool = { layout = "diff3_mixed" },
       },

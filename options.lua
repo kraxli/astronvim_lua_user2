@@ -23,7 +23,7 @@ return {
 		listchars = { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
 		shortmess = vim.opt.shortmess + { I = true },
 		showbreak = "↪ ",
-    showtabline = 0,
+    showtabline = 1,
 		-- spellfile = "~/.config/astronvim/spell/en.utf-8.add",
     -- spellfile = vim.fn.expand "~/.config/nvim/lua/user/spell/en.utf-8.add",
 		thesaurus = "~/.config/astronvim/spell/mthesaur.txt",

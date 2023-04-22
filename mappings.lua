@@ -27,11 +27,6 @@ local mappings = {
     -- better increment/decrement
     ["-"] = { "<c-x>", desc = "Descrement number" },
     ["+"] = { "<c-a>", desc = "Increment number" },
-    -- kitty navigation
-    ["<C-j>"] = { "<cmd>KittyNavigateDown<cr>" },
-    ["<C-h>"] = { "<cmd>KittyNavigateLeft<cr>" },
-    ["<C-l>"] = { "<cmd>KittyNavigateRight<cr>" },
-    ["<C-k>"] = { "<cmd>KittyNavigateUp<cr>" },
     -- resize with arrows
     ["<c-Up>"] = { function() require("smart-splits").resize_up(2) end, desc = "Resize split up" },
     ["<c-Down>"] = { function() require("smart-splits").resize_down(2) end, desc = "Resize split down" },
@@ -67,6 +62,14 @@ local mappings = {
     ["<leader>fB"] = { "<cmd>Telescope bibtex<cr>", desc = "Find BibTeX" },
     ["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "File explorer" },
     ["<leader>fp"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" },
+    ["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
+    -- octo plugin mappings
+    ["<leader>G"] = { name = " GitHub" },
+    ["<leader>Gi"] = { "<cmd>Octo issue list<cr>", desc = "Open Issues" },
+    ["<leader>GI"] = { "<cmd>Octo issue search<cr>", desc = "Search Issues" },
+    ["<leader>Gp"] = { "<cmd>Octo pr list<cr>", desc = "Open PRs" },
+    ["<leader>GP"] = { "<cmd>Octo pr search<cr>", desc = "Search PRs" },
+    ["<leader>Gr"] = { "<cmd>Octo repo list<cr>", desc = "Open Repository" },
     -- compiler
     ["<leader>m"] = { desc = "󱁤 Compiler" },
     ["<leader>mk"] = {
@@ -132,6 +135,7 @@ local mappings = {
     ["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
     ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
     ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+    ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
     ["<leader>;"] = { desc = "󰧑 AI Assistant" },
     ["<leader>;;"] = {
       function()
