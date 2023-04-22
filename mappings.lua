@@ -199,8 +199,7 @@ for _, char in ipairs { "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", 
   end
 end
 
--- load other mapping files:
-require("user.mappings_d0")
+-- load other mapping files (kraxli):
 
 local extend_tbl = require("astronvim.utils").extend_tbl
 
@@ -213,5 +212,7 @@ for _, file in ipairs {
 } do
   mappings = extend_tbl(mappings, require(dir_mapping .. file))
 end
+
+require("user.mappings_d0")
 
 return mappings

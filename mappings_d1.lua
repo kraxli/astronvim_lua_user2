@@ -22,6 +22,12 @@ local maps = {
     ["<b"] = false,
     ["<leader>tp"] = false,
     -- ["<leader>ft"] = false,
+    [">B"] = false,
+    ["<B"] = false,
+    [">F"] = false,
+    ["<F"] = false,
+    [">P"] = false,
+    ["<P"] = false,
 
     -- general
     ["<C-s>"] = { ":w!<CR>", desc = "Save" },
