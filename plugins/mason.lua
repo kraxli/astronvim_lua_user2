@@ -51,5 +51,6 @@ return {
         "python",
       },
     },
+    enabled = vim.fn.has('unix') == 1,
   },
 }

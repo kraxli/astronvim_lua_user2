@@ -56,6 +56,7 @@ return {
       ]])
 		end,
 		enable = false,
+    -- enabled = vim.fn.has('unix') == 1,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
@@ -69,5 +70,6 @@ return {
 		"jbyuki/one-small-step-for-vimkind",
 		dependendies = { "mfussenegger/nvim-dap" },
 		ft = { "lua" },
+    enabled = vim.fn.has('unix') == 1,
 	},
 }

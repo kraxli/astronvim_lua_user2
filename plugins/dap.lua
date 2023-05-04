@@ -45,4 +45,5 @@ return {
       attach_node,
     }
   end,
+  enabled = vim.fn.has('unix') == 1,
 }
