@@ -52,11 +52,17 @@ keymap("n", "<", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/ch
 keymap("n", "<F6>", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 keymap("n", "gx", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 
+-- ['q'] = { "<cmd>bd!<cr>", "Kill (del) buffer" }, -- not sure to keep
+vim.api.nvim_set_keymap("n", "q", "<cmd>bd!<cr>", { noremap = false })
+
 -- code_jump
-vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<C-BS>", "<C-o>", { noremap = false }) -- backspace
+-- vim.api.nvim_set_keymap("i", "<C-BS>", "<C-o>", { noremap = false }) -- backspace
 vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = false }) -- backspace
+vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = false })
+vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = false })
+vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
 
 -- comment
 -- n  <Space>/    * <Lua 149: ~/.config/nvim/lua/core/mappings.lua:106>

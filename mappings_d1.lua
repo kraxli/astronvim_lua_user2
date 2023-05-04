@@ -227,7 +227,6 @@ local maps = {
       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
       desc = "Previous buffer",
     },
-	  q = { "<cmd>bd!<cr>", "Kill (del) buffer" }, -- not sure to keep
   },
   -- insert mode:
   i = {
