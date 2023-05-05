@@ -148,6 +148,7 @@ local maps = {
         W = {'<cmd>lua require("telekasten").goto_thisweek()<CR>', 'Goto this week'},
         y = {'<cmd>lua require("telekasten").yank_notelink()<CR>', 'Yank note link'},
         z = {'<cmd>lua require("telekasten").panel()<CR>', 'Panel'},
+        x = {"<cmd>PasteImg<cr>", "Paste Image"},
       },
       -- o = {
       --   name = "Text Object",

@@ -11,6 +11,7 @@ create_command("Google", '<cmd>lua require("user.utils").google()', {desc= "Goog
 
 create_command("CacheClean", '<cmd>lua require("user.utils").cacheClean()', {desc= "Clean cache dirs"})
 
+create_command("Pi", "<cmd>PasteImg<cr>", {desc="Paste Image"})
 
 -- TODO:
 -- copy path of file of current file

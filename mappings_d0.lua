@@ -85,3 +85,7 @@ vim.cmd([[
 
 -- open system app for file under cursor or file explorer
 vim.api.nvim_set_keymap("", "<F3>", [[<cmd>lua require('user.utils').sys_app_open()<CR>]], opts)
+
+-- writer
+vim.api.nvim_set_keymap("n", "<c-s-v>", "<cmd>PasteImg<cr>", { noremap = false })
+
