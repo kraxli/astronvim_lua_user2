@@ -74,6 +74,67 @@ return {
 		end,
 	},
 	{
+		"ekickx/clipboard-image.nvim",
+		cmd = "PasteImg",
+		ft = { "markdown", "text", "vimwiki" },
+		config = function()
+			require'clipboard-image'.setup {
+  			default = {
+					img_dir = 'img',
+					img_dir_txt = 'img',
+    			img_name = function ()
+      			-- local img_dir = 'img' -- require'clipboard-image.config'.get_config().img_dir()
+      			return os.date('%Y-%m-%d-%H-%M-%S')
+    			end,
+    			affix = '![](%s)',
+  		},
+  		-- markdown = {
+  		--   img_dir = 'src/assets/img',
+  		--   img_dir_txt = '/assets/img',
+  		--   affix = '![](%s)',
+  		-- },
+			}
+		end,
+		-- enabled = false,
+	},
+	-- {
+	-- 	"niuiic/cp-image.nvim",
+	-- 	dependencies = {"niuiic-core.nvim"},
+	-- 	cmd = "PasteImg",
+	-- 	ft = { "markdown", "text", "vimwiki" },
+	-- 	config = function()
+	-- 		require("cp-image").setup(
+ --    			-- default config
+ --    			{
+ --        			-- how to generate the image from clipboard and place it
+ --        			-- image_type is the suffix of file name
+ --        			cmd = function(path, image_type)
+ --            			return string.format("xclip -selection clipboard -t image/%s -o > %s", image_type, path)
+ --        			end,
+ --        			---@diagnostic disable-next-line:unused-local
+ --        			-- text to insert
+ --        			-- relative_path is relative to the root path of the project
+ --        			text = function(relative_path, file_name, file_type, full_path)
+ --            			return string.format("![%s](%s)", file_name, relative_path)
+ --        			end,
+ --        			-- default directory path to store image
+ --        			path = function(project_root)
+ --            			return project_root
+ --        			end,
+ --        			-- used to search root path of the project
+ --        			-- if .git does not exist, current directory path would be used
+ --        			root_pattern = ".git",
+ --        			-- command to create directory
+ --        			create_dir = "mkdir -p",
+ --    			}
+	-- 		)
+	-- 	end,
+	-- 	enabled = false,
+	-- },
+	-- {
+	-- 	"niuiic/niuiic-core.nvim",
+	-- },
+	{
     "iamcco/markdown-preview.nvim",
     -- run = function() vim.fn["mkdp#util#install"]() end,
 	  run = "cd app && npm install",
