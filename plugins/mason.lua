@@ -6,11 +6,11 @@ return {
       ensure_installed = {
         "clangd",
         "cssls",
-        "gopls",
+        -- "gopls",
         "html",
         "intelephense",
         "marksman",
-        "neocmake",
+        -- "neocmake",
         "jsonls",
         "julials",
         "pyright",
