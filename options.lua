@@ -22,8 +22,8 @@ return {
 		list = true, -- show whitespace characters
 		listchars = { tab = "│→", extends = "⟩", precedes = "⟨", trail = "·", nbsp = "␣" },
 		shortmess = vim.opt.shortmess + { I = true },
+    showtabline = (vim.t.bufs and #vim.t.bufs > 1) and 2 or 1,
 		showbreak = "↪ ",
-    showtabline = 1,
 		-- spellfile = "~/.config/astronvim/spell/en.utf-8.add",
     -- spellfile = vim.fn.expand "~/.config/nvim/lua/user/spell/en.utf-8.add",
 		thesaurus = "~/.config/astronvim/spell/mthesaur.txt",
@@ -52,6 +52,7 @@ return {
     diagnostics_enabled = false, -- enable diagnostics at start
     status_diagnostics_enabled = true, -- enable diagnostics in statusline
     heirline_bufferline = true,
+    resession_enabled = true,
 	},
 	wo = {
 		number = true,
