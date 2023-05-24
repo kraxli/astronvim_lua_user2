@@ -78,7 +78,7 @@ return {
 		cmd = "PasteImg",
 		ft = { "markdown", "text", "vimwiki" },
 		config = function()
-			require'clipboard-image'.setup {
+			require('clipboard-image').setup {
   			default = {
 					img_dir = 'img',
 					img_dir_txt = 'img',
