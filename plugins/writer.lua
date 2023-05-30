@@ -30,7 +30,7 @@ return {
     	autolist.create_mapping_hook("n", "<C-r>", autolist.force_recalculate)
     	autolist.create_mapping_hook("n", "<leader>x", autolist.invert_entry, "")
   	end,
-		enabled = false,
+		enabled = true,
 	},
 	{
 		"dkarter/bullets.vim",
@@ -54,7 +54,7 @@ return {
   				\ ['imap', '<cr>', '<Plug>(bullets-newline)'],
   				\ ['inoremap', '<C-cr>', '<cr>'],
   				\
-  				\ ['nmap', 'O', 'k<Plug>(bullets-newline)'],
+  				\ ['noremap', 'O', 'k<Plug>(bullets-newline)'],
   				\ ['nmap', 'o', '<Plug>(bullets-newline)'],
   				\
   				\ ['vmap', 'gN', '<Plug>(bullets-renumber)'],
@@ -70,8 +70,8 @@ return {
   				\ ['vmap', '<', '<Plug>(bullets-promote)'],
   				\ ]
 				]])
-
 		end,
+		enabled = false,
 	},
 	{
 		"ekickx/clipboard-image.nvim",

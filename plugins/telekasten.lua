@@ -143,18 +143,19 @@ return {
 		local keyOpts = { noremap = true, silent = true }
 		-- vim.api.nvim_set_keymap('i', '<c-a>', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
 		-- vim.api.nvim_set_keymap('i', '<c-#>', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
-		vim.api.nvim_set_keymap(
-			"n",
-			"<c-space>",
-			"<ESC>:lua require('telekasten').toggle_todo({ i=false })<CR>",
-			keyOpts
-		)
-		vim.api.nvim_set_keymap(
-			"i",
-			"<c-space>",
-			"<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>",
-			keyOpts
-		)
+
+		-- vim.api.nvim_set_keymap(
+		-- 	"n",
+		-- 	"<c-space>",
+		-- 	"<ESC>:lua require('telekasten').toggle_todo({ i=false })<CR>",
+		-- 	keyOpts
+		-- )
+		-- vim.api.nvim_set_keymap(
+		-- 	"i",
+		-- 	"<c-space>",
+		-- 	"<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>",
+		-- 	keyOpts
+		-- )
 
 		vim.cmd([[
 	       " inoremap <c-[> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
