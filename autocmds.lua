@@ -19,8 +19,17 @@ vim.api.nvim_create_autocmd("FileType", {
 -- kraxli:
 -- -------------------------------------------------------
 
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
+-- local augroup = vim.api.nvim_create_augroup
+-- local autocmd = vim.api.nvim_create_autocmd
+
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "settings for markdown and other 'writer' files",
+  group = vim.api.nvim_create_augroup("_Markdown_FileType", { clear = true }),
+  pattern = { "gitcommit", "markdown", "text", "plaintex", "vimwiki.markdown", "vimwiki", "markdown", "telekasten" },
+  callback = function()
+    vim.g.diagnostics_mode = 0
+  end,
+})
 
 
 vim.cmd([[

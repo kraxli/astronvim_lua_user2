@@ -55,8 +55,7 @@ return {
         " nnoremap <silent><expr> <LocalLeader>rs  :SnipRun<CR>
       ]])
 		end,
-		enable = false,
-    -- enabled = vim.fn.has('unix') == 1,
+    enabled = vim.fn.has('unix') == 1,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
