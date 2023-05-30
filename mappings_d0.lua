@@ -36,14 +36,14 @@ local keymap = vim.api.nvim_set_keymap
 -- Tab shift
 -- -------------------------------------------------------
 
-keymap("x", "<", "<gv", opts)
-keymap("x", ">", ">gv|", opts)
+-- keymap("x", "<", "<gv", opts)
+-- keymap("x", ">", ">gv|", opts)
 keymap("x", "<S-Tab>", "<gv", opts)
 keymap("x", "<Tab>", ">gv|", opts)
 -- keymap("n", ">", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal >>]] end, vim.o.shiftwidth)", opts)
 -- keymap("n", "<", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal <<]] end, -vim.o.shiftwidth)", opts)
-keymap("n", ">", ">>_", opts) -- <gt>
-keymap("n", "<", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/change.html#%3C
+keymap("n", "> ", ">>_", opts) -- <gt>
+keymap("n", "< ", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/change.html#%3C
 
 -- -------------------------------------------------------
 -- TODO:
