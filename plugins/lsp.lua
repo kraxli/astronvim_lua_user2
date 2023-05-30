@@ -20,9 +20,7 @@ return {
         end,
       })
     end,
-    opts = {
-      inlay_hints = { highlight = "Comment" },
-    },
+    opts = { inlay_hints = { highlight = "Comment" } },
   },
   {
     "jose-elias-alvarez/typescript.nvim",

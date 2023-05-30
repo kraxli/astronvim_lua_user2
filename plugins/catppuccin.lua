@@ -20,5 +20,17 @@ return {
       telescope = true,
       which_key = true,
     },
+    custom_highlights = function(colors)
+      return {
+        -- disable italics  for treesitter highlights
+        TabLineFill = { link = "StatusLine" },
+        ["@parameter"] = { style = {} },
+        ["@type.builtin"] = { style = {} },
+        ["@namespace"] = { style = {} },
+        ["@text.uri"] = { style = { "underline" } },
+        ["@tag.attribute"] = { style = {} },
+        ["@tag.attribute.tsx"] = { style = {} },
+      }
+    end,
   },
 }
