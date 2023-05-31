@@ -64,10 +64,12 @@ return {
   				\
   				\ ['imap', '<C-t>', '<Plug>(bullets-demote)'],
   				\ ['nmap', '>>', '<Plug>(bullets-demote)'],
+  				\ ['nmap', '> ', '<Plug>(bullets-demote)'],
   				\ ['vmap', '>', '<Plug>(bullets-demote)'],
   				\ ['imap', '<C-d>', '<Plug>(bullets-promote)'],
   				\ ['nmap', '<<', '<Plug>(bullets-promote)'],
   				\ ['vmap', '<', '<Plug>(bullets-promote)'],
+  				\ ['vmap', '< ', '<Plug>(bullets-promote)'],
   				\ ]
 				]])
 		end,
