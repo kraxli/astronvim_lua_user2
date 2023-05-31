@@ -69,6 +69,7 @@ return {
     dependencies = "nvim-treesitter/nvim-treesitter",
     ft = "markdown",
     opts = {},
+    enable = false,
   },
   {
     "ahmedkhalf/project.nvim",
