@@ -69,7 +69,7 @@ return {
     dependencies = "nvim-treesitter/nvim-treesitter",
     ft = "markdown",
     opts = {},
-    enable = false,
+    enable = vim.fn.has('unix') == 1,
   },
   {
     "ahmedkhalf/project.nvim",
