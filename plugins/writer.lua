@@ -139,7 +139,7 @@ return {
 	{
     "iamcco/markdown-preview.nvim",
     -- run = function() vim.fn["mkdp#util#install"]() end,
-	  run = "cd app && npm install",
+	  run = "cd $XDG_DATA_HOME/nvim/lazy/markdown-preview.nvim/app && npm install && npm audit fix --force",
 	  setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
 	  ft = { "markdown" },
 	},
