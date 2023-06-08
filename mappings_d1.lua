@@ -42,9 +42,9 @@ local maps = {
 	  -- Miscellenuous
 	  ["<C-z>"] = { ":undo<cr>", desc = "Undo" },
     -- Terminal:
-	  -- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
-	  ["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
-	  ["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
+	  -- -- ["<c-t>"] = {'<Cmd>exe v:count1 . "ToggleTerm"<CR>', desc="Terminal toggle"},
+	  -- ["<leader>ts"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
+	  -- ["<C-e>"] = {function () require("toggleterm").send_lines_to_terminal("single_line", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) end, desc="Send line"},
 
 		["<leader>"] = {
 			-- Git, enhance base functionality
@@ -241,25 +241,27 @@ local maps = {
     -- navigating wrapped lines
     j = { "gj", desc = "Navigate down" },
     k = { "gk", desc = "Navigate down" },
-    ["<leader>ts"] = {
-      function ()
-        vim.cmd [[normal :esc<CR> gv]]
-        require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
-      end,
-      desc="Send lines"},
-    ["<leader>tS"] = {
-      function ()
-        vim.cmd [[normal :esc<CR> gv]]
-        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
-      end,
-      desc="Send selection"},
-    ["<C-e>"] = {
-      function ()
-        vim.cmd [[normal :esc<CR> gv]]
-        require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
-      end,
-      desc="Send selection"},
+    -- ["<leader>ts"] = {
+    --   function ()
+    --     vim.cmd [[normal :esc<CR> gv]]
+    --     require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
+    --   end,
+    --   desc="Send lines"},
+    -- ["<leader>tS"] = {
+    --   function ()
+    --     vim.cmd [[normal :esc<CR> gv]]
+    --     require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
+    --   end,
+    --   desc="Send selection"},
+    -- ["<C-e>"] = {
+    --   function ()
+    --     vim.cmd [[normal :esc<CR> gv]]
+    --     require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
+    --   end,
+    --   desc="Send selection"},
+
     ["<C-s>"] = { "<ESC>:w!<CR>gv", desc = "Save" },
+
     ["<leader>"] = {
       t = {
           name = "Terminal",
@@ -297,7 +299,8 @@ maps.n["<leader>fT"] = { function() require("telescope.builtin").colorscheme { e
 
 
 if is_available "toggleterm.nvim" then
-  local python = vim.fn.executable "ipython3" == 1 and "ipython3" or vim.fn.executable "python3" == 1 and "python3"
+  -- local python = vim.fn.executable "ipython3" == 1 and "ipython3" or vim.fn.executable "python3" == 1 and "python3"
+  local python =  "python3"
   if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
   -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 end
