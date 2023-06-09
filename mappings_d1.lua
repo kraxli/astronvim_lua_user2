@@ -275,13 +275,10 @@ local maps = {
   -- terminal mappings
   t = {
 		["jk"] = false,
-		["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-    -- ["<C-q>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+		["<C-c>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
     ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-		["<C-c>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-		-- ["<ESC>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-		-- ["<c-q>"] = { "<cmd>bd!<cr>", desc = "Kill (del) buffer" },
+		["<C-k>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
   },
   x = {
     -- Tressitter Surfer:
