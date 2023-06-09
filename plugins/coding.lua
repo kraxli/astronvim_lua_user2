@@ -71,4 +71,22 @@ return {
 		ft = { "lua" },
     enabled = vim.fn.has('unix') == 1,
 	},
+	{
+    "mfussenegger/nvim-dap-python",
+    after = "mason-nvim-dap.nvim",
+    config = function ()
+      -- require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+      require('dap-python').setup('/usr/bin/python3')
+
+      table.insert(require('dap').configurations.python, {
+        type = 'python',
+        request = 'launch',
+        name = 'My custom launch configuration',
+        program = '${file}',
+        -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+      })
+    end,
+    -- config = function() require "user.plugins.nvim-dap-vscode-js" end,
+    enabled = false  -- vim.fn.has('unix') == 1,
+  },
 }
