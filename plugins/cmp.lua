@@ -54,7 +54,13 @@ return {
         end, { "i", "s" }),
         -- <C-n> and <C-p> for navigating snippets
         ["<C-n>"] = cmp.mapping(function()
-          if luasnip.jumpable(1) then luasnip.jump(1) end
+          if 
+            luasnip.jumpable(1) then luasnip.jump(1)
+          elseif cmp.visible() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+          else
+            cmp.complete()
+          end
         end, { "i", "s" }),
         ["<C-p>"] = cmp.mapping(function()
           if luasnip.jumpable(-1) then luasnip.jump(-1) end
