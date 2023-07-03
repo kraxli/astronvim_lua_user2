@@ -32,11 +32,11 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    dependencies = { "miversen33/netman.nvim" },
+    -- dependencies = { "miversen33/netman.nvim" },
     opts = {
       sources = {
         "filesystem",
-        "netman.ui.neo-tree",
+        -- "netman.ui.neo-tree",
         "git_status",
       },
       source_selector = {
