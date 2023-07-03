@@ -29,6 +29,7 @@ return {
 		thesaurus = "~/.config/astronvim/spell/mthesaur.txt",
     -- thesaurus = vim.fn.expand "~/.config/nvim/lua/user/spell/mthesaur.txt",
 		-- dictionary = {"~/.config/nvim/lua/user/spell/de.utf-8.spl"},
+    splitkeep = "screen",
     swapfile = false,
 		wrap = true, -- soft wrap lines
 		relativenumber = false, -- Show relative numberline

@@ -45,8 +45,6 @@ local mappings = {
       end,
       desc = "Switch Buffers",
     },
-    -- vim-sandwich
-    ["s"] = "<Nop>",
     ["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" },
     ["<leader>N"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
     ["<leader><cr>"] = { '<esc>/<++><cr>"_c4l', desc = "Next Template" },
@@ -67,13 +65,6 @@ local mappings = {
     ["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "File explorer" },
     ["<leader>fp"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" },
     ["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
-    -- octo plugin mappings
-    ["<leader>G"] = { name = " GitHub" },
-    ["<leader>Gi"] = { "<cmd>Octo issue list<cr>", desc = "Open Issues" },
-    ["<leader>GI"] = { "<cmd>Octo issue search<cr>", desc = "Search Issues" },
-    ["<leader>Gp"] = { "<cmd>Octo pr list<cr>", desc = "Open PRs" },
-    ["<leader>GP"] = { "<cmd>Octo pr search<cr>", desc = "Search PRs" },
-    ["<leader>Gr"] = { "<cmd>Octo repo list<cr>", desc = "Open Repository" },
     -- compiler
     ["<leader>m"] = { desc = "󱁤 Compiler" },
     ["<leader>mk"] = {
@@ -128,7 +119,7 @@ local mappings = {
     ["<leader>r<cr>"] = { "<cmd>SendHere<cr>", desc = "Set REPL" },
     ["<leader>z"] = { "<cmd>ZenMode<cr>", desc = "Zen Mode" },
     ["<leader>s"] = { desc = "󰛔 Search/Replace" },
-    ["<leader>ss"] = { function() require("spectre").open() end, desc = "Spectre" },
+    ["<leader>ss"] = { function() require("spectre").toggle() end, desc = "Toggle Spectre" },
     ["<leader>sf"] = { function() require("spectre").open_file_search() end, desc = "Spectre (current file)" },
     ["<leader>sw"] = {
       function() require("spectre").open_visual { select_word = true } end,
@@ -140,21 +131,6 @@ local mappings = {
     ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
     ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
     ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
-    ["<leader>;"] = { desc = "󰧑 AI Assistant" },
-    ["<leader>;;"] = {
-      function()
-        vim.cmd.Codeium(vim.g.codeium_enabled == 0 and "Enable" or "Disable")
-        astro_utils.notify("Codeium " .. (vim.g.codeium_enabled == 0 and "Disabled" or "Enabled"))
-      end,
-      desc = "Toggle Global",
-    },
-    ["<leader>;b"] = {
-      function()
-        vim.cmd.Codeium(vim.b.codeium_enabled == 0 and "EnableBuffer" or "DisableBuffer")
-        astro_utils.notify("Codeium (buffer) " .. (vim.b.codeium_enabled == 0 and "Disabled" or "Enabled"))
-      end,
-      desc = "Toggle Buffer",
-    },
   },
   v = {
     ["<leader>r"] = { "<Plug>Send", desc = "Send to REPL" },
@@ -163,17 +139,7 @@ local mappings = {
   i = {
     -- signature help, fails silently so attach always
     ["<C-l>"] = { function() vim.lsp.buf.signature_help() end, desc = "Signature help" },
-    -- type template string
-    ["<C-CR>"] = { "<++>", desc = "Insert template string" },
     ["<S-Tab>"] = { "<C-V><Tab>", desc = "Tab character" },
-    -- date/time input
-    ["<C-t>"] = { desc = "󰃰 Date/Time" },
-    ["<C-t>n"] = { "<c-r>=strftime('%Y-%m-%d')<cr>", desc = "Y-m-d" },
-    ["<C-t>x"] = { "<c-r>=strftime('%m/%d/%y')<cr>", desc = "m/d/y" },
-    ["<C-t>f"] = { "<c-r>=strftime('%B %d, %Y')<cr>", desc = "B d, Y" },
-    ["<C-t>X"] = { "<c-r>=strftime('%H:%M')<cr>", desc = "H:M" },
-    ["<C-t>F"] = { "<c-r>=strftime('%H:%M:%S')<cr>", desc = "H:M:S" },
-    ["<C-t>d"] = { "<c-r>=strftime('%Y/%m/%d %H:%M:%S -')<cr>", desc = "Y/m/d H:M:S -" },
   },
   -- terminal mappings
   t = {
@@ -184,30 +150,24 @@ local mappings = {
     -- better increment/decrement
     ["+"] = { "g<C-a>", desc = "Increment number" },
     ["-"] = { "g<C-x>", desc = "Descrement number" },
-    -- line text-objects
-    ["il"] = { "g_o^", desc = "Inside line text object" },
-    ["al"] = { "$o^", desc = "Around line text object" },
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
-    -- vim-sandwich
-    ["s"] = "<Nop>",
   },
   o = {
     -- line text-objects
     ["il"] = { ":normal vil<cr>", desc = "Inside line text object" },
     ["al"] = { ":normal val<cr>", desc = "Around line text object" },
   },
+  -- ia = vim.fn.has "nvim-0.10" and {
+  --   mktemp = { function() return "<++>" end, desc = "Insert <++>", expr = true },
+  --   ldate = { function() return os.date "%Y/%m/%d %H:%M:%S -" end, desc = "Y/m/d H:M:S -", expr = true },
+  --   ndate = { function() return os.date "%Y-%m-%d" end, desc = "Y-m-d", expr = true },
+  --   xdate = { function() return os.date "%m/%d/%y" end, desc = "m/d/y", expr = true },
+  --   fdate = { function() return os.date "%B %d, %Y" end, desc = "B d, Y", expr = true },
+  --   Xdate = { function() return os.date "%H:%M" end, desc = "H:M", expr = true },
+  --   Fdate = { function() return os.date "%H:%M:%S" end, desc = "H:M:S", expr = true },
+  -- } or nil,
 }
-
--- add more text objects for "in" and "around"
-for _, char in ipairs { "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" } do
-  for _, mode in ipairs { "x", "o" } do
-    mappings[mode]["i" .. char] =
-      { string.format(":<C-u>silent! normal! f%sF%slvt%s<CR>", char, char, char), desc = "between " .. char }
-    mappings[mode]["a" .. char] =
-      { string.format(":<C-u>silent! normal! f%sF%svf%s<CR>", char, char, char), desc = "around " .. char }
-  end
-end
 
 -- load other mapping files (kraxli):
 
@@ -224,5 +184,4 @@ for _, file in ipairs {
 end
 
 require("user.mappings_d0")
-
 return mappings
