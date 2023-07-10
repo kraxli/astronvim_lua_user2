@@ -111,14 +111,14 @@ function M.get_visual_lines()
   local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
   local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
   -- vim.cmd [[normal :esc<CR>]]
-  local selection = vim.fn.getline(line_start, line_end) -- or nvim_buf_get_lines() 
+  local selection = vim.fn.getline(line_start, line_end) -- or nvim_buf_get_lines()
 
   if #selection == 0 then  -- or vim.fn.len(selection) == 0
     return ''
   end
 
   return table.concat(selection, '\n')
- 
+
 end
 
 
@@ -156,7 +156,7 @@ function M.sys_app_open(mode)
   local commandsOpen = {unix="xdg-open", mac="open", powershell='Start-Process', win='explorer'}  -- win='start /b ""'
   local os = getOs()
 
-  -- powershell: 
+  -- powershell:
   --   set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
   --   set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
 
@@ -170,7 +170,7 @@ function M.sys_app_open(mode)
     path = M.get_visual_selection()  -- global such that it can be used in vim.cmd()
   else
     path = vim.fn.expand("<cfile>")
-    -- path = path or vim.fn.expand("<cfile>")  -- in case of input variable path, <cfile>  or <cword>  
+    -- path = path or vim.fn.expand("<cfile>")  -- in case of input variable path, <cfile>  or <cword>
     path = vim.fn.fnamemodify(path, ':p')
   end
 
@@ -291,6 +291,8 @@ function M.handle_checkbox()
   local config = require("autolist.config")
   local auto = require("autolist.auto")
 
+  local checkbox_pattern = " [ ]"
+
   local filetype_lists = config.lists[vim.bo.filetype]
   local line = vim.fn.getline(".")
 
@@ -298,14 +300,15 @@ function M.handle_checkbox()
     local list_item = line:match("^%s*" .. list_pattern .. "%s*")  -- only bullet, no checkbox
     list_item = list_item:gsub("%s+", "")
     local is_list_item = list_item ~= nil -- only bullet, no checkbox
-    local is_checkbox_item = line:match("^%s*" .. list_pattern .. "%s*" .. "%[.%]" .. "%s*") ~= nil -- bullet and checkbox  
-
-    local checkbox_pattern = " [ ]"
+    local is_checkbox_item = line:match("^%s*" .. list_pattern .. "%s*" .. "%[.%]" .. "%s*") ~= nil -- bullet and checkbox
 
     if is_list_item == true and is_checkbox_item == false then
       vim.fn.setline(".", (line:gsub(list_item, list_item .. checkbox_pattern, 1)))
+
       local cursor_pos = vim.api.nvim_win_get_cursor(0)
-      vim.api.nvim_win_set_cursor(0, {cursor_pos[1], cursor_pos[2] + checkbox_pattern:len()})
+      if cursor_pos[2] > 0 then
+        vim.api.nvim_win_set_cursor(0, {cursor_pos[1], cursor_pos[2] + checkbox_pattern:len()})
+      end
       goto continue
     else
       auto.toggle_checkbox()
