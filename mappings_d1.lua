@@ -29,6 +29,8 @@ local maps = {
     [">P"] = false,
     ["<P"] = false,
 
+    ["M-right"] = {"C-i", desc="Move to prevous position"},
+
     -- general
     ["<C-s>"] = { ":w!<CR>", desc = "Save" },
 	  -- recording
@@ -264,8 +266,13 @@ local maps = {
 
     ["<leader>"] = {
       t = {
-          name = "Terminal",
+        name = "Terminal",
       },
+  	  z = {
+        name = "Zettel / Md",
+  	    -- b = {'<cmd>lua vim.api.nvim_set_keymap("v", "<leader>zb", "sa*gv<right>sa*", { noremap = false })', desc='Bold' },
+  	    -- b = { "sa*gv<Right>sa*" , desc='Bold' },
+  	  },
   	},
   	z = {
       name = "Zettel / Md",
@@ -297,7 +304,7 @@ maps.n["<leader>fT"] = { function() require("telescope.builtin").colorscheme { e
 
 if is_available "toggleterm.nvim" then
   -- local python = vim.fn.executable "ipython3" == 1 and "ipython3" or vim.fn.executable "python3" == 1 and "python3"
-  local python =  "python3"
+  local python =  "bpython" -- "python3"
   if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
   -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 end

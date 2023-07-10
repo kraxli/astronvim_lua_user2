@@ -35,13 +35,14 @@ local keymap = vim.api.nvim_set_keymap
 -- -------------------------------------------------------
 -- Tab shift
 -- -------------------------------------------------------
-
 -- keymap("x", "<", "<gv", opts)
 -- keymap("x", ">", ">gv|", opts)
 keymap("x", "<S-Tab>", "<gv", opts)
 keymap("x", "<Tab>", ">gv|", opts)
 -- keymap("n", ">", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal >>]] end, vim.o.shiftwidth)", opts)
 -- keymap("n", "<", "<cmd>lua require('user.utils').reset_cursor_pos(function() vim.cmd[[normal <<]] end, -vim.o.shiftwidth)", opts)
+keymap("n", ">>", ">>_", opts) -- <gt>
+keymap("n", "<<", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/change.html#%3C
 keymap("n", "> ", ">>_", opts) -- <gt>
 keymap("n", "< ", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/change.html#%3C
 
@@ -49,11 +50,17 @@ keymap("n", "< ", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/c
 -- TODO:
 -- -------------------------------------------------------
 
+vim.api.nvim_set_keymap("v", "<leader>zb", "sa*gv<right>sa*", { noremap = false, desc='Bold' })
+vim.api.nvim_set_keymap("v", "zb", "sa*gv<right>sa*", { noremap = false, desc='Bold' })
+
+
 keymap("n", "<F6>", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 keymap("n", "gx", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 
 -- ['q'] = { "<cmd>bd!<cr>", "Kill (del) buffer" }, -- not sure to keep
 vim.api.nvim_set_keymap("n", "q", "<cmd>bd!<cr>", { noremap = false })
+
+vim.api.nvim_set_keymap("n", "<M-right>", "", { noremap = false })
 
 -- code_jump
 vim.api.nvim_set_keymap("n", "<C-BS>", "<C-o>", { noremap = false }) -- backspace

@@ -28,9 +28,34 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "gitcommit", "markdown", "text", "plaintex", "vimwiki.markdown", "vimwiki", "markdown", "telekasten" },
   callback = function()
     vim.g.diagnostics_mode = 0
+    vim.opt_local.wrap = true
+    vim.opt_local.tabstop=2
+    vim.opt_local.shiftwidth=2
+    vim.opt_local.filetype="markdown"
+    vim.opt_local.syntax="markdown"
   end,
 })
 
+-- text like documents enable  spell
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gitcommit", "markdown", "text", "plaintex", "tex", "vimwiki.markdown", "vimwiki", "telekasten" },
+  group = vim.api.nvim_create_augroup("auto_spell", { clear = true }),
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "de,en"
+  end,
+})
+
+-- auto hide tabline
+vim.api.nvim_create_autocmd("User", {
+  desc = "Auto hide tabline",
+  group = vim.api.nvim_create_augroup("autohide_tabline", { clear = true }),
+  pattern = "AstroBufsUpdated",
+  callback = function()
+    local new_showtabline = #vim.t.bufs > 1 and 2 or 1
+    if new_showtabline ~= vim.opt.showtabline:get() then vim.opt.showtabline = new_showtabline end
+  end,
+})
 
 vim.cmd([[
 
@@ -47,7 +72,7 @@ vim.cmd([[
   autocmd BufRead,BufEnter,BufWinEnter,BufNew,BufWrite,VimEnter,InsertEnter *.md,*.wiki,*.txt lua require('user.highlight').markdown()
   " autocmd FileType vimwiki.markdown,vimwiki,markdown,text set foldmethod=expr foldexpr=MkdFoldSimple()
 
-  autocmd FileType vimwiki.markdown,vimwiki,markdown,text,telekasten setl spell spelllang=en,de filetype=markdown syntax=markdown wrap
+  " autocmd FileType vimwiki.markdown,vimwiki,markdown,text,telekasten setl spell spelllang=en,de filetype=markdown syntax=markdown wrap
 
   augroup end
 
@@ -70,23 +95,3 @@ vim.cmd([[
 ]])
 
 
--- text like documents enable wrap and spell
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "gitcommit", "markdown", "text", "plaintex", "tex", "vimwiki.markdown", "vimwiki", "telekasten" },
-  group = vim.api.nvim_create_augroup("auto_spell", { clear = true }),
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
-})
-
--- auto hide tabline
-vim.api.nvim_create_autocmd("User", {
-  desc = "Auto hide tabline",
-  group = vim.api.nvim_create_augroup("autohide_tabline", { clear = true }),
-  pattern = "AstroBufsUpdated",
-  callback = function()
-    local new_showtabline = #vim.t.bufs > 1 and 2 or 1
-    if new_showtabline ~= vim.opt.showtabline:get() then vim.opt.showtabline = new_showtabline end
-  end,
-})
