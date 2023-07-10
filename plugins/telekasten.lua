@@ -50,7 +50,7 @@ return {
 			-- "title-uuid" - Suffix title with uuid
 			new_note_filename = "uuid-title",
 			-- file uuid type ("rand" or input for os.date such as "%Y%m%d%H%M")
-			uuid_type = "Zet%Y%m%d", -- %H%M",
+			uuid_type = "%Y%m%d", -- %H%M",
 			-- UUID separator
 			uuid_sep = "-",
 
@@ -160,7 +160,7 @@ return {
 		vim.cmd([[
 	       " inoremap <c-[> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
 	       inoremap <c-l> <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
-	       inoremap <c-space> <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
+	       " inoremap <c-space> <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
 	       " inoremap <c-3> <cmd>lua require('telekasten').show_tags({i = true})<cr>
 	       inoremap <c-t> <cmd>lua require('telekasten').show_tags({i = true})<cr>#
 
