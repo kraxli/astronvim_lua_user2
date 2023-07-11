@@ -145,7 +145,7 @@ local maps = {
           g = {'<cmd>lua require("telekasten").search_notes()<CR>', 'Search notes'},
           w = {'<cmd>lua require("telekasten").find_weekly_notes()<CR>', "Find note"},
         },
-        t = {'<cmd>lua require("telekasten").toggle_todo()<CR>', 'Toggle todo'},
+        t = {"<cmd>lua require('user.utils').handle_checkbox()<CR>", 'Toggle todo'},
         T = {'<cmd>lua require("telekasten").goto_today()<CR>', 'Goto today'},
         W = {'<cmd>lua require("telekasten").goto_thisweek()<CR>', 'Goto this week'},
         y = {'<cmd>lua require("telekasten").yank_notelink()<CR>', 'Yank note link'},
@@ -276,7 +276,7 @@ local maps = {
   	},
   	z = {
       name = "Zettel / Md",
-      t = {'<cmd>lua require("telekasten").toggle_todo({ v = true })<CR>', 'Toggle todo'},
+      t = {"<cmd>lua require('user.utils').handle_checkbox()<CR>", 'Toggle todo'},
   	},
   },
   -- terminal mappings

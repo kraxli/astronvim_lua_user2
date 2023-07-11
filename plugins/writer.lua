@@ -28,10 +28,10 @@ return {
         vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>")
         vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
         -- vim.keymap.set("n", "<C-space>", "<cmd>AutolistToggleCheckbox<cr>")
-        vim.keymap.set("n", "<CR>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
+        vim.keymap.set("n", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
         vim.keymap.set("n", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
-        vim.keymap.set("v", "<CR>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
-        vim.keymap.set("v", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
+        -- vim.keymap.set("v", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
+        -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
 
         -- cycle list types with dot-repeat
         vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true })
