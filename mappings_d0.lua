@@ -50,8 +50,8 @@ keymap("n", "< ", "<<_", opts) -- <lt>  https://vimdoc.sourceforge.net/htmldoc/c
 -- TODO:
 -- -------------------------------------------------------
 
-vim.api.nvim_set_keymap("v", "<leader>zb", "sa*gv<right>sa*", { noremap = false, desc='Bold' })
-vim.api.nvim_set_keymap("v", "zb", "sa*gv<right>sa*", { noremap = false, desc='Bold' })
+vim.api.nvim_set_keymap("v", "<leader>zb", "sa*gvllsa*", { noremap = false, desc='Bold' })
+vim.api.nvim_set_keymap("v", "zb", "sa*gv<right><right>sa*", { noremap = false, desc='Bold' })
 
 
 keymap("n", "<F6>", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
