@@ -293,16 +293,18 @@ function M.handle_checkbox()
 
   local checkbox_pattern = " [ ]"
 
-  local filetype_lists = config.lists[vim.bo.filetype]
+  local filetype_list = config.lists[vim.bo.filetype]
   local line = vim.fn.getline(".")
 
-  for i, list_pattern in ipairs(filetype_lists) do
+  for i, list_pattern in ipairs(filetype_list) do
     local list_item = line:match("^%s*" .. list_pattern .. "%s*")  -- only bullet, no checkbox
+    if list_item == nil then goto continue_for_loop end
     list_item = list_item:gsub("%s+", "")
     local is_list_item = list_item ~= nil -- only bullet, no checkbox
     local is_checkbox_item = line:match("^%s*" .. list_pattern .. "%s*" .. "%[.%]" .. "%s*") ~= nil -- bullet and checkbox
 
     if is_list_item == true and is_checkbox_item == false then
+      list_item = list_item:gsub('%)', '%%)')
       vim.fn.setline(".", (line:gsub(list_item, list_item .. checkbox_pattern, 1)))
 
       local cursor_pos = vim.api.nvim_win_get_cursor(0)
@@ -314,10 +316,9 @@ function M.handle_checkbox()
       auto.toggle_checkbox()
       goto continue
     end
-
+    ::continue_for_loop::
   end
   ::continue::
-
 end
 
 
