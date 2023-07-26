@@ -283,9 +283,15 @@ local maps = {
   t = {
 		["jk"] = false,
 		["<C-c>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
+		["<ESC>c"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
+		["<ESC>n"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
+		["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
     ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		["<C-k>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
+		["<ESC>k"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
+		["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
+		["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
   },
   x = {
     -- Tressitter Surfer:
