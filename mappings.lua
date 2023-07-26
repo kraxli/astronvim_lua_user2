@@ -65,6 +65,8 @@ local mappings = {
     ["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "File explorer" },
     ["<leader>fp"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" },
     ["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
+    -- neogit
+    ["<leader>gG"] = { function() require("neogit").open() end, desc = "Neogit" },
     -- compiler
     ["<leader>m"] = { desc = "󱁤 Compiler" },
     ["<leader>mk"] = {
@@ -158,7 +160,7 @@ local mappings = {
     ["il"] = { ":normal vil<cr>", desc = "Inside line text object" },
     ["al"] = { ":normal val<cr>", desc = "Around line text object" },
   },
-  -- ia = vim.fn.has "nvim-0.10" and {
+  -- ia = vim.fn.has "nvim-0.10" == 1 and {
   --   mktemp = { function() return "<++>" end, desc = "Insert <++>", expr = true },
   --   ldate = { function() return os.date "%Y/%m/%d %H:%M:%S -" end, desc = "Y/m/d H:M:S -", expr = true },
   --   ndate = { function() return os.date "%Y-%m-%d" end, desc = "Y-m-d", expr = true },

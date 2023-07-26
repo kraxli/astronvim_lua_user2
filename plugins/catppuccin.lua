@@ -6,8 +6,10 @@ return {
     integrations = {
       alpha = false,
       dashboard = false,
+      flash = false,
       nvimtree = false,
       ts_rainbow = false,
+      ts_rainbow2 = false,
       barbecue = false,
       indent_blankline = false,
       navic = false,
@@ -18,6 +20,7 @@ return {
       headlines = true,
       mason = true,
       native_lsp = { enabled = true, inlay_hints = { background = false } },
+      neogit = true,
       neotree = true,
       noice = true,
       notify = true,
