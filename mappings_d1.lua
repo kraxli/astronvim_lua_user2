@@ -283,15 +283,16 @@ local maps = {
   t = {
 		["jk"] = false,
 		["<C-c>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
-		["<ESC>c"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
-		["<ESC>n"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
-		["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
+		["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+		["<ESC>c"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+		["<ESC>n"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+		["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
     ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		["<C-k>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
 		["<ESC>k"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
-		["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
 		["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
+		-- ["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },  -- conflict with close ipython
   },
   x = {
     -- Tressitter Surfer:
@@ -310,7 +311,10 @@ maps.n["<leader>fT"] = { function() require("telescope.builtin").colorscheme { e
 
 if is_available "toggleterm.nvim" then
   -- local python = vim.fn.executable "ipython3" == 1 and "ipython3" or vim.fn.executable "python3" == 1 and "python3"
-  local python =  "bpython" -- "python3"
+  local python =  "bpython -i" -- "python3"
+  -- ipython -i --no-autoindent --no-autoedit-syntax --nosep
+  -- -i or --pylab or --matplotlib
+
   if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
   -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 end
