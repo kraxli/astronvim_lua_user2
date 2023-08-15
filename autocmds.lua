@@ -33,8 +33,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.g.diagnostics_mode = 0
 		vim.opt_local.wrap = true
-		vim.opt_local.tabstop = 4
-		vim.opt_local.shiftwidth = 4
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
 		vim.opt_local.filetype = "markdown"
 		vim.opt_local.syntax = "markdown"
 	end,
