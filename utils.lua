@@ -292,6 +292,7 @@ function M.handle_checkbox()
   local auto = require("autolist.auto")
 
   local checkbox_pattern = " [ ]"
+  -- local checkbox_pattern_done = " [x]"
 
   local filetype_list = config.lists[vim.bo.filetype]
   local line = vim.fn.getline(".")
