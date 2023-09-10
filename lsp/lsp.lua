@@ -1,6 +1,7 @@
 -- return{
 --   {
 --     'neovim/nvim-lspconfig',
+--     -- event = { 'BufReadPre', 'BufNewFile' },
 --     dependencies = {
 --       -- { 'folke/neoconf.nvim', cmd = 'Neoconf', config = true },
 --       'rafi/neoconf-venom.nvim',

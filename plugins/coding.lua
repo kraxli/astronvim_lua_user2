@@ -7,9 +7,48 @@ return {
 		end,
 	},
 	-- {
+	-- 	"AckslD/swenv.nvim",
+	-- 	ft =  {'python'},
+	-- 	config = function ()
+	-- 		require('swenv').setup({
+ --  		-- Should return a list of tables with a `name` and a `path` entry each.
+ --  		-- Gets the argument `venvs_path` set below.
+ --  		-- By default just lists the entries in `venvs_path`.
+ --  		get_venvs = function(venvs_path)
+ --    		return require('swenv.api').get_venvs(venvs_path)
+ --  		end,
+ --  		-- Path passed to `get_venvs`.
+ --  		venvs_path = vim.fn.expand('~/venvs'),
+ --  		-- Something to do after setting an environment, for example call vim.cmd.LspRestart
+ --  		post_set_venv = nil,
+ --  		sections = {
+ --    		lualine_a = 'swenv', -- uses default options
+ --    		-- lualine_x = { 'swenv', icon = '🐍' }, -- passing lualine component options
+	-- 		},
+	-- 		})
+	-- 	end,
+	-- },
+	{
+		"rafi/vim-venom",
+			ft = { "python" },
+			init = function()
+				vim.g.venom_echo = 1
+				vim.g.venom_quiet = 0
+				vim.g.venom_symbol = "🐍"
+				vim.g.venom_auto_activate = 1
+				vim.g.venom_use_tools = 1
+				vim.g.venom_tools = {
+					poetry = "poetry env info -p",
+					pipenv = "pipenv --venv",
+				}
+			end,
+	},
+	-- {
 	-- 	"rafi/neoconf-venom.nvim",
+	-- 	-- enabled = false,
 	-- 	dependencies = { 'nvim-lua/plenary.nvim', 'folke/neoconf.nvim' },
 	-- 	-- ft =  {'python'},
+	-- 	-- event = { 'BufReadPre', 'BufNewFile' },
 	-- 	config = function ()
 	-- 		require('venom').setup({
  --  			echo = true,
@@ -103,10 +142,6 @@ return {
 		end;
     enabled = vim.fn.has('unix') == 1,
 	},
-  {
-  	"ChristianChiarulli/swenv.nvim",  -- pick virutual environment
-  	ft = {'python'},
-  },
   -- {
   -- 	'Vigemus/iron.nvim',
   -- 	-- tag = 'v3.0',
