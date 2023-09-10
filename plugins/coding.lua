@@ -7,19 +7,37 @@ return {
 		end,
 	},
 	{
-		"rafi/vim-venom",
-		ft = { "python" },
-		init = function()
-			vim.g.venom_echo = 1
-			vim.g.venom_quiet = 0
-			vim.g.venom_symbol = "🐍"
-			vim.g.venom_auto_activate = 1
-			vim.g.venom_use_tools = 1
-			vim.g.venom_tools = {
-				poetry = "poetry env info -p",
-				pipenv = "pipenv --venv",
-			}
-		end,
+		"rafi/neoconf-venom.nvim",
+		dependencies = { 'nvim-lua/plenary.nvim', 'folke/neoconf.nvim' },
+		-- ft =  {'python'},
+		config = function ()
+			require('venom').setup({
+  			echo = true,
+  			symbol = '🐍',
+  			venv_patterns = { 'venv', '.venv', '.python-version' },
+  			use_tools = true,
+  			tools = {
+    			pipenv = { 'pipenv', '--venv' },
+    			poetry = { 'poetry', 'env', 'info', '-p' },
+  			},
+  			plugins = {
+    			pyright = function(venv_path)
+      			return {
+        			python = {
+          			pythonPath = table.concat({ venv_path, 'bin', 'python' }, '/')
+        			},
+      			}
+    			end,
+    			pylsp = function(venv_path)
+      			return {
+        			pylsp = {
+          			plugins = { jedi = { environment = venv_path } }
+        			},
+      			}
+    			end,
+  			},
+			})
+		end
 	},
 	{ "jalvesaq/Nvim-R", ft = { "r", "R", "rmd" }, command = { "StartR" } },
 	-- TODO: improve / refine setup and harpoon integration
