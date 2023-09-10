@@ -103,31 +103,6 @@ return {
 		end;
     enabled = vim.fn.has('unix') == 1,
 	},
-	-- {
- --    "mfussenegger/nvim-dap-python",
- --    after = "mason-nvim-dap.nvim",
- --    config = function ()
- --      -- require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
- --      require('dap-python').setup('/usr/bin/python3')
-	--
- --      -- see: https://github.com/AstroNvim/AstroNvim/issues/1449
- --      table.insert(require('dap').configurations.python, {
- --      	-- options for debugpy: 
- --      	-- 	https://code.visualstudio.com/docs/python/debugging#_set-configuration-options
- --      	-- 	https://code.visualstudio.com/docs/python/settings-reference
- --        type = 'python',
- --        request = 'launch',
- --        name = 'My custom launch configuration',
- --        program = '${file}',
- --        -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
- --        stopOnEntry = false,
- --        justMyCode = false,
- --        gevent = true,
- --      })
- --    end,
- --    -- config = function() require "user.plugins.nvim-dap-vscode-js" end,
- --    -- enabled = false  -- vim.fn.has('unix') == 1,
- --  },
   {
   	"ChristianChiarulli/swenv.nvim",  -- pick virutual environment
   	ft = {'python'},
