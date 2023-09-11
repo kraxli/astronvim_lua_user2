@@ -319,13 +319,4 @@ if is_available "toggleterm.nvim" then
   -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 end
 
-if is_available "swenv.nvim" then
-	maps.n["<leader>fv"] = { function() require('swenv.api').pick_venv() end, desc = "Choose venv" }
-	maps.n["<leader>fV"] = { function() require('swenv.api').get_current_venv() end, desc = "Show current venv" }
-end
-
--- if is_available "neoconf-venom.nvim" then
--- 	maps.n["<leader>fv"] = { '<cmd>Telescope venom virtualenvs<CR>', desc = "Choose venv" }
--- end
-
 return maps
