@@ -11,6 +11,7 @@ return {
 	},
 	{
   	"gaoDean/autolist.nvim",
+		enabled = false,
   	ft = {
     	"markdown",
     	"text",
@@ -28,8 +29,8 @@ return {
         vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>")
         vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
         -- vim.keymap.set("n", "<C-space>", "<cmd>AutolistToggleCheckbox<cr>")
-        vim.keymap.set("n", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
-        vim.keymap.set("n", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
+        vim.keymap.set("n", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox_autolist()<CR>")
+        vim.keymap.set("n", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox_autolist()<CR>")
         -- vim.keymap.set("v", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
         -- vim.keymap.set("v", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox()<CR>")
 
@@ -49,10 +50,10 @@ return {
         vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>")
         vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
   	end,
-		enabled = true,
 	},
 	{
 		"dkarter/bullets.vim",
+		enabled = true,
 		ft = {
     	"markdown",
     	"text",
@@ -62,6 +63,13 @@ return {
   	-- init
 		config = function ()
 			vim.cmd([[
+			  let g:bullets_delete_last_bullet_if_empty = 1
+			  let g:bullets_auto_indent_after_colon = 1
+			  let g:bullets_max_alpha_characters = 2
+			  let g:bullets_renumber_on_change = 1
+			  let g:bullets_nested_checkboxes = 1
+			  let g:bullets_checkbox_markers = ' .oOX'  " '✗○◐●✓'
+			  let g:bullets_checkbox_partials_toggle = 1
 			  let g:bullets_set_mappings = 0 " disable adding default key mappings, default = 1
 
 				" default = []
@@ -79,8 +87,6 @@ return {
   				\ ['vmap', 'gN', '<Plug>(bullets-renumber)'],
   				\ ['nmap', 'gN', '<Plug>(bullets-renumber)'],
   				\
-  				\ ['nmap', '<c-space>', '<Plug>(bullets-toggle-checkbox)'],
-  				\
   				\ ['imap', '<C-t>', '<Plug>(bullets-demote)'],
   				\ ['nmap', '>>', '<Plug>(bullets-demote)'],
   				\ ['nmap', '> ', '<Plug>(bullets-demote)'],
@@ -90,9 +96,18 @@ return {
   				\ ['vmap', '<', '<Plug>(bullets-promote)'],
   				\ ['vmap', '< ', '<Plug>(bullets-promote)'],
   				\ ]
+  				" \ ['nmap', '<c-space>', '<Plug>(bullets-toggle-checkbox)'],
+  				" \ ['nmap', 'zt', '<Plug>(bullets-toggle-checkbox)'],
+  				" \
+
+			  noremap O k<Plug>(bullets-newline)
+
 				]])
+
+        vim.keymap.set("n", "<leader>zt", "<cmd>lua require('user.utils').handle_checkbox_bullets()<CR>")
+        vim.keymap.set("n", "<C-space>", "<cmd>lua require('user.utils').handle_checkbox_bullets()<CR>")
+
 		end,
-		enabled = false,
 	},
 	{
 		"ekickx/clipboard-image.nvim",
@@ -156,32 +171,26 @@ return {
 	-- 	"niuiic/niuiic-core.nvim",
 	-- },
 	{
-    "iamcco/markdown-preview.nvim",
-    -- run = function() vim.fn["mkdp#util#install"]() end,
-	  run = "cd $XDG_DATA_HOME/nvim/lazy/markdown-preview.nvim/app && npm install && npm audit fix --force",
-	  setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+  	'cnshsliu/smp.nvim',
+  	build="cd $XDG_DATA_HOME/nvim/lazy/smp.nvim/lua/server && npm install",
 	  ft = { "markdown" },
+	 --  config = function() require("smp").setup({
+		-- 		-- home = require("telekasten").Cfg.home or vim.fn.expand("~/zettelkasten"),
+		-- 		-- home = vim.fn.expand("~/zettelkasten"),
+		-- 		-- templates = home .. "/" .. "templates",
+		-- 		-- smp_markdown_css = "~/.config/smp/my_markdown.css",
+		-- 		-- smp_snippets_folder = "~/.config/smp/snippets",
+		-- 	})
+		-- end,
+		enabled=false,
 	},
-	{ 'toppair/peek.nvim',
-		run = 'deno task --quiet build:fast',
-		config = function()
-			require('peek').setup({
-  			auto_load = true,         -- whether to automatically load preview when
-                            			-- entering another markdown buffer
-  			close_on_bdelete = true,  -- close preview window on buffer delete
-  			syntax = true,            -- enable syntax highlighting, affects performance
-  			theme = 'dark',           -- 'dark' or 'light'
-  			update_on_change = true,
-  			app = 'browser',          -- 'webview', 'browser', string or a table of strings
-                            			-- explained below
-  			filetype = { 'markdown' },-- list of filetypes to recognize as markdown
-  			-- relevant if update_on_change is true
-  			throttle_at = 200000,     -- start throttling when file exceeds this
-                            			-- amount of bytes in size
-  			throttle_time = 'auto',   -- minimum amount of time in milliseconds
-                            			-- that has to pass before starting new render
-			})
-		end,
-		enable = false,
-	}
+	{
+    "iamcco/markdown-preview.nvim",
+  	-- version = "v0.0.10",
+	  build = "cd $XDG_DATA_HOME/nvim/lazy/markdown-preview.nvim/app && npm install && npm audit fix --force",
+    -- build = function() vim.fn["call mkdp#util#install"]() end,
+	  ft = { "markdown" },
+	  setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+	  -- enabled=false,
+	},
 }

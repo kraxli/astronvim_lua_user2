@@ -30,5 +30,6 @@ return function()
 
   pcall(require, "user.commands")
   -- require("user.commands")
-  require("user.vim_functions")
+  pcall(require, "user.vim_functions")
+  -- require("user.vim_functions")
 end

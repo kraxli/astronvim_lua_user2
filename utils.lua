@@ -287,7 +287,7 @@ end
 --   if not installed then astronvim.notify "Mason: No packages to install" end
 -- end
 
-function M.handle_checkbox()
+function M.handle_checkbox_autolist()
   local config = require("autolist.config")
   local auto = require("autolist.auto")
 
@@ -315,6 +315,45 @@ function M.handle_checkbox()
       goto continue
     else
       auto.toggle_checkbox()
+      goto continue
+    end
+    ::continue_for_loop::
+  end
+  ::continue::
+end
+
+function M.handle_checkbox_bullets()
+
+  -- TODO: support more list item types like alpha-numerics
+
+  local checkbox_pattern = " [ ]"
+  -- local checkbox_pattern_done = " [x]"
+
+  local check_mark_string = vim.g.bullets_checkbox_markers
+  local list_items = {'-', '*'}
+  -- local filetype_list = {}
+  -- check_mark_string:gsub(".",function(c) table.insert(filetype_list, c) end)
+  local line = vim.fn.getline(".")
+
+  for i, list_pattern in ipairs(list_items) do
+    local list_item = line:match("^%s*" .. list_pattern .. "%s*")  -- only bullet, no checkbox
+    if list_item == nil then goto continue_for_loop end
+    list_item = list_item:gsub("%s+", "")
+    local is_list_item = list_item ~= nil -- only bullet, no checkbox
+    local is_checkbox_item = line:match("^%s*" .. list_pattern .. "%s*" .. "%[.%]" .. "%s*") ~= nil -- bullet and checkbox
+
+    if is_list_item == true and is_checkbox_item == false then
+      print(list_item)
+      list_item = list_item:gsub('%)', '%%)')
+      vim.fn.setline(".", (line:gsub(list_item, list_item .. checkbox_pattern, 1)))
+
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)
+      if cursor_pos[2] > 0 then
+        vim.api.nvim_win_set_cursor(0, {cursor_pos[1], cursor_pos[2] + checkbox_pattern:len()})
+      end
+      goto continue
+    else
+      vim.cmd('ToggleCheckbox')
       goto continue
     end
     ::continue_for_loop::
