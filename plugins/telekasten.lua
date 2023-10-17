@@ -17,7 +17,7 @@ return {
 		-- home = vim.fn.expand("~/Dropbox/PKD/")
 		-- home = vim.fn.expand(require("local.settings").dirPkd)
 		else
-			home = vim.fn.expand("/home/dave/Dropbox/PKD")
+			home = '.'
 		end
 		-- local home = vim.fn.expand("~/Dropbox/PKD")
 
