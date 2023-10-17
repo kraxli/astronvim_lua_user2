@@ -61,7 +61,7 @@ return {
 
 			-- -- template for new notes (new_note, follow_link)
 			-- -- set to `nil` or do not specify if you do not want a template
-			-- template_new_note = home .. '/' .. 'templates/new_note.md',
+			template_new_note = home .. '/' .. 'templates/telekasten_base.md',
 			--
 			-- -- template for newly created daily notes (goto_today)
 			-- -- set to `nil` or do not specify if you do not want a template
