@@ -137,6 +137,7 @@ local maps = {
         N = {'<cmd>lua require("telekasten").new_templated_note()<CR>', 'New template note'},
         m = {'<cmd>lua require("telekasten").browse_media()<CR>', 'Brows media'},
         p = {'<cmd>lua require("telekasten").preview_img()<CR>', 'Preview img'},
+        r = {'<cmd>lua require("telekasten").rename_note()<CR>', 'Rename this note'},
         s = {
           name="search / find",
           d = {'<cmd>lua require("telekasten").find_dialy_notes()<CR>', "Find daily note"},
