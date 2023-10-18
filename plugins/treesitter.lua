@@ -21,6 +21,6 @@ return {
       auto_install = vim.fn.executable "tree-sitter" == 1,
       matchup = { enable = true },
     },
+  enabled = function() return(not (vim.bo.filetype == 'markdown' and vim.fn.has('win64') == 1)) end,
   },
-  enabled = function() return(not (vim.bo.filetype == 'markdown' and vim.fn.has('win64') == 1)) end
 }
