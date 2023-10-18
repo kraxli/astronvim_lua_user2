@@ -69,7 +69,7 @@ return {
   },
   {
     "lukas-reineke/headlines.nvim",
-    enabled = vim.fn.has('win') ~= 1,
+    enabled = (vim.fn.has('win32') ~= 1 or vim.fn.has('win64') ~= 1),
     dependencies = "nvim-treesitter/nvim-treesitter",
     ft = "markdown",
     opts = {},

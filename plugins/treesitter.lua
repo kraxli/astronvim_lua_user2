@@ -22,4 +22,5 @@ return {
       matchup = { enable = true },
     },
   },
+  enabled = function() return(not (vim.bo.filetype == 'markdown' and vim.fn.has('win64') == 1)) end
 }
