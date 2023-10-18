@@ -33,7 +33,7 @@ return {
 			-- dir names for special notes (absolute path or subdir name)
 			dailies = home .. "/" .. "daily",
 			weeklies = home .. "/" .. "weekly",
-			templates = home .. "/" .. "templates",
+			templates = home .. "/" .. "templates",  -- "$XDG_CONFIG_HOME/astronvim/templates",
 
 			-- image (sub)dir for pasting
 			-- dir name (absolute path or subdir name)
