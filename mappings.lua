@@ -35,16 +35,16 @@ local mappings = {
     -- Easy-Align
     ga = { "<Plug>(EasyAlign)", desc = "Easy Align" },
     -- buffer switching
-    ["<Tab>"] = {
-      function()
-        if #vim.t.bufs > 1 then
-          require("telescope.builtin").buffers { sort_mru = true, ignore_current_buffer = true }
-        else
-          astro_utils.notify "No other buffers open"
-        end
-      end,
-      desc = "Switch Buffers",
-    },
+    -- ["<Tab>"] = {  -- cofligst with <c-i>
+    --   function()
+    --     if #vim.t.bufs > 1 then
+    --       require("telescope.builtin").buffers { sort_mru = true, ignore_current_buffer = true }
+    --     else
+    --       astro_utils.notify "No other buffers open"
+    --     end
+    --   end,
+    --   desc = "Switch Buffers",
+    -- },
     ["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" },
     ["<leader>N"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
     ["<leader><cr>"] = { '<esc>/<++><cr>"_c4l', desc = "Next Template" },

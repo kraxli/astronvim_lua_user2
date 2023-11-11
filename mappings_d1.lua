@@ -29,7 +29,7 @@ local maps = {
     [">P"] = false,
     ["<P"] = false,
 
-    ["M-right"] = {"C-i", desc="Move to prevous position"},
+    ["M-right"] = {"<C-i>", desc="Move to prevous position"},
 
     -- general
     ["<C-s>"] = { ":w!<CR>", desc = "Save" },
@@ -68,7 +68,7 @@ local maps = {
 			},
 			i = { -- micah has redundatn double mapping (only one leaf)
 				name = "Treesitter",
-				v = {function() require("syntax-tree-surfer").targeted_jump({ "variable_declaration" }) end, "Go to Variables", }, 
+				v = {function() require("syntax-tree-surfer").targeted_jump({ "variable_declaration" }) end, "Go to Variables", },
 
 				f = { function() require("syntax-tree-surfer").targeted_jump({ "function" }) end, "Go to Functions", },
 				i = { function() require("syntax-tree-surfer").targeted_jump({
@@ -247,19 +247,19 @@ local maps = {
     -- ["<leader>ts"] = {
     --   function ()
     --     vim.cmd [[normal :esc<CR> gv]]
-    --     require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
+    --     require("toggleterm").send_lines_to_terminal("visual_lines", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])})
     --   end,
     --   desc="Send lines"},
     -- ["<leader>tS"] = {
     --   function ()
     --     vim.cmd [[normal :esc<CR> gv]]
-    --     require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
+    --     require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])})
     --   end,
     --   desc="Send selection"},
     -- ["<C-e>"] = {
     --   function ()
     --     vim.cmd [[normal :esc<CR> gv]]
-    --     require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])}) 
+    --     require("toggleterm").send_lines_to_terminal("visual_selection", true, {args=tostring(require("user.settings").terminal[vim.bo.filetype]['term_id'])})
     --   end,
     --   desc="Send selection"},
 
@@ -283,14 +283,14 @@ local maps = {
   -- terminal mappings
   t = {
 		["jk"] = false,
+		["<ESC>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
+		["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
 		["<C-c>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
 		["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-		["<ESC>c"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-		["<ESC>n"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
-		["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
+
     ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 		["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-		["<C-k>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
+
 		["<ESC>k"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
 		["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
 		-- ["<C-d>"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },  -- conflict with close ipython
@@ -307,17 +307,30 @@ local maps = {
 
 -- Telescope:
 maps.n["<leader>ft"] = { require('telescope._extensions.termfinder').find, "Terminals" }
+maps.n["<leader>ts"] = { require('telescope._extensions.termfinder').find, "Terminals" }
 maps.n["<leader>fT"] = { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" }
 
 
-if is_available "toggleterm.nvim" then
-  -- local python = vim.fn.executable "ipython3" == 1 and "ipython3" or vim.fn.executable "python3" == 1 and "python3"
-  local python =  "bpython -i" -- "python3"
-  -- ipython -i --no-autoindent --no-autoedit-syntax --nosep
-  -- -i or --pylab or --matplotlib
 
-  if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
-  -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
+if is_available "toggleterm.nvim" then
+  maps.n["<leader>tb"] = { function() utils.toggle_term_cmd({cmd='zsh', count=50, direction='float'}) end, desc = "ToggleTerm python" }
+  maps.n["<leader>tz"] = maps.n["<leader>tb"]
+
+
+  -- local python = vim.fn.executable "ipython3" == 1 and "ipython3" or vim.fn.executable "python3" == 1 and "python3"
+  local python =  "ipython3 --pylab -i" -- "python3"
+  -- ipython -i --no-autoindent --no-autoedit-syntax --nosep
+  -- -i or --pylab or --matplotlib 
+
+  if python then
+
+    maps.n["<leader>tp"] = { function() require('user.utils').adapt_create_term({cmd=python, direction='vertical'}, 99) end }
+    maps.n["<leader>tP"] = { function() require('user.utils').adapt_create_term({cmd=python, direction='float'}, 99) end }
+    -- maps.n["<leader>tp"] = { function() require('toggleterm').toggle_command("cmd='ipython3 --pylab -i' size=80 direction=vertical", 99) end, desc='ToggleTerm IPython'}
+    -- maps.n["<leader>tp"] = { function() utils.toggle_term_cmd({cmd=python, count=99, direction='vertical'}) end, desc = "ToggleTerm IPython" }
+    -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
+
+  end
 end
 
 return maps

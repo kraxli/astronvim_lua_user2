@@ -59,17 +59,21 @@ keymap("n", "gx", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 
 -- ['q'] = { "<cmd>bd!<cr>", "Kill (del) buffer" }, -- not sure to keep
 vim.api.nvim_set_keymap("n", "q", "<cmd>bd!<cr>", { noremap = false })
-
-vim.api.nvim_set_keymap("n", "<M-right>", "", { noremap = false })
+vim.api.nvim_set_keymap("n", "XX", "<cmd>w!|bd!<cr>", { noremap = false })
 
 -- code_jump
-vim.api.nvim_set_keymap("n", "<C-BS>", "<C-o>", { noremap = false }) -- backspace
+-- https://github.com/neovim/neovim/issues/20126
+vim.api.nvim_set_keymap("n", "<C-BS>", "<C-o>", { noremap = true }) -- backspace
 -- vim.api.nvim_set_keymap("i", "<C-BS>", "<C-o>", { noremap = false }) -- backspace
-vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = false }) -- backspace
-vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = false })
+vim.api.nvim_set_keymap("n", "<BS>", "<C-o>", { noremap = true }) -- backspace
+vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = true })
+vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = false })
-vim.api.nvim_set_keymap("i", "<M-left>", "<C-o>", { noremap = false })
-vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
+vim.api.nvim_set_keymap("n", "<S-BS>", "<C-i>", { noremap = true }) -- backspace
+-- vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
+
+-- vim.keymap.set('n', '<leader>n', '<cmd>bnext<CR>', { desc = '[N]ext buffer' })
+-- vim.keymap.set('n', '<leader>p', '<cmd>bprevious<CR>', { desc = '[P]revious buffer' })
 
 -- comment
 -- n  <Space>/    * <Lua 149: ~/.config/nvim/lua/core/mappings.lua:106>
@@ -78,8 +82,9 @@ vim.api.nvim_set_keymap("i", "<M-right>", "<C-i>", { noremap = false })
 --                  Toggle comment line
 
 -- floating window
-vim.api.nvim_set_keymap("", "<F2>", '<Cmd>lua require("user.utils").toggle_term()<CR>', { noremap = false })
-vim.api.nvim_set_keymap("", "<c-t>", '<Cmd>lua require("user.utils").toggle_term()<CR>', { noremap = false })
+vim.api.nvim_set_keymap("", "<F2>", '<Cmd>ToggleTerm<CR>', { noremap = false, desc='Toggle terminal' })
+-- vim.api.nvim_set_keymap("", "<F2>", '<Cmd>lua require("user.utils").toggle_term()<CR>', { noremap = false })
+vim.api.nvim_set_keymap("", "<c-t>", '<Cmd>ToggleTerm<CR>', { noremap = false })
 vim.cmd([[
     vnoremap <silent><leader>x :'<,'>lua require('user.utils').excecute_code('visual_lines')<CR>
     nnoremap <silent><leader>x <cmd>lua require('user.utils').excecute_code('single_line')<CR>

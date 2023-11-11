@@ -5,7 +5,7 @@ CONFIGS = {}
 CONFIGS.toggleterm = {
 	filetype2exclude = { "alpha" },
 	default = { repl = "zsh" },
-	python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "-i", exe_cmd = [[\%run]] },
+	python = { repl = "ipython", exe_file_terminal = "ipython", exe_file_opt = "--pylab -i", exe_cmd = [[\%run]] },
 	-- lua = {repl = 'lua5.1'},
 }
 
