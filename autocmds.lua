@@ -126,8 +126,11 @@ vim.cmd([[
   autocmd!
 
 	autocmd WinClosed,WinEnter * if winnr('$') == 1 && &ft == "neo-tree" | q | endif
-  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :q!<CR>  " ,TelescopePrompt
-  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> <localleader>c :close!<CR>  " ,TelescopePrompt
+  " autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :q!<CR>  " ,TelescopePrompt
+  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> dd :q!<CR>  " ,TelescopePrompt
+  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> kk :q!<CR>  " ,TelescopePrompt
+  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> <localleader>q :close!<CR>  " ,TelescopePrompt
+  autocmd FileType toggleterm,qf,help,man,lspinfo nnoremap <silent><buffer> q :close!<CR>  " ,TelescopePrompt
   " set file types
 
   augroup end

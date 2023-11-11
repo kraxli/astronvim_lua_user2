@@ -3,13 +3,14 @@ local get_icon = require("astronvim.utils").get_icon
 return {
   { "goolord/alpha-nvim", enabled = false },
   { "max397574/better-escape.nvim", enabled = false },
-  { "lukas-reineke/indent-blankline.nvim", enabled = false },
+  -- { "lukas-reineke/indent-blankline.nvim", enabled = false },
 
   { "mfussenegger/nvim-dap", dependencies = {
     { "theHamsta/nvim-dap-virtual-text", config = true },
   } },
   { "akinsho/toggleterm.nvim", opts = {
     terminal_mappings = false,
+    size=80,
   } },
   { "rcarriga/nvim-notify", opts = {
     timeout = 0,
