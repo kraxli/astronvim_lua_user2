@@ -31,7 +31,7 @@ return {
         "stylua",
         "black",
         "isort",
-        "prettierd",
+        -- "prettierd",
         "shfmt",
         "shellcheck",
       },
