@@ -359,34 +359,5 @@ function M.handle_checkbox_bullets()
   ::continue::
 end
 
-
-
----------------------------------------------------------
--- toggle term utils
----------------------------------------------------------
-
-function M.adapt_create_term(args, count)
-
-  -- local fn = vim.fn
-  local term = require('toggleterm.terminal').get(count)
-  local direction = 'vertical'
-  local size = string.format(80)
-  if args.direction then direction = args.direction  end
-  -- if dir and fn.isdirectory(fn.expand(dir)) == 0 then dir = nil end
-  if args.size then size = string.format(args.size) end
-
-  if term then
-    require('toggleterm').toggle_command("size=" .. size .. " direction=" .. direction, count)
-  else
-    local cmd = ''
-    if args.cmd then cmd = args.cmd end
-    local vim_eval_str = string.format(count) .. 'TermExec cmd="' .. cmd .. '" size=' .. size .. ' direction="' .. direction .. '"'
-    vim.cmd(vim_eval_str)
-    -- maps.n["<leader>tP"] = { '<cmd>99TermExec cmd="ipython3" size=80 direction=vertical<cr>', desc = "Ipython term vertical split" }
-    -- maps.n["<leader>tP"] = { function() require('toggleterm.terminal').Terminal:new({cmd=python,  direction="vertical", count=99}):toggle() end, desc = "Ipython term vertical split" }
-    -- return require('toggleterm.terminal').Terminal:new({ id = count, dir = dir, direction = direction }), true
-  end
-end
-
 return M
 

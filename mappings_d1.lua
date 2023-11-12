@@ -324,11 +324,13 @@ if is_available "toggleterm.nvim" then
 
   if python then
 
-    maps.n["<leader>tp"] = { function() require('user.utils').adapt_create_term({cmd=python, direction='vertical'}, 99) end }
-    maps.n["<leader>tP"] = { function() require('user.utils').adapt_create_term({cmd=python, direction='float'}, 99) end }
+    maps.n["<leader>tp"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='vertical'}, 99) end }
+    maps.n["<leader>tP"] = { function() require('user.toggleterm').create_toggle_term({cmd=python, direction='float'}, 99) end }
     -- maps.n["<leader>tp"] = { function() require('toggleterm').toggle_command("cmd='ipython3 --pylab -i' size=80 direction=vertical", 99) end, desc='ToggleTerm IPython'}
     -- maps.n["<leader>tp"] = { function() utils.toggle_term_cmd({cmd=python, count=99, direction='vertical'}) end, desc = "ToggleTerm IPython" }
     -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
+
+    maps.v["<leader>r"] = { ":'<,'>lua require('user.toggleterm').send_visual_lines_to_ipython()<CR>" }
 
   end
 end
