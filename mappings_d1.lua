@@ -331,6 +331,7 @@ if is_available "toggleterm.nvim" then
     -- ["<leader>tp"] = { function() astronvim.toggle_term_cmd({cmd=require("user.settings").terminal['python']['cmd'], count=require("user.settings").terminal['python']['term_id']}) end, desc = "ToggleTerm ipython" },
 
     maps.v["<leader>r"] = { ":'<,'>lua require('user.toggleterm').send_visual_lines_to_ipython()<CR>" }
+    maps.v["<leader>R"] = { ":'<,'>lua require('user.toggleterm').send_visual_lines_to_ipython_v2()<CR>" }
 
   end
 end

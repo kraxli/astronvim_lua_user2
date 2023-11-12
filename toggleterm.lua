@@ -72,24 +72,15 @@ local function is_whitespace(str)
 end
 
 -- Function to remove leading and ending whitespace strings
-local function trim_whitespace_strings(lines)
-  local start_idx, end_idx = 1, #lines
-
-  -- Find the index of the first non-whitespace string
-  while start_idx <= #lines and is_whitespace(lines[start_idx]) do
-    start_idx = start_idx + 1
-  end
-
-  -- Find the index of the last non-whitespace string
-  while end_idx >= 1 and is_whitespace(lines[end_idx]) do
-    end_idx = end_idx - 1
-  end
-
+local function remove_empty_lines(lines)
   -- Create a new table containing only the non-whitespace strings
   local trimmed_lines = {}
-  for i = start_idx, end_idx do
-    table.insert(trimmed_lines, lines[i])
-  end
+
+	for _, line in ipairs(lines) do
+	  if line ~= '' or line:match('^%s*$') == nil then
+	    trimmed_lines[#trimmed_lines+1] = line
+	  end
+	end
 
   return trimmed_lines
 end
@@ -104,21 +95,22 @@ function M.send_visual_lines_to_ipython()
   local line_start = vstart[2]
   local line_end = vend[2]
   local lines = vim.fn.getline(line_start, line_end)
-  --
-  print(vim.inspect(lines))
-  local cmd = string.char(15)
-  cmd = cmd .. '%autoindent'  .. '\r\n' -- string.char(13) .. string.char(4) -- .. string.char(4)  -- 10 13 4
 
-  for _, line in ipairs(trim_whitespace_strings(lines)) do
-    local l = line
-    if l == "" then
-      cmd = cmd .. string.char(15) .. string.char(14)
-    else
-      cmd = cmd .. l .. string.char(10)
+  local cmd = ''  -- string.char(15)
+  cmd = cmd .. '%autoindent'  .. string.char(10) -- '\r\n' -- string.char(13) .. string.char(4) -- .. string.char(4)  -- 10 13 4
+
+  lines = remove_empty_lines(lines)
+
+  if #lines == 1 then
+    cmd = lines[1]
+  else
+    for _, line in ipairs(lines) do
+      cmd = cmd .. line .. string.char(10)  -- '\r'  10,13  (?14)
     end
+    cmd = cmd .. '%autoindent'
+    -- cmd = cmd .. string.char(4)
   end
-  cmd = cmd .. '%autoindent'
-  cmd = cmd .. string.char(4)
+
   require("toggleterm").exec(cmd, term_count)
 
   vim.api.nvim_set_current_win(current_window)
