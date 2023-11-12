@@ -364,79 +364,11 @@ end
 ---------------------------------------------------------
 -- toggle term utils
 ---------------------------------------------------------
---
--- --- @param count number?
--- --- @param size number?
--- --- @param dir string?
--- --- @param direction string?
--- --- @param name string?
--- function M.toggle(count, size, dir, direction, name)
---   if count and count >= 1 then
---     toggle_nth_term(count, size, dir, direction, name)
---   else
---     smart_toggle(size, dir, direction, name)
---   end
--- end
---
---
---
--- function M.toggle_command(args, count)
---   local api = vim.api
---   -- local fn = vim.fn
---
---   ---@module "toggleterm.commandline"
---   local commandline = lazy.require("toggleterm.commandline")
---
---   local command = api.nvim_create_user_command
---   local lazy = require("toggleterm.lazy")
---
---   local parsed = commandline.parse(args)
---   vim.validate({
---     size = { parsed.size, "number", true },
---     dir = { parsed.dir, "string", true },
---     direction = { parsed.direction, "string", true },
---     name = { parsed.name, "string", true },
---   })
---   if parsed.size then parsed.size = tonumber(parsed.size) end
---   M.toggle(count, parsed.size, parsed.dir, parsed.direction, parsed.name)
--- end
---
-
-
--- lua require('toggleterm').toggle_command({args},count)
-
--- command(
---    "ToggleTerm",
---    function(opts) M.toggle_command(opts.args, opts.count) end,
---    { count = true, complete = commandline.toggle_term_complete, nargs = "*" }
--- )
-
--- lua require('toggleterm.terminal').get(99)
-
--- function M.adapt_create_term_v1(args, count)
---   -- ,num, dir, direction
---   local fn = vim.fn
---   local term = require('toggleterm.terminal').get(count)
---   -- if args.num then count = args.num end
---   for key, value in pairs(args) do
---     -- if term[key] then term[key] = value end
---     term[key] = value
---   end
---   print(term.cmd)
---
---   if term then return term, false end
---
---   local direction = 'vertical'
---   if args.direction then direction = args.direction  end
---   if dir and fn.isdirectory(fn.expand(dir)) == 0 then dir = nil end
---   return require('toggleterm.terminal').Terminal:new({ id = count, dir = dir, direction = direction }), true
--- end
 
 function M.adapt_create_term(args, count)
-  -- ,num, dir, direction
-  local fn = vim.fn
+
+  -- local fn = vim.fn
   local term = require('toggleterm.terminal').get(count)
-  -- if args.num then count = args.num end
   local direction = 'vertical'
   local size = string.format(80)
   if args.direction then direction = args.direction  end
@@ -444,7 +376,6 @@ function M.adapt_create_term(args, count)
   if args.size then size = string.format(args.size) end
 
   if term then
-    -- 99ToggleTerm direction=float
     require('toggleterm').toggle_command("size=" .. size .. " direction=" .. direction, count)
   else
     local cmd = ''
@@ -455,7 +386,6 @@ function M.adapt_create_term(args, count)
     -- maps.n["<leader>tP"] = { function() require('toggleterm.terminal').Terminal:new({cmd=python,  direction="vertical", count=99}):toggle() end, desc = "Ipython term vertical split" }
     -- return require('toggleterm.terminal').Terminal:new({ id = count, dir = dir, direction = direction }), true
   end
-
 end
 
 return M
