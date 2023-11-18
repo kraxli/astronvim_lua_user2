@@ -20,5 +20,6 @@ return {
     init = function() vim.g.send_disable_mapping = true end,
     keys = { "<Plug>Send", "<Plug>SendLine" },
     cmd = "SendHere",
+    enabled = false,
   },
 }

@@ -40,6 +40,21 @@ function M.visual_send_by_paste_to_ipython()
 end
 
 
+-- Function to remove leading and ending whitespace strings
+local function remove_empty_lines(lines)
+  -- Create a new table containing only the non-whitespace strings
+  local trimmed_lines = {}
+
+	for _, line in ipairs(lines) do
+	  if line ~= '' or line:match('^%s*$') == nil then
+	    trimmed_lines[#trimmed_lines+1] = line
+	  end
+	end
+
+  return trimmed_lines
+end
+
+
 -- https://github.com/akinsho/toggleterm.nvim/issues/425
 function M.send_visual_lines_to_ipython_v2()
   local term_count = 99  -- python terminal count TODO: set in config
@@ -51,6 +66,7 @@ function M.send_visual_lines_to_ipython_v2()
 	local start_line = vim.api.nvim_buf_get_mark(0, "<")[1]
 	local end_line = vim.api.nvim_buf_get_mark(0, ">")[1]
 	local lines = vim.fn.getline(start_line, end_line)
+  lines = remove_empty_lines(lines)
 
 	-- send selection with trimmed indent
 	local toggleterm = require("toggleterm")
@@ -71,19 +87,6 @@ local function is_whitespace(str)
   return str:match("^%s*$") ~= nil
 end
 
--- Function to remove leading and ending whitespace strings
-local function remove_empty_lines(lines)
-  -- Create a new table containing only the non-whitespace strings
-  local trimmed_lines = {}
-
-	for _, line in ipairs(lines) do
-	  if line ~= '' or line:match('^%s*$') == nil then
-	    trimmed_lines[#trimmed_lines+1] = line
-	  end
-	end
-
-  return trimmed_lines
-end
 
 function M.send_visual_lines_to_ipython()
   local term_count = 99
@@ -101,6 +104,10 @@ function M.send_visual_lines_to_ipython()
 
   lines = remove_empty_lines(lines)
 
+  -- for _, line in ipairs(lines) do
+  --   require("toggleterm").exec(line, term_count)
+  -- end
+
   if #lines == 1 then
     cmd = lines[1]
   else
@@ -116,4 +123,7 @@ function M.send_visual_lines_to_ipython()
   vim.api.nvim_set_current_win(current_window)
 end
 
+-- vim.o.shiftwith / tabwith??
+-- line.sub()
+-- line:match line:find
 return M
