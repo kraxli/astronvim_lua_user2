@@ -13,6 +13,7 @@ return {
         },
       }
     end,
+    enabled = vim.fn.has('win64') == 0,  -- vim.fn.has('unix') == 1 and 
   },
   {
     "mtikekar/nvim-send-to-term",

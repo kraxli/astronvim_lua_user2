@@ -6,8 +6,10 @@ return {
   -- { "lukas-reineke/indent-blankline.nvim", enabled = false },
 
   { "mfussenegger/nvim-dap", dependencies = {
-    { "theHamsta/nvim-dap-virtual-text", config = true },
-  } },
+      { "theHamsta/nvim-dap-virtual-text", config = true },
+    },
+    enabled = vim.fn.has('win64') == 0,  -- vim.fn.has('unix') == 1 and 
+  },
   { "akinsho/toggleterm.nvim", opts = {
     terminal_mappings = false,
     size=80,

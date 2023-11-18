@@ -68,7 +68,7 @@ return {
   				callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
 				end
 		end;
-    enabled = vim.fn.has('unix') == 1,
+    enabled = vim.fn.has('win64') == 0,  -- vim.fn.has('unix') == 1 and 
 	},
   -- {
   -- 	'Vigemus/iron.nvim',
