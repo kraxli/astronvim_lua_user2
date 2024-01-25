@@ -122,7 +122,14 @@ return {
       			-- local img_dir = 'img' -- require'clipboard-image.config'.get_config().img_dir()
       			return os.date('%Y-%m-%d-%H-%M-%S')
     			end,
-    			affix = '![](%s)',
+    			affix = function()
+    				if vim.has('win64') then 
+    					return '![](%s)'
+    				else
+    					return '![](/%s)'
+    				end
+
+    			end,
   		},
   		-- markdown = {
   		--   img_dir = 'src/assets/img',
