@@ -11,6 +11,7 @@ local maps = {
     ["<leader>fm"] = false,
     ["<leader>fn"] = false,
     ["<leader>fo"] = false,
+    ["<leader>o"] = false,
     ["<leader>sb"] = false,
     ["<leader>sc"] = false,
     ["<leader>sh"] = false,
@@ -60,8 +61,7 @@ local maps = {
 					"Lazygit",
 				},
 				-- g = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'},
-			},
-			--
+			},			--
 			u = {
 				name = "Utils",
 				w = { "<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Clear postspace" },
@@ -203,7 +203,8 @@ local maps = {
 	    N = { '<cmd>lua require"user.plugins.telescope".pickers.notebook()<CR>', "Notebook" },
 	    -- o = {'<cmd>lua require("telescope.builtin").vim_options()<CR>', "Vim options"},
 	    -- p = {'<cmd>lua require("telescope.builtin").projects()<CR>', "Projects"},
-	    q = { "<cmd>bd!<cr>", "Kill (del) buffer" },
+	    q = { "<cmd>w | bd!<cr>", "Save & del buffer" },
+	    r = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
 	    R = { '<cmd>lua require("telescope.builtin").pickers()<CR>', "Pickers" },
 	    -- S = {'<cmd>lua require("telescope.builtin").session-lens search_session()<CR>', "Search session"},
 	    s = { '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', "Search current Buffer" },
@@ -213,10 +214,10 @@ local maps = {
 	    },
 	    t = {'<cmd>Telescope termfinder find<CR>', 'Terminals'},
 	    T = { "<Cmd>AerialToggle<CR>", "Code Outline" }, -- already mapped at <leader>lS
-	    u = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
+	    u = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" },
 	    v = { '<cmd>lua require("telescope.builtin").registers()<CR>', "Registers" },
 	    w = { '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', "Spell suggestions" },
-	    x = { '<cmd>lua require("telescope.builtin").oldfiles()<CR>', "Files old" },
+	    x = { '<cmd>lua require("telescope.builtin").resume()<CR>', "Resume last" },
 	    -- z = {'<cmd>Zoxide<CR>', "Zoxide"},
 	    ["/"] = {
 		    '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
@@ -343,5 +344,19 @@ if is_available "toggleterm.nvim" then
 
   end
 end
+
+if is_available "neo-tree.nvim" then
+  maps.n["<leader>E"] = {
+    function()
+      if vim.bo.filetype == "neo-tree" then
+        vim.cmd.wincmd "p"
+      else
+        vim.cmd.Neotree "focus"
+      end
+    end,
+    desc = "Toggle Explorer Focus",
+  }
+end
+
 
 return maps

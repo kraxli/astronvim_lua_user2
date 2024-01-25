@@ -45,6 +45,11 @@ local mappings = {
     --   end,
     --   desc = "Switch Buffers",
     -- },
+
+    ["<leader>"] = {
+      o = {desc = "Orgmode"},
+    },
+
     ["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" },
     ["<leader>N"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
     ["<leader><cr>"] = { '<esc>/<++><cr>"_c4l', desc = "Next Template" },

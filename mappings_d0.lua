@@ -58,8 +58,9 @@ keymap("n", "<F6>", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 keymap("n", "gx", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 
 -- ['q'] = { "<cmd>bd!<cr>", "Kill (del) buffer" }, -- not sure to keep
-vim.api.nvim_set_keymap("n", "q", "<cmd>bd!<cr>", { noremap = false })
+vim.api.nvim_set_keymap("n", "q", "<cmd>w!|bd!<cr>", { noremap = false })
 vim.api.nvim_set_keymap("n", "XX", "<cmd>w!|bd!<cr>", { noremap = false })
+vim.api.nvim_set_keymap("n", "c", "<cmd>bd!<cr>", { noremap = false })
 
 -- code_jump
 -- https://github.com/neovim/neovim/issues/20126
