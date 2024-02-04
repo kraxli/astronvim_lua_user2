@@ -1,5 +1,9 @@
 return {
 	{
+		"famiu/bufdelete.nvim",
+		cmd = {'Bdelete','Bwipeout'},
+	},
+	{
 		"stevearc/aerial.nvim",
 		version = "1.3.0",
 	},
