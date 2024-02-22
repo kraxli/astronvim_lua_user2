@@ -61,7 +61,7 @@ keymap("n", "gx", [[<cmd> lua require("user.utils").openExtApp()<CR>]], {})
 -- use https://github.com/famiu/bufdelete.nvim to delete buffer without closing windows in case neo-tree is open and a file has been opened from neo-tree
 vim.api.nvim_set_keymap("n", "q", "<cmd>w!|Bdelete!<cr>", { noremap = false })
 vim.api.nvim_set_keymap("n", "XX", "<cmd>w!|bd!<cr>", { noremap = false })
-vim.api.nvim_set_keymap("n", "c", "<cmd>bd!<cr>", { noremap = false })
+-- vim.api.nvim_set_keymap("n", "c", "<cmd>bd!<cr>", { noremap = false })
 
 -- code_jump
 -- https://github.com/neovim/neovim/issues/20126

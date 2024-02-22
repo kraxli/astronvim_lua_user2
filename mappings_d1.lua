@@ -284,13 +284,14 @@ local maps = {
   -- terminal mappings
   t = {
 		["jk"] = false,
-		["<ESC>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
+		-- ["<ESC>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- conflicts with lazygit!
 		["jj"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
 		["<C-c>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },  -- actually C-C is required
 		["<C-n>"] = { "<C-\\><C-n>", desc = "Terminal normal mode" },
 
-    ["<ESC>q"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
-		["<C-q>"] = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+    ["<ESC>q"]      = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+		["<C-q>"]       = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
+    ["<ESC><ESC>"]  = { "<C-\\><C-n>:q<CR>", desc = "Terminal quit" },
 
 		["<ESC>k"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
 		["<ESC>d"] = { "<C-\\><C-n>:bd!<CR>", desc = "Terminal kill/delete" },
