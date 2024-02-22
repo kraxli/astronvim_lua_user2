@@ -4,6 +4,10 @@ return {
 		ignore_filetypes = { -- disable format on save for specified filetypes
 			"lua",
 			"julia",
+			"css",
+			"html",
+			"js",
+			"javascript",
 		},
 		disabled = { "lua_ls", "sumneko_lua" },
 		-- allow_filetypes = { }, -- only allow formatting on save for these filetypes
