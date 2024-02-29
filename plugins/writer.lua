@@ -194,7 +194,7 @@ return {
 	{
     "iamcco/markdown-preview.nvim",
   	-- version = "v0.0.10",
-	  build = "cd $XDG_DATA_HOME/nvim/lazy/markdown-preview.nvim/app && npm install",  -- npm install && npm audit fix --force",
+	  build = "cd $XDG_DATA_HOME/nvim/lazy/markdown-preview.nvim/app && npm install && npm audit fix --force",  -- npm install && npm audit fix --force",
     -- build = function() vim.fn["call mkdp#util#install"]() end,
 	  ft = { "markdown" },
 	  setup = function() vim.g.mkdp_filetypes = { "markdown" } end,

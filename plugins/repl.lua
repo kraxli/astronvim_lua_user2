@@ -12,6 +12,7 @@ return {
           ["<leader>j"] = { "<Plug>JupyterRunVisual", desc = "Send to Jupyter" },
         },
       }
+      vim.g.jupyter_mapkeys = 0
     end,
     enabled = vim.fn.has('win64') == 0,  -- vim.fn.has('unix') == 1 and 
   },
